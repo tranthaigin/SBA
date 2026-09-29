@@ -1,0 +1,123 @@
+{
+  "info": {
+    "name": "SBA301 Slot8 Product API",
+    "description": "Postman Collection for Slot 8 Product REST API Design and Inspection Kit",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 - GET All Products",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["products"]
+        }
+      }
+    },
+    {
+      "name": "02 - GET Product by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["products", "1"]
+        }
+      }
+    },
+    {
+      "name": "03 - GET Missing Product (404 Test)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/products/999999",
+          "host": ["{{baseUrl}}"],
+          "path": ["products", "999999"]
+        }
+      }
+    },
+    {
+      "name": "04 - POST Create Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"MacBook Air M3\",\n  \"category\": \"Laptop\",\n  \"price\": 30000000,\n  \"quantity\": 8,\n  \"active\": true\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["products"]
+        }
+      }
+    },
+    {
+      "name": "05 - PUT Replace Product 1",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 1,\n  \"name\": \"iPhone 15 Pro\",\n  \"category\": \"Phone\",\n  \"price\": 29000000,\n  \"quantity\": 7,\n  \"active\": true\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["products", "1"]
+        }
+      }
+    },
+    {
+      "name": "06 - PATCH Partial Update Product 1",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"price\": 28000000,\n  \"quantity\": 9\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["products", "1"]
+        }
+      }
+    },
+    {
+      "name": "07 - DELETE Product 4",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/products/4",
+          "host": ["{{baseUrl}}"],
+          "path": ["products", "4"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "iPhone 15",
+      "category": "Phone",
+      "price": 25000000,
+      "quantity": 10,
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "Samsung Galaxy S24",
+      "category": "Phone",
+      "price": 22000000,
+      "quantity": 15,
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "Dell XPS 13",
+      "category": "Laptop",
+      "price": 35000000,
+      "quantity": 5,
+      "active": false
+    },
+    {
+      "id": 4,
+      "name": "Logitech MX Master 3S",
+      "category": "Accessory",
+      "price": 2500000,
+      "quantity": 20,
+      "active": true
+    }
+  ]
+}

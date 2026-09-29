@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #ffffff;
+}
+
+.orchid-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-title {
+  line-height: 1.2;
+}

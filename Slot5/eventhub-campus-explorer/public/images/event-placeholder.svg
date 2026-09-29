@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#eaf2f8"/>
+  <circle cx="400" cy="180" r="70" fill="#f28c28"/>
+  <text x="400" y="310" text-anchor="middle" font-family="Arial" font-size="42" font-weight="bold" fill="#163a5f">EventHub Campus</text>
+</svg>

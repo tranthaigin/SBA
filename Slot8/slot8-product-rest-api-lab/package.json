@@ -1,0 +1,14 @@
+{
+  "name": "slot8-product-rest-api-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SBA301 Slot 8 - Client-Server, HTTP, JSON, REST lab",
+  "scripts": {
+    "api": "json-server --watch db.json --port 3001",
+    "json-demo": "node scripts/parse-json-demo.js",
+    "reset-db": "node scripts/reset-db.js"
+  },
+  "devDependencies": {
+    "json-server": "0.17.4"
+  }
+}

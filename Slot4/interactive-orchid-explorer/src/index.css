@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f8fafc;
+  color: #1e293b;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.orchid-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-title {
+  line-height: 1.2;
+}
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}

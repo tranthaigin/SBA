@@ -1,0 +1,89 @@
+{
+  "info": {
+    "name": "SBA301 Slot 13 News API",
+    "description": "Postman Collection for Slot 13 3-Layer CRUD News REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "T01 - GET /api/hello",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/hello", "host": ["{{baseUrl}}"], "path": ["api", "hello"] }
+      }
+    },
+    {
+      "name": "T02 - GET /api/hello?name=Thai",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/hello?name=Thai", "host": ["{{baseUrl}}"], "path": ["api", "hello"], "query": [{ "key": "name", "value": "Thai" }] }
+      }
+    },
+    {
+      "name": "T03 - GET /api/news (All)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/news", "host": ["{{baseUrl}}"], "path": ["api", "news"] }
+      }
+    },
+    {
+      "name": "T04 - GET /api/news/1 (By ID)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/news/1", "host": ["{{baseUrl}}"], "path": ["api", "news", "1"] }
+      }
+    },
+    {
+      "name": "T05 - GET /api/news/999 (404 Error Test)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/news/999", "host": ["{{baseUrl}}"], "path": ["api", "news", "999"] }
+      }
+    },
+    {
+      "name": "T06 - POST /api/news (Create)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"RESTful API with Spring Boot\",\n  \"content\": \"Created from Postman\",\n  \"categoryId\": 2,\n  \"active\": true\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/news", "host": ["{{baseUrl}}"], "path": ["api", "news"] }
+      }
+    },
+    {
+      "name": "T07 - PUT /api/news/2 (Update)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Spring Boot CRUD Updated\",\n  \"content\": \"Updated by PUT\",\n  \"categoryId\": 1,\n  \"active\": false\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/news/2", "host": ["{{baseUrl}}"], "path": ["api", "news", "2"] }
+      }
+    },
+    {
+      "name": "T08 - GET /api/news?keyword=spring (Search)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/news?keyword=spring", "host": ["{{baseUrl}}"], "path": ["api", "news"], "query": [{ "key": "keyword", "value": "spring" }] }
+      }
+    },
+    {
+      "name": "T09 - DELETE /api/news/1 (Delete)",
+      "request": {
+        "method": "DELETE",
+        "url": { "raw": "{{baseUrl}}/api/news/1", "host": ["{{baseUrl}}"], "path": ["api", "news", "1"] }
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#fff7ed"/>
+  <circle cx="400" cy="250" r="110" fill="#f97316"/>
+  <circle cx="320" cy="220" r="85" fill="#fed7aa"/>
+  <circle cx="480" cy="220" r="85" fill="#fed7aa"/>
+  <text x="400" y="450" text-anchor="middle" font-size="44" font-weight="bold" fill="#7c2d12">Amber Wing (Cattleya)</text>
+</svg>
