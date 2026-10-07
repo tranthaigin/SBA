@@ -1,0 +1,7 @@
+{
+  "reason": "Cleanup test record from failed shell verification run",
+  "method": "DELETE",
+  "url": "http://localhost:8080/api/orchids/3",
+  "status": 204,
+  "name": "Hoa lan Lab4 20261007085422 Updated"
+}

@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "B5-CLEANUP",
+    "time":  "2026-10-07T09:06:41+07:00",
+    "method":  "DELETE",
+    "url":  "http://localhost:8080/api/orchids/10",
+    "requestBody":  null,
+    "contentType":  "application/json",
+    "expectedStatus":  204,
+    "actualStatus":  204,
+    "responseBody":  ""
+}

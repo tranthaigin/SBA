@@ -1,0 +1,7 @@
+H2 diagnostic retest on 2026-10-07:
+T05 generated orchidID=35, name Hoa lan Lab4 20261007084443, category=1.
+T07 PUT/GET returned name Hoa lan Lab4 20261007084443 Updated, category=2, flags=false.
+T12 after immediate Stop-Process/restart returned original name, category=1, flags=true.
+Root cause: diagnostic H2 file database default write delay and abrupt process termination.
+Fix: diagnostic URL adds WRITE_DELAY=0. SQL Server application configuration remains unchanged.
+Retest: full scripts/verify-api.ps1 -Restart -UseH2Verification; see latest HTTP evidence and test-matrix.md.

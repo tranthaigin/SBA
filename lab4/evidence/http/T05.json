@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "T05",
+    "time":  "2026-10-07T09:06:27+07:00",
+    "method":  "POST",
+    "url":  "http://localhost:8080/api/orchids",
+    "requestBody":  "{\"orchidDescription\":\"Hoa lan kiểm thử lưu bền vững\",\"orchidCategory\":{\"categoryId\":1},\"orchidName\":\"Hoa lan Lab4 20261007090627\",\"orchidURL\":\"https://example.com/orchid.jpg\",\"orchidID\":999999,\"isNatural\":true,\"isAttractive\":true}",
+    "contentType":  "application/json",
+    "expectedStatus":  201,
+    "actualStatus":  201,
+    "responseBody":  "{\"orchidID\":8,\"orchidName\":\"Hoa lan Lab4 20261007090627\",\"isNatural\":true,\"orchidDescription\":\"Hoa lan kiểm thử lưu bền vững\",\"orchidCategory\":{\"categoryId\":1,\"categoryName\":\"Cattleya\"},\"isAttractive\":true,\"orchidURL\":\"https://example.com/orchid.jpg\"}"
+}

@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "B7-MALFORMED",
+    "time":  "2026-10-07T08:47:58+07:00",
+    "method":  "POST",
+    "url":  "http://localhost:8080/api/orchids",
+    "requestBody":  "{",
+    "contentType":  "application/json",
+    "expectedStatus":  400,
+    "actualStatus":  400,
+    "responseBody":  "{\"timestamp\":\"2026-10-07T01:47:58.732+00:00\",\"status\":400,\"error\":\"Bad Request\",\"path\":\"/api/orchids\"}"
+}

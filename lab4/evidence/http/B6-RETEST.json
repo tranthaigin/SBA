@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "B6-RETEST",
+    "time":  "2026-10-07T09:06:40+07:00",
+    "method":  "GET",
+    "url":  "http://localhost:8080/api/orchids/10",
+    "requestBody":  null,
+    "contentType":  "application/json",
+    "expectedStatus":  200,
+    "actualStatus":  200,
+    "responseBody":  "{\"orchidID\":10,\"orchidName\":\"Hoa lan Lab4 20261007090627 Updated\",\"isNatural\":false,\"orchidDescription\":\"Hoa lan kiểm thử lưu bền vững\",\"orchidCategory\":{\"categoryId\":2,\"categoryName\":\"Dendrobium\"},\"isAttractive\":false,\"orchidURL\":\"https://example.com/orchid.jpg\"}"
+}

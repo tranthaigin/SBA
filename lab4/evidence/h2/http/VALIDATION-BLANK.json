@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "VALIDATION-BLANK",
+    "time":  "2026-10-07T08:46:38+07:00",
+    "method":  "POST",
+    "url":  "http://localhost:8080/api/orchids",
+    "requestBody":  "{\"orchidDescription\":\"Hoa lan kiểm thử lưu bền vững\",\"orchidID\":999999,\"orchidCategory\":{\"categoryId\":1},\"isNatural\":true,\"isAttractive\":true,\"orchidName\":\" \",\"orchidURL\":\"https://example.com/orchid.jpg\"}",
+    "contentType":  "application/json",
+    "expectedStatus":  400,
+    "actualStatus":  400,
+    "responseBody":  "{\"timestamp\":\"2026-10-07T01:46:38.479+00:00\",\"status\":400,\"error\":\"Bad Request\",\"path\":\"/api/orchids\"}"
+}

@@ -1,0 +1,45 @@
+database_name,server_version
+-------------,--------------
+OrchidDB,Microsoft SQL Server 2022 (RTM-CU27) (KB5104824) - 16.0.4295.3 (X64) 
+	Aug 26 2026 11:02:22 
+	Copyright (C) 2022 Microsoft Corporation
+	Developer Edition (64-bit) on Linux (Ubuntu 22.04.5 LTS) <X64>
+
+(1 rows affected)
+table_name,column_name,data_type,max_length,is_nullable,is_identity
+----------,-----------,---------,----------,-----------,-----------
+orchid_categories,category_id,bigint,8,0,1
+orchid_categories,category_name,nvarchar,200,0,0
+orchids,orchidid,bigint,8,0,1
+orchids,is_attractive,bit,1,1,0
+orchids,is_natural,bit,1,1,0
+orchids,orchid_description,nvarchar,2000,1,0
+orchids,orchid_name,nvarchar,300,0,0
+orchids,orchidurl,varchar,255,1,0
+orchids,category_id,bigint,8,0,0
+
+(9 rows affected)
+table_name,primary_key,key_column
+----------,-----------,----------
+orchid_categories,PK__orchid_c__D54EE9B40A907BB6,category_id
+orchids,PK__orchids__D38A92FA3B3FD4B2,orchidid
+
+(2 rows affected)
+name,owning_table,fk_column,referenced_table,referenced_column
+----,------------,---------,----------------,-----------------
+FK1nau98c2g1u4qk2nx7fmj0dt5,orchids,category_id,orchid_categories,category_id
+
+(1 rows affected)
+category_id,category_name
+-----------,-------------
+1,Cattleya
+2,Dendrobium
+3,Phalaenopsis
+
+(3 rows affected)
+orchidid,orchid_name,category_id,is_natural,is_attractive
+--------,-----------,-----------,----------,-------------
+1,Cattleya Queen,1,1,1
+2,Dendrobium Nobile,2,0,1
+
+(2 rows affected)

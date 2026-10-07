@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "T02",
+    "time":  "2026-10-07T08:46:37+07:00",
+    "method":  "GET",
+    "url":  "http://localhost:8080/api/orchids?name=HOA%20LAN%20LAB4%2020261007084637",
+    "requestBody":  null,
+    "contentType":  "application/json",
+    "expectedStatus":  200,
+    "actualStatus":  200,
+    "responseBody":  "[{\"orchidID\":65,\"orchidName\":\"Hoa lan Lab4 20261007084637\",\"isNatural\":true,\"orchidDescription\":\"Hoa lan kiểm thử lưu bền vững\",\"orchidCategory\":{\"categoryId\":1,\"categoryName\":\"Cattleya\"},\"isAttractive\":true,\"orchidURL\":\"https://example.com/orchid.jpg\"}]"
+}

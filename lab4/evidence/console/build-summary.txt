@@ -1,0 +1,12 @@
+SBA301 Lab04 clean package verification
+Command: mvnw.cmd -B clean package
+Execution directory: C:/SBA301/bài tập/sba-301/lab4
+Java tests use H2. SQL Server live verification is recorded separately.
+
+com.example.orchid.OrchidApplicationTests: tests=1, failures=0, errors=0, skipped=0
+com.example.orchid.OrchidControllerTest: tests=10, failures=0, errors=0, skipped=0
+com.example.orchid.OrchidPersistenceTest: tests=5, failures=0, errors=0, skipped=0
+com.example.orchid.OrchidServiceTest: tests=10, failures=0, errors=0, skipped=0
+
+Total: 26 tests, 0 failures, 0 errors, 0 skipped
+BUILD SUCCESS

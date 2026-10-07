@@ -1,0 +1,5 @@
+Diagnostic datasource: H2 file with WRITE_DELAY=0 (see scripts/run.ps1).
+2026-10-07T08:46:53.684+07:00  INFO 15392 --- [slot18-orchid-lab] [           main] com.example.orchid.OrchidApplication     : Starting OrchidApplication v0.0.1-SNAPSHOT using Java 21.0.11 with PID 15392 (C:\SBA301\Lab4\target\slot18-orchid-jpa-rest-lab-0.0.1-SNAPSHOT.jar started by quoct in C:\SBA301\Lab4)
+2026-10-07T08:47:18.491+07:00  INFO 15392 --- [slot18-orchid-lab] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./.local/http-verification user=SA
+2026-10-07T08:47:54.665+07:00  INFO 15392 --- [slot18-orchid-lab] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-10-07T08:47:54.735+07:00  INFO 15392 --- [slot18-orchid-lab] [           main] com.example.orchid.OrchidApplication     : Started OrchidApplication in 69.891 seconds (process running for 72.559)

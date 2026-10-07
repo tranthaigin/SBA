@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "B8-ROUTE",
+    "time":  "2026-10-07T09:06:41+07:00",
+    "method":  "GET",
+    "url":  "http://localhost:8080/api/orchid",
+    "requestBody":  null,
+    "contentType":  "application/json",
+    "expectedStatus":  404,
+    "actualStatus":  404,
+    "responseBody":  "{\"timestamp\":\"2026-10-07T02:06:41.024+00:00\",\"status\":404,\"error\":\"Not Found\",\"path\":\"/api/orchid\"}"
+}

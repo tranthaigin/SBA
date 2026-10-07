@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "T01",
+    "time":  "2026-10-07T09:06:27+07:00",
+    "method":  "GET",
+    "url":  "http://localhost:8080/api/orchids",
+    "requestBody":  null,
+    "contentType":  "application/json",
+    "expectedStatus":  200,
+    "actualStatus":  200,
+    "responseBody":  "[{\"orchidID\":1,\"orchidName\":\"Cattleya Queen\",\"isNatural\":true,\"orchidDescription\":\"Beautiful natural cattleya orchid\",\"orchidCategory\":{\"categoryId\":1,\"categoryName\":\"Cattleya\"},\"isAttractive\":true,\"orchidURL\":\"https://example.com/cattleya-queen.jpg\"},{\"orchidID\":2,\"orchidName\":\"Dendrobium Nobile\",\"isNatural\":false,\"orchidDescription\":\"Hybrid dendrobium orchid\",\"orchidCategory\":{\"categoryId\":2,\"categoryName\":\"Dendrobium\"},\"isAttractive\":true,\"orchidURL\":\"https://example.com/dendrobium-nobile.jpg\"},{\"orchidID\":8,\"orchidName\":\"Hoa lan Lab4 20261007090627\",\"isNatural\":true,\"orchidDescription\":\"Hoa lan kiểm thử lưu bền vững\",\"orchidCategory\":{\"categoryId\":1,\"categoryName\":\"Cattleya\"},\"isAttractive\":true,\"orchidURL\":\"https://example.com/orchid.jpg\"}]"
+}

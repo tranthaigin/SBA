@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "T06-MISSING",
+    "time":  "2026-10-07T09:06:28+07:00",
+    "method":  "POST",
+    "url":  "http://localhost:8080/api/orchids",
+    "requestBody":  "{\"orchidName\":\"Missing category\"}",
+    "contentType":  "application/json",
+    "expectedStatus":  400,
+    "actualStatus":  400,
+    "responseBody":  "categoryId is required"
+}

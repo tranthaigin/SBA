@@ -1,0 +1,24 @@
+sqlserver-1  | 
+2026-10-07 01:53:52.12 spid88s     Database 'msdb' running the upgrade step from version 956 to version 957.
+sqlserver-1  | 
+2026-10-07 01:53:52.19 spid44s     Recovery is complete. This is an informational message only. No user action is required.
+sqlserver-1  | 
+2026-10-07 01:53:52.22 spid52s     The default language (LCID 0) has been set for engine and full-text services.
+sqlserver-1  | 
+2026-10-07 01:53:52.75 spid52s     The tempdb database has 8 data file(s).
+sqlserver-1  | 
+2026-10-07 01:53:54.48 spid52      [5]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1. ConcurrentGAMUpdate: 1. ConcurrentSGAMUpdate: 1, CleanupUnderUserTransaction: 0. TranLevelPVS: 0
+sqlserver-1  | 
+2026-10-07 01:53:54.49 spid52      Starting up database 'OrchidDB'.
+sqlserver-1  | 
+2026-10-07 01:53:54.49 spid52      RemoveStaleDbEntries: Cleanup of stale DB entries called for database ID: [5]
+sqlserver-1  | 
+2026-10-07 01:53:54.49 spid52      RemoveStaleDbEntries: Cleanup of stale DB entries skipped because master db is not memory optimized. DbId: 5.
+sqlserver-1  | 
+2026-10-07 01:53:54.57 spid52      Parallel redo is started for database 'OrchidDB' with worker pool size [8].
+sqlserver-1  | 
+2026-10-07 01:53:54.59 spid52      Parallel redo is shutdown for database 'OrchidDB' with worker pool size [8].
+sqlserver-1  | 
+2026-10-07 01:58:58.45 spid51      Attempting to load library 'xplog70.dll' into memory. This is an informational message only. No user action is required.
+sqlserver-1  | 
+2026-10-07 01:58:58.56 spid51      Using 'xplog70.dll' version '2022.160.4295' to execute extended stored procedure 'xp_msver'. This is an informational message only; no user action is required.

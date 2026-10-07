@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "B5-RETEST",
+    "time":  "2026-10-07T08:47:59+07:00",
+    "method":  "POST",
+    "url":  "http://localhost:8080/api/orchids",
+    "requestBody":  "{\"orchidCategory\":{\"categoryId\":2},\"orchidID\":999999,\"orchidName\":\"Hoa lan Lab4 20261007084637 Updated\",\"isNatural\":false,\"isAttractive\":false,\"orchidDescription\":\"Hoa lan kiểm thử lưu bền vững\",\"orchidURL\":\"https://example.com/orchid.jpg\"}",
+    "contentType":  "application/json",
+    "expectedStatus":  201,
+    "actualStatus":  201,
+    "responseBody":  "{\"orchidID\":98,\"orchidName\":\"Hoa lan Lab4 20261007084637 Updated\",\"isNatural\":false,\"orchidDescription\":\"Hoa lan kiểm thử lưu bền vững\",\"orchidCategory\":{\"categoryId\":2,\"categoryName\":\"Dendrobium\"},\"isAttractive\":false,\"orchidURL\":\"https://example.com/orchid.jpg\"}"
+}

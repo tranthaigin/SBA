@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "T09-GET",
+    "time":  "2026-10-07T09:06:40+07:00",
+    "method":  "GET",
+    "url":  "http://localhost:8080/api/orchids/8",
+    "requestBody":  null,
+    "contentType":  "application/json",
+    "expectedStatus":  404,
+    "actualStatus":  404,
+    "responseBody":  ""
+}

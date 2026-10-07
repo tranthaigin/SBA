@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "PRE-CATEGORIES",
+    "time":  "2026-10-07T09:06:27+07:00",
+    "method":  "GET",
+    "url":  "http://localhost:8080/api/categories",
+    "requestBody":  null,
+    "contentType":  "application/json",
+    "expectedStatus":  200,
+    "actualStatus":  200,
+    "responseBody":  "[{\"categoryId\":1,\"categoryName\":\"Cattleya\"},{\"categoryId\":2,\"categoryName\":\"Dendrobium\"},{\"categoryId\":3,\"categoryName\":\"Phalaenopsis\"}]"
+}

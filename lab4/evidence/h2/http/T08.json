@@ -1,0 +1,11 @@
+﻿{
+    "testId":  "T08",
+    "time":  "2026-10-07T08:46:38+07:00",
+    "method":  "PUT",
+    "url":  "http://localhost:8080/api/orchids/999999",
+    "requestBody":  "{\"orchidCategory\":{\"categoryId\":2},\"orchidID\":999999,\"orchidName\":\"Hoa lan Lab4 20261007084637 Updated\",\"isNatural\":false,\"isAttractive\":false,\"orchidDescription\":\"Hoa lan kiểm thử lưu bền vững\",\"orchidURL\":\"https://example.com/orchid.jpg\"}",
+    "contentType":  "application/json",
+    "expectedStatus":  404,
+    "actualStatus":  404,
+    "responseBody":  ""
+}

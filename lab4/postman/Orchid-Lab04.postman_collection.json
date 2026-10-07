@@ -1,0 +1,581 @@
+{
+  "info": {
+    "name": "SBA301 Slot18 Orchid API",
+    "description": "Run in order. T11 SQL/FK and T12 restart are verified separately with scripts/verify-api.ps1 -VerifyDatabase -Restart.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "categoryId",
+      "value": ""
+    },
+    {
+      "key": "secondCategoryId",
+      "value": ""
+    },
+    {
+      "key": "orchidId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "PRE - Discover category IDs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/categories"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Two categories available\",()=>pm.expect(pm.response.json().length).to.be.at.least(2));",
+              "const c=pm.response.json(); pm.collectionVariables.set(\"categoryId\",c[0].categoryId); pm.collectionVariables.set(\"secondCategoryId\",c[1].categoryId);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T05 - Create Orchid",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/orchids",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orchidID\": 999999,\n  \"orchidName\": \"Postman Lab4 Orchid\",\n  \"isNatural\": true,\n  \"orchidDescription\": \"Hoa lan kiem thu Lab4\",\n  \"orchidCategory\": {\n    \"categoryId\": {{categoryId}}\n  },\n  \"isAttractive\": true,\n  \"orchidURL\": \"https://example.com/orchid.jpg\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+              "pm.test(\"Generated identity\",()=>{pm.expect(pm.response.json().orchidID).to.be.above(0); pm.expect(pm.response.json().orchidID).not.to.eql(999999);});",
+              "pm.collectionVariables.set(\"orchidId\",pm.response.json().orchidID);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T01 - List",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/orchids"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Array\",()=>pm.expect(pm.response.json()).to.be.an(\"array\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T02 - Search",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/orchids?name=postman%20lab4"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Matching names\",()=>{const rows=pm.response.json(); pm.expect(rows.length).to.be.above(0); rows.forEach(o=>pm.expect(o.orchidName.toLowerCase()).to.include(\"postman lab4\"));});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T03 - GET postcondition",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/orchids/{{orchidId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"POST persisted\",()=>{const o=pm.response.json(); pm.expect(o.orchidName).to.eql(\"Postman Lab4 Orchid\"); pm.expect(String(o.orchidCategory.categoryId)).to.eql(String(pm.collectionVariables.get(\"categoryId\"))); pm.expect(o.isNatural).to.eql(true); pm.expect(o.orchidCategory).not.to.have.property(\"orchids\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T04 - Missing",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/orchids/999999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T06a - Missing category",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/orchids",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orchidName\": \"Missing category\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T06b - Invalid category",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/orchids",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orchidID\": 999999,\n  \"orchidName\": \"Postman Lab4 Orchid\",\n  \"isNatural\": true,\n  \"orchidDescription\": \"Hoa lan kiem thu Lab4\",\n  \"orchidCategory\": {\n    \"categoryId\": 999999\n  },\n  \"isAttractive\": true,\n  \"orchidURL\": \"https://example.com/orchid.jpg\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T07 - Update",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/orchids/{{orchidId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orchidID\": 999999,\n  \"orchidName\": \"Postman Lab4 Orchid Updated\",\n  \"isNatural\": false,\n  \"orchidDescription\": \"Hoa lan kiem thu Lab4\",\n  \"orchidCategory\": {\n    \"categoryId\": {{secondCategoryId}}\n  },\n  \"isAttractive\": false,\n  \"orchidURL\": \"https://example.com/orchid.jpg\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T07 - GET postcondition",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/orchids/{{orchidId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"PUT persisted\",()=>{const o=pm.response.json(); pm.expect(o.orchidName).to.eql(\"Postman Lab4 Orchid Updated\"); pm.expect(o.isNatural).to.eql(false); pm.expect(o.isAttractive).to.eql(false); pm.expect(String(o.orchidCategory.categoryId)).to.eql(String(pm.collectionVariables.get(\"secondCategoryId\")));});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T08 - Missing PUT",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/orchids/999999",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orchidID\": 999999,\n  \"orchidName\": \"Postman Lab4 Orchid Updated\",\n  \"isNatural\": false,\n  \"orchidDescription\": \"Hoa lan kiem thu Lab4\",\n  \"orchidCategory\": {\n    \"categoryId\": {{secondCategoryId}}\n  },\n  \"isAttractive\": false,\n  \"orchidURL\": \"https://example.com/orchid.jpg\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid PUT",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/orchids/{{orchidId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orchidID\": 999999,\n  \"orchidName\": \"Postman Lab4 Orchid\",\n  \"isNatural\": true,\n  \"orchidDescription\": \"Hoa lan kiem thu Lab4\",\n  \"orchidCategory\": {\n    \"categoryId\": 999999\n  },\n  \"isAttractive\": true,\n  \"orchidURL\": \"https://example.com/orchid.jpg\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rollback GET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/orchids/{{orchidId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Rejected PUT preserved state\",()=>pm.expect(pm.response.json().orchidName).to.eql(\"Postman Lab4 Orchid Updated\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Blank name",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/orchids",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orchidID\": 999999,\n  \"orchidName\": \" \",\n  \"isNatural\": true,\n  \"orchidDescription\": \"Hoa lan kiem thu Lab4\",\n  \"orchidCategory\": {\n    \"categoryId\": {{categoryId}}\n  },\n  \"isAttractive\": true,\n  \"orchidURL\": \"https://example.com/orchid.jpg\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "B7 - Malformed JSON",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/orchids",
+        "body": {
+          "mode": "raw",
+          "raw": "{",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "B7 - Wrong Content-Type",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/plain"
+          }
+        ],
+        "url": "{{baseUrl}}/api/orchids",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 415\", () => pm.response.to.have.status(415));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "B8 - Route mismatch",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/orchid"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "B8 - Correct route",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/orchids"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Original Lab04 path",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/orchids/"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T09 - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/orchids/{{orchidId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));",
+              "pm.test(\"Empty body\",()=>pm.expect(pm.response.text()).to.eql(\"\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T09 - GET after DELETE",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/orchids/{{orchidId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T10 - Missing DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/orchids/{{orchidId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

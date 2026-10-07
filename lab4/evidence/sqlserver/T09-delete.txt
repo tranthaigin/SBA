@@ -1,0 +1,11 @@
+﻿deleted_row_count
+-----------------
+0
+
+(1 rows affected)
+category_id,category_name
+-----------,-------------
+1,Cattleya
+2,Dendrobium
+
+(2 rows affected)

@@ -1,0 +1,50 @@
+Datasource: SQL Server 2022 Developer / OrchidDB, localhost:14334.
+Execution directory: C:/SBA301/bài tập/sba-301/lab4
+{
+  "iterations": {
+    "total": 1,
+    "pending": 0,
+    "failed": 0
+  },
+  "items": {
+    "total": 22,
+    "pending": 0,
+    "failed": 0
+  },
+  "scripts": {
+    "total": 22,
+    "pending": 0,
+    "failed": 0
+  },
+  "prerequests": {
+    "total": 22,
+    "pending": 0,
+    "failed": 0
+  },
+  "requests": {
+    "total": 22,
+    "pending": 0,
+    "failed": 0
+  },
+  "tests": {
+    "total": 22,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 30,
+    "pending": 0,
+    "failed": 0
+  },
+  "testScripts": {
+    "total": 22,
+    "pending": 0,
+    "failed": 0
+  },
+  "prerequestScripts": {
+    "total": 0,
+    "pending": 0,
+    "failed": 0
+  }
+}
+Failures: 0

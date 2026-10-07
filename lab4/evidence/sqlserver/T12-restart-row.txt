@@ -1,0 +1,5 @@
+﻿orchidid,orchid_name,category_id,is_natural,is_attractive,description_utf16_hex
+--------,-----------,-----------,----------,-------------,---------------------
+8,Hoa lan Lab4 20261007090627 Updated,2,0,0,48006F00610020006C0061006E0020006B006900C31E6D00200074006800ED1E20006C00B001750020006200C11E6E0020007600EF1E6E006700
+
+(1 rows affected)
