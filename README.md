@@ -6,17 +6,17 @@ Repository [tranthaigin/SBA](https://github.com/tranthaigin/SBA) tập hợp cá
 
 | Phần | Thư mục / hướng dẫn | Nội dung |
 |---|---|---|
-| Slot 02 | [SLot2/sba301-learning-dashboard](SLot2/sba301-learning-dashboard/README.md) | React learning dashboard |
-| Slot 03 | [Slot3/orchid-explorer](Slot3/orchid-explorer/README.md) | Orchid Explorer, React-Bootstrap |
-| Slot 04 | [Slot4/interactive-orchid-explorer](Slot4/interactive-orchid-explorer/README.md) | Props, State, Hooks, Context |
-| Slot 05 | [Slot5/eventhub-campus-explorer](Slot5/eventhub-campus-explorer/README.md) | EventHub Campus Explorer |
-| Slot 06 | [Slot6/react-hook-product-manager](Slot6/react-hook-product-manager/README.md) | Product CRUD với React Hooks |
-| Slot 07 | [Slot7/sba301-event-navigator](Slot7/sba301-event-navigator/README.md) | React Router, dynamic routes |
-| Slot 08 | [Slot8/slot8-product-rest-api-lab](Slot8/slot8-product-rest-api-lab/README.md) | Product mock REST API, Postman |
-| Slot 09 | [Slot9/ministore-spa](Slot9/ministore-spa/README.md) | MiniStore SPA, nested routes |
-| Slot 10 | [Slot10/orchid-router-demo](Slot10/orchid-router-demo/README.md) | Orchid Router SPA |
-| Slot 12 | [Slot12/slot12-rest-design](Slot12/slot12-rest-design/README.md) | REST fundamentals, Spring Boot skeleton |
-| Slot 13 | [Slot13/slot13-rest-api](Slot13/slot13-rest-api/README.md) | Spring Boot REST API, kiến trúc 3 layer |
+| Slot 02 | [SLot2](SLot2/README.md) | React learning dashboard |
+| Slot 03 | [Slot3](Slot3/README.md) | Orchid Explorer, React-Bootstrap |
+| Slot 04 | [Slot4](Slot4/README.md) | Props, State, Hooks, Context |
+| Slot 05 | [Slot5](Slot5/README.md) | EventHub Campus Explorer |
+| Slot 06 | [Slot6](Slot6/README.md) | Product CRUD với React Hooks |
+| Slot 07 | [Slot7](Slot7/README.md) | React Router, dynamic routes |
+| Slot 08 | [Slot8](Slot8/README.md) | Product mock REST API, Postman |
+| Slot 09 | [Slot9](Slot9/README.md) | MiniStore SPA, nested routes |
+| Slot 10 | [Slot10](Slot10/README.md) | Orchid Router SPA |
+| Slot 12 | [Slot12](Slot12/README.md) | REST fundamentals, Spring Boot skeleton |
+| Slot 13 | [Slot13](Slot13/README.md) | Spring Boot REST API, kiến trúc 3 layer |
 | Lab 01 | [lab1](lab1/README.md) | Orchid Gallery với Props và State |
 | Lab 02 | [lab2/orchid-gallery-spa](lab2/orchid-gallery-spa/README.md) | Orchid Gallery SPA, API loading/error/empty states |
 | Lab 03 | [lab3](lab3/README.md) | Employee REST API, versioning, Page/Slice, Swagger và automated testing |
