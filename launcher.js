@@ -11,7 +11,7 @@ const PROJECTS = [
     id: "slot2",
     name: "Slot 02 - Student Learning Dashboard",
     category: "React Fundamentals",
-    path: "SLot2/sba301-learning-dashboard",
+    path: "Slot02/sba301-learning-dashboard",
     port: 5173,
     type: "react",
     desc: "ReactJS + Vite tĩnh, Component Architecture, JSX expressions, data modules (course, student, dashboardData)."
@@ -20,7 +20,7 @@ const PROJECTS = [
     id: "slot3",
     name: "Slot 03 - Orchid Explorer Dashboard",
     category: "React-Bootstrap",
-    path: "Slot3/orchid-explorer",
+    path: "Slot03/orchid-explorer",
     port: 5174,
     type: "react",
     desc: "React-Bootstrap, Hero Section, Quick Stats Cards, Orchid Gallery 6 loài lan kèm vector SVG, Care Tips."
@@ -29,7 +29,7 @@ const PROJECTS = [
     id: "slot4",
     name: "Slot 04 - Interactive Orchid Explorer",
     category: "Props & State",
-    path: "Slot4/interactive-orchid-explorer",
+    path: "Slot04/interactive-orchid-explorer",
     port: 5175,
     type: "react",
     desc: "Props, useState mở Modal & Favorite độc lập, UserContext toàn ứng dụng, Derived search & special filter."
@@ -38,7 +38,7 @@ const PROJECTS = [
     id: "slot5",
     name: "Slot 05 - EventHub Campus Explorer",
     category: "Frontend Integration",
-    path: "Slot5/eventhub-campus-explorer",
+    path: "Slot05/eventhub-campus-explorer",
     port: 5176,
     type: "react",
     desc: "Danh sách 8 sự kiện campus, lọc từ khóa, lọc category dropdown, switch featured, Modal chi tiết, Reset filters."
@@ -47,7 +47,7 @@ const PROJECTS = [
     id: "slot6",
     name: "Slot 06 - React Hook Product Manager",
     category: "React Hooks Comprehensive",
-    path: "Slot6/react-hook-product-manager",
+    path: "Slot06/react-hook-product-manager",
     port: 5177,
     type: "react",
     desc: "Full CRUD sản phẩm, Custom Hook useLocalStorage, ThemeContext Dark/Light, useRef focus, controlled validation."
@@ -56,7 +56,7 @@ const PROJECTS = [
     id: "slot7",
     name: "Slot 07 - Campus Event Navigator",
     category: "React Router",
-    path: "Slot7/sba301-event-navigator",
+    path: "Slot07/sba301-event-navigator",
     port: 5178,
     type: "react",
     desc: "React Router DOM v6, Dynamic Route /events/:id, useParams, useNavigate (-1), Wildcard Route 404."
@@ -65,7 +65,7 @@ const PROJECTS = [
     id: "slot9",
     name: "Slot 09 - MiniStore Router SPA",
     category: "Nested Routes",
-    path: "Slot9/ministore-spa",
+    path: "Slot09/ministore-spa",
     port: 5179,
     type: "react",
     desc: "Nested Routes với Outlet (Dashboard/Profile/Orders), useSearchParams lưu bộ lọc trực tiếp lên URL query string."
@@ -101,7 +101,7 @@ const PROJECTS = [
     id: "slot8",
     name: "Slot 08 - Product REST API Kit",
     category: "Mock REST API",
-    path: "Slot8/slot8-product-rest-api-lab",
+    path: "Slot08/slot8-product-rest-api-lab",
     port: 3001,
     type: "node",
     desc: "Mock REST API với json-server, API contract documentation, Postman collection, reset database script."

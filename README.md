@@ -1,19 +1,19 @@
 # SBA301 - Bài tập, thực hành và tài liệu
 
-Repository [tranthaigin/SBA](https://github.com/tranthaigin/SBA) tập hợp các bài đã thực hiện của môn SBA301. Các thư mục giữ nguyên tên hiện có để bảo toàn đường dẫn của từng bài.
+Repository [tranthaigin/SBA](https://github.com/tranthaigin/SBA) tập hợp các bài đã thực hiện của môn SBA301. Các thư mục Slot dùng số hai chữ số (Slot02, Slot03… Slot13) để hiển thị theo thứ tự trên GitHub.
 
 ## Danh mục dự án
 
 | Phần | Thư mục / hướng dẫn | Nội dung |
 |---|---|---|
-| Slot 02 | [SLot2](SLot2/README.md) | React learning dashboard |
-| Slot 03 | [Slot3](Slot3/README.md) | Orchid Explorer, React-Bootstrap |
-| Slot 04 | [Slot4](Slot4/README.md) | Props, State, Hooks, Context |
-| Slot 05 | [Slot5](Slot5/README.md) | EventHub Campus Explorer |
-| Slot 06 | [Slot6](Slot6/README.md) | Product CRUD với React Hooks |
-| Slot 07 | [Slot7](Slot7/README.md) | React Router, dynamic routes |
-| Slot 08 | [Slot8](Slot8/README.md) | Product mock REST API, Postman |
-| Slot 09 | [Slot9](Slot9/README.md) | MiniStore SPA, nested routes |
+| Slot 02 | [Slot02](Slot02/README.md) | React learning dashboard |
+| Slot 03 | [Slot03](Slot03/README.md) | Orchid Explorer, React-Bootstrap |
+| Slot 04 | [Slot04](Slot04/README.md) | Props, State, Hooks, Context |
+| Slot 05 | [Slot05](Slot05/README.md) | EventHub Campus Explorer |
+| Slot 06 | [Slot06](Slot06/README.md) | Product CRUD với React Hooks |
+| Slot 07 | [Slot07](Slot07/README.md) | React Router, dynamic routes |
+| Slot 08 | [Slot08](Slot08/README.md) | Product mock REST API, Postman |
+| Slot 09 | [Slot09](Slot09/README.md) | MiniStore SPA, nested routes |
 | Slot 10 | [Slot10](Slot10/README.md) | Orchid Router SPA |
 | Slot 12 | [Slot12](Slot12/README.md) | REST fundamentals, Spring Boot skeleton |
 | Slot 13 | [Slot13](Slot13/README.md) | Spring Boot REST API, kiến trúc 3 layer |
