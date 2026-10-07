@@ -1,0 +1,56 @@
+{
+  "name": "T08 Stable name sort",
+  "method": "GET",
+  "status": 200,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Transfer-Encoding",
+      "value": "chunked"
+    },
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:55 GMT"
+    },
+    {
+      "key": "Keep-Alive",
+      "value": "timeout=60"
+    },
+    {
+      "key": "Connection",
+      "value": "keep-alive"
+    }
+  ],
+  "body": {
+    "content": [
+      {
+        "empId": "E001",
+        "empName": "An",
+        "designation": "Developer",
+        "salary": 10250000
+      },
+      {
+        "empId": "E011",
+        "empName": "An",
+        "designation": "Tester",
+        "salary": 12750000
+      },
+      {
+        "empId": "E021",
+        "empName": "An",
+        "designation": "HR",
+        "salary": 15250000
+      }
+    ],
+    "page": 0,
+    "size": 3,
+    "numberOfElements": 3,
+    "totalElements": 30,
+    "totalPages": 10,
+    "hasNext": true,
+    "hasPrevious": false
+  }
+}

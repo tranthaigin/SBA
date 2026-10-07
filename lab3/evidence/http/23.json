@@ -1,0 +1,28 @@
+{
+  "name": "T15 Unsupported Accept",
+  "method": "GET",
+  "status": 406,
+  "headers": [
+    {
+      "key": "Accept",
+      "value": "application/json"
+    },
+    {
+      "key": "Content-Length",
+      "value": "0"
+    },
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:56 GMT"
+    },
+    {
+      "key": "Keep-Alive",
+      "value": "timeout=60"
+    },
+    {
+      "key": "Connection",
+      "value": "keep-alive"
+    }
+  ],
+  "body": ""
+}

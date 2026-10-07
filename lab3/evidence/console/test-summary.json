@@ -1,0 +1,50 @@
+{
+  "command": "mvnw.cmd -B clean package",
+  "java": "21",
+  "testSuites": [
+    {
+      "name": "com.example.employeemanagement.EmployeeApiIntegrationTest",
+      "tests": "3",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "8.656"
+    },
+    {
+      "name": "com.example.employeemanagement.EmployeeControllerTest",
+      "tests": "23",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "2.064"
+    },
+    {
+      "name": "com.example.employeemanagement.EmployeeRepositoryTest",
+      "tests": "13",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.127"
+    },
+    {
+      "name": "com.example.employeemanagement.EmployeeServiceUnitTest",
+      "tests": "10",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.307"
+    },
+    {
+      "name": "com.example.employeemanagement.PagingPolicyTest",
+      "tests": "13",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "0.119"
+    }
+  ],
+  "tests": 62,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0
+}

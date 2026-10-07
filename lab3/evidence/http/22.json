@@ -1,0 +1,47 @@
+{
+  "name": "T14 Unsupported URI version",
+  "method": "GET",
+  "status": 404,
+  "headers": [
+    {
+      "key": "Vary",
+      "value": "Origin"
+    },
+    {
+      "key": "Vary",
+      "value": "Access-Control-Request-Method"
+    },
+    {
+      "key": "Vary",
+      "value": "Access-Control-Request-Headers"
+    },
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Transfer-Encoding",
+      "value": "chunked"
+    },
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:56 GMT"
+    },
+    {
+      "key": "Keep-Alive",
+      "value": "timeout=60"
+    },
+    {
+      "key": "Connection",
+      "value": "keep-alive"
+    }
+  ],
+  "body": {
+    "timestamp": "2026-10-07T02:27:57.298169900Z",
+    "status": 404,
+    "error": "Not Found",
+    "message": "Resource was not found",
+    "path": "/api/v3/employees",
+    "fieldErrors": {}
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "sba301-lab03-api-verification",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "newman run Employee-Lab03.postman_collection.json --reporters cli,json --reporter-json-export ../evidence/postman/newman-run.json"
+  },
+  "devDependencies": {
+    "newman": "6.2.1"
+  }
+}

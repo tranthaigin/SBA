@@ -1,0 +1,39 @@
+{
+  "name": "T18 Unsupported body type",
+  "method": "POST",
+  "status": 415,
+  "headers": [
+    {
+      "key": "Accept",
+      "value": "application/json"
+    },
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Transfer-Encoding",
+      "value": "chunked"
+    },
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:57 GMT"
+    },
+    {
+      "key": "Keep-Alive",
+      "value": "timeout=60"
+    },
+    {
+      "key": "Connection",
+      "value": "keep-alive"
+    }
+  ],
+  "body": {
+    "timestamp": "2026-10-07T02:27:58.239882200Z",
+    "status": 415,
+    "error": "Unsupported Media Type",
+    "message": "Use Content-Type application/json",
+    "path": "/api/employees",
+    "fieldErrors": {}
+  }
+}

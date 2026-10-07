@@ -1,0 +1,33 @@
+{
+  "name": "T02 V1 four fields",
+  "method": "GET",
+  "status": 200,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Transfer-Encoding",
+      "value": "chunked"
+    },
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:55 GMT"
+    },
+    {
+      "key": "Keep-Alive",
+      "value": "timeout=60"
+    },
+    {
+      "key": "Connection",
+      "value": "keep-alive"
+    }
+  ],
+  "body": {
+    "empId": "E001",
+    "empName": "An",
+    "designation": "Developer",
+    "salary": 10250000
+  }
+}

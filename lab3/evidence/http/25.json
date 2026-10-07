@@ -1,0 +1,33 @@
+{
+  "name": "T16 Validation negative salary",
+  "method": "POST",
+  "status": 400,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Transfer-Encoding",
+      "value": "chunked"
+    },
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:57 GMT"
+    },
+    {
+      "key": "Connection",
+      "value": "close"
+    }
+  ],
+  "body": {
+    "timestamp": "2026-10-07T02:27:57.843128300Z",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "Employee validation failed",
+    "path": "/api/employees",
+    "fieldErrors": {
+      "salary": "must be greater than or equal to 0.0"
+    }
+  }
+}

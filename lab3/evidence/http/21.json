@@ -1,0 +1,35 @@
+{
+  "name": "T13 Missing employee",
+  "method": "GET",
+  "status": 404,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Transfer-Encoding",
+      "value": "chunked"
+    },
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:56 GMT"
+    },
+    {
+      "key": "Keep-Alive",
+      "value": "timeout=60"
+    },
+    {
+      "key": "Connection",
+      "value": "keep-alive"
+    }
+  ],
+  "body": {
+    "timestamp": "2026-10-07T02:27:57.203390500Z",
+    "status": 404,
+    "error": "Not Found",
+    "message": "Employee E999 was not found",
+    "path": "/api/employees/E999",
+    "fieldErrors": {}
+  }
+}

@@ -19,9 +19,14 @@ Repository [tranthaigin/SBA](https://github.com/tranthaigin/SBA) tập hợp cá
 | Slot 13 | [Slot13/slot13-rest-api](Slot13/slot13-rest-api/README.md) | Spring Boot REST API, kiến trúc 3 layer |
 | Lab 01 | [lab1](lab1/README.md) | Orchid Gallery với Props và State |
 | Lab 02 | [lab2/orchid-gallery-spa](lab2/orchid-gallery-spa/README.md) | Orchid Gallery SPA, API loading/error/empty states |
+| Lab 03 | [lab3](lab3/README.md) | Employee REST API, versioning, Page/Slice, Swagger và automated testing |
 | Lab 04 | [lab4](lab4/README.md) | Orchid REST API, JPA, SQL Server, CRUD/search và evidence |
 
 Danh mục này phản ánh các thư mục thực tế trong repository, không khẳng định mọi Slot của môn học đều đã được triển khai. Các tài liệu Slot khác trong thư mục tài liệu là nội dung học tập, không phải bài làm tương ứng.
+
+## Lab03 - REST API và testing
+
+[Lab03](lab3/README.md) nằm ở tiết 45-46 trong syllabus; phần hướng dẫn core nằm trong Slot15/Slot16. Employee API dùng repository trong bộ nhớ, chạy riêng tại port `8083`, gồm CRUD, URI versioning, Page/Slice và Swagger. Xem [nguồn đề và phạm vi](lab3/docs/source-discovery.md), [API contract](lab3/docs/api-contract.md), [báo cáo kiểm chứng](lab3/docs/verification.md).
 
 ## Lab04 - chạy và kiểm tra
 

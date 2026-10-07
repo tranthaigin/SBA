@@ -1,0 +1,1002 @@
+{
+  "info": {
+    "name": "SBA301 Lab03 Employee API",
+    "description": "Slot15/16 core Employee API; ordered scenario uses disposable E901 and ends by deleting it. Run against a freshly started Lab03 (30 seeds).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8083",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "T01 Baseline thirty employees",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"30 seeds and 3 pages\", () => { const b=pm.response.json(); pm.expect(b.totalElements).to.eql(30); pm.expect(b.totalPages).to.eql(3); pm.expect(b.content).to.have.length(10); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T02 V1 four fields",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/v1/employees/E001"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"V1 contract\", () => pm.expect(Object.keys(pm.response.json()).sort()).to.eql([\"designation\",\"empId\",\"empName\",\"salary\"]));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T03 V2 extra fields",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/v2/employees/E001"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"V2 contract\", () => {const b=pm.response.json(); pm.expect(b.email).to.eql(\"employee01@example.com\"); pm.expect(b.department).to.eql(\"Engineering\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T04 Page zero",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?page=0&size=5"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const b=pm.response.json(); pm.collectionVariables.set(\"pageZero\", JSON.stringify(b.content.map(e=>e.empId))); pm.test(\"page 0 content\", () => {pm.expect(b.content.map(e=>e.empId)).to.eql([\"E001\",\"E002\",\"E003\",\"E004\",\"E005\"]); pm.expect(b.page).to.eql(0); pm.expect(b.hasPrevious).to.eql(false);});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T05 Page one",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?page=1&size=5"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"disjoint pages and metadata\", () => {const b=pm.response.json(); pm.expect(b.content.map(e=>e.empId)).to.eql([\"E006\",\"E007\",\"E008\",\"E009\",\"E010\"]); pm.expect(b.totalPages).to.eql(6); pm.expect(b.hasPrevious).to.eql(true); pm.expect(b.content.map(e=>e.empId).filter(id=>JSON.parse(pm.collectionVariables.get(\"pageZero\")).includes(id))).to.eql([]);});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T06 Salary asc",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?size=100&sort=salary,asc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"numeric salary order\", () => { const v=pm.response.json().content.map(e=>e.salary); pm.expect(v).to.eql([...v].sort((a,b)=>a-b)); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T06 Salary desc",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?size=100&sort=salary,desc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"numeric salary order\", () => { const v=pm.response.json().content.map(e=>e.salary); pm.expect(v).to.eql([...v].sort((a,b)=>b-a)); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T07 Multi sort",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?size=3&sort=empName,asc&sort=salary,desc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"name then salary\", () => pm.expect(pm.response.json().content.map(e=>e.empId)).to.eql([\"E021\",\"E011\",\"E001\"]));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T08 Stable name sort",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?size=3&sort=empName,asc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"stable ID tie-break\", () => pm.expect(pm.response.json().content.map(e=>e.empId)).to.eql([\"E001\",\"E011\",\"E021\"]));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T09 First slice",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees/slice?size=7"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"hasNext without totals\", () => {const b=pm.response.json(); pm.expect(b.content).to.have.length(7); pm.expect(b.hasNext).to.eql(true); pm.expect(b).not.to.have.property(\"totalElements\"); pm.expect(b).not.to.have.property(\"totalPages\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T10 Last slice",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/v2/employees/slice?page=4&size=7"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"last slice has two rows\", () => {const b=pm.response.json(); pm.expect(b.content).to.have.length(2); pm.expect(b.hasNext).to.eql(false); pm.expect(b.content[0]).to.have.property(\"email\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T11 Beyond range",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?page=2147483647&size=100"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"empty page no overflow\", () => {const b=pm.response.json(); pm.expect(b.content).to.eql([]); pm.expect(b.totalElements).to.eql(30); pm.expect(b.hasNext).to.eql(false);});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T12 Guard negative page",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?page=-1"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"structured error\", () => {const b=pm.response.json(); pm.expect(b.status).to.eql(400); pm.expect(b.path).to.eql(\"/api/employees\"); pm.expect(b.message).to.be.a(\"string\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T12 Guard zero size",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?size=0"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"structured error\", () => {const b=pm.response.json(); pm.expect(b.status).to.eql(400); pm.expect(b.path).to.eql(\"/api/employees\"); pm.expect(b.message).to.be.a(\"string\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T12 Guard oversized page",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?size=101"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"structured error\", () => {const b=pm.response.json(); pm.expect(b.status).to.eql(400); pm.expect(b.path).to.eql(\"/api/employees\"); pm.expect(b.message).to.be.a(\"string\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T12 Guard huge page size",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?size=100000"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"structured error\", () => {const b=pm.response.json(); pm.expect(b.status).to.eql(400); pm.expect(b.path).to.eql(\"/api/employees\"); pm.expect(b.message).to.be.a(\"string\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T12 Guard unknown sort",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?sort=password,asc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"structured error\", () => {const b=pm.response.json(); pm.expect(b.status).to.eql(400); pm.expect(b.path).to.eql(\"/api/employees\"); pm.expect(b.message).to.be.a(\"string\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T12 Guard invalid direction",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?sort=empName,wrong"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"structured error\", () => {const b=pm.response.json(); pm.expect(b.status).to.eql(400); pm.expect(b.path).to.eql(\"/api/employees\"); pm.expect(b.message).to.be.a(\"string\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T12 Guard nonnumeric page",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?page=abc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"structured error\", () => {const b=pm.response.json(); pm.expect(b.status).to.eql(400); pm.expect(b.path).to.eql(\"/api/employees\"); pm.expect(b.message).to.be.a(\"string\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T12 Guard duplicate sort",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?sort=empName,asc&sort=empName,desc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"structured error\", () => {const b=pm.response.json(); pm.expect(b.status).to.eql(400); pm.expect(b.path).to.eql(\"/api/employees\"); pm.expect(b.message).to.be.a(\"string\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T13 Missing employee",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees/E999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+              "pm.test(\"missing ID contract\", () => pm.expect(pm.response.json().message).to.include(\"E999\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T14 Unsupported URI version",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/v3/employees"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T15 Unsupported Accept",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/xml"
+          }
+        ],
+        "url": "{{baseUrl}}/api/employees"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 406\", () => pm.response.to.have.status(406));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T16 Validation blank name",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/employees",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"empId\": \"E901\", \"empName\": \"\", \"designation\": \"Tester\", \"salary\": 10}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T16 Validation negative salary",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/employees",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"empId\": \"E901\", \"empName\": \"An\", \"designation\": \"Tester\", \"salary\": -1}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T16 Validation invalid email",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/employees",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"empId\": \"E901\", \"empName\": \"An\", \"designation\": \"Tester\", \"salary\": 10, \"email\": \"bad-email\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T16 Validation invalid ID",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/employees",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"empId\": \"bad\", \"empName\": \"An\", \"designation\": \"Tester\", \"salary\": 10}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T17 Malformed JSON",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/employees",
+        "body": {
+          "mode": "raw",
+          "raw": "{",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T18 Unsupported body type",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/plain"
+          }
+        ],
+        "url": "{{baseUrl}}/api/employees",
+        "body": {
+          "mode": "raw",
+          "raw": "plain",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 415\", () => pm.response.to.have.status(415));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T19 Create Unicode employee",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/employees",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"empId\": \"E901\", \"empName\": \"Nguyễn Thị Ánh\", \"designation\": \"Tester\", \"salary\": 12500000, \"email\": \"anh@example.com\", \"department\": \"QA\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+              "pm.test(\"Location and Unicode body\", () => {pm.expect(pm.response.headers.get(\"Location\")).to.eql(\"/api/employees/E901\"); pm.expect(pm.response.json().empName).to.eql(\"Nguyễn Thị Ánh\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T20 Duplicate ID",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/employees",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"empId\": \"E901\", \"empName\": \"Nguyễn Thị Ánh\", \"designation\": \"Tester\", \"salary\": 12500000, \"email\": \"anh@example.com\", \"department\": \"QA\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T21 Read created V2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/v2/employees/E901"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"retained Unicode and V2 fields\", () => {const b=pm.response.json(); pm.expect(b.empName).to.eql(\"Nguyễn Thị Ánh\"); pm.expect(b.email).to.eql(\"anh@example.com\"); pm.expect(b.department).to.eql(\"QA\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T22 Replace employee",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/employees/E901",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"empId\": \"E901\", \"empName\": \"Trần Minh\", \"designation\": \"Developer\", \"salary\": 15000000, \"email\": \"anh@example.com\", \"department\": \"QA\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"updated representation\", () => pm.expect(pm.response.json().empName).to.eql(\"Trần Minh\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T23 Read replacement",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees/E901"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"updated state persisted in repository\", () => {const b=pm.response.json(); pm.expect(b.empName).to.eql(\"Trần Minh\"); pm.expect(b.salary).to.eql(15000000);});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T24 Path/body mismatch",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/employees/E901",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"empId\": \"E902\", \"empName\": \"Trần Minh\", \"designation\": \"Developer\", \"salary\": 15000000, \"email\": \"anh@example.com\", \"department\": \"QA\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T25 Update missing",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/employees/E999",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"empId\": \"E999\", \"empName\": \"Trần Minh\", \"designation\": \"Developer\", \"salary\": 15000000, \"email\": \"anh@example.com\", \"department\": \"QA\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T26 Delete employee",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees/E901"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));",
+              "pm.test(\"204 empty body\", () => pm.expect(pm.response.text()).to.eql(\"\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T27 Get deleted",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees/E901"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T28 Delete missing",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees/E901"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T29 Final thirty seeds",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees?size=100"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"test data cleaned\", () => {const b=pm.response.json(); pm.expect(b.totalElements).to.eql(30); pm.expect(b.content.map(e=>e.empId)).not.to.include(\"E901\");});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T30 OpenAPI spec",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/v3/api-docs"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"documented endpoints and schemas\", () => {const b=pm.response.json(); pm.expect(b.paths).to.have.property(\"/api/employees\"); pm.expect(b.paths).to.have.property(\"/api/v2/employees\"); pm.expect(b.components.schemas).to.have.property(\"EmployeeV1\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T31 Swagger UI",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/swagger-ui/index.html"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Swagger HTML\", () => pm.expect(pm.response.text()).to.include(\"Swagger UI\"));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "requests": 42,
+  "assertions": 71,
+  "failures": 0,
+  "baseUrl": "http://127.0.0.1:8083",
+  "newmanVersion": "6.2.1",
+  "runtime": "real Lab03 Java server with in-memory repository",
+  "executions": [
+    {
+      "name": "T01 Baseline thirty employees",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T02 V1 four fields",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T03 V2 extra fields",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T04 Page zero",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T05 Page one",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T06 Salary asc",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T06 Salary desc",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T07 Multi sort",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T08 Stable name sort",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T09 First slice",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T10 Last slice",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T11 Beyond range",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T12 Guard negative page",
+      "method": "GET",
+      "status": 400,
+      "assertions": 2
+    },
+    {
+      "name": "T12 Guard zero size",
+      "method": "GET",
+      "status": 400,
+      "assertions": 2
+    },
+    {
+      "name": "T12 Guard oversized page",
+      "method": "GET",
+      "status": 400,
+      "assertions": 2
+    },
+    {
+      "name": "T12 Guard huge page size",
+      "method": "GET",
+      "status": 400,
+      "assertions": 2
+    },
+    {
+      "name": "T12 Guard unknown sort",
+      "method": "GET",
+      "status": 400,
+      "assertions": 2
+    },
+    {
+      "name": "T12 Guard invalid direction",
+      "method": "GET",
+      "status": 400,
+      "assertions": 2
+    },
+    {
+      "name": "T12 Guard nonnumeric page",
+      "method": "GET",
+      "status": 400,
+      "assertions": 2
+    },
+    {
+      "name": "T12 Guard duplicate sort",
+      "method": "GET",
+      "status": 400,
+      "assertions": 2
+    },
+    {
+      "name": "T13 Missing employee",
+      "method": "GET",
+      "status": 404,
+      "assertions": 2
+    },
+    {
+      "name": "T14 Unsupported URI version",
+      "method": "GET",
+      "status": 404,
+      "assertions": 1
+    },
+    {
+      "name": "T15 Unsupported Accept",
+      "method": "GET",
+      "status": 406,
+      "assertions": 1
+    },
+    {
+      "name": "T16 Validation blank name",
+      "method": "POST",
+      "status": 400,
+      "assertions": 1
+    },
+    {
+      "name": "T16 Validation negative salary",
+      "method": "POST",
+      "status": 400,
+      "assertions": 1
+    },
+    {
+      "name": "T16 Validation invalid email",
+      "method": "POST",
+      "status": 400,
+      "assertions": 1
+    },
+    {
+      "name": "T16 Validation invalid ID",
+      "method": "POST",
+      "status": 400,
+      "assertions": 1
+    },
+    {
+      "name": "T17 Malformed JSON",
+      "method": "POST",
+      "status": 400,
+      "assertions": 1
+    },
+    {
+      "name": "T18 Unsupported body type",
+      "method": "POST",
+      "status": 415,
+      "assertions": 1
+    },
+    {
+      "name": "T19 Create Unicode employee",
+      "method": "POST",
+      "status": 201,
+      "assertions": 2
+    },
+    {
+      "name": "T20 Duplicate ID",
+      "method": "POST",
+      "status": 409,
+      "assertions": 1
+    },
+    {
+      "name": "T21 Read created V2",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T22 Replace employee",
+      "method": "PUT",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T23 Read replacement",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T24 Path/body mismatch",
+      "method": "PUT",
+      "status": 400,
+      "assertions": 1
+    },
+    {
+      "name": "T25 Update missing",
+      "method": "PUT",
+      "status": 404,
+      "assertions": 1
+    },
+    {
+      "name": "T26 Delete employee",
+      "method": "DELETE",
+      "status": 204,
+      "assertions": 2
+    },
+    {
+      "name": "T27 Get deleted",
+      "method": "GET",
+      "status": 404,
+      "assertions": 1
+    },
+    {
+      "name": "T28 Delete missing",
+      "method": "DELETE",
+      "status": 404,
+      "assertions": 1
+    },
+    {
+      "name": "T29 Final thirty seeds",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T30 OpenAPI spec",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    },
+    {
+      "name": "T31 Swagger UI",
+      "method": "GET",
+      "status": 200,
+      "assertions": 2
+    }
+  ]
+}

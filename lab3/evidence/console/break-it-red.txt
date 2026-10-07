@@ -1,0 +1,267 @@
+[INFO] Scanning for projects...
+
+[INFO]
+
+[INFO] ---------------< com.example:lab03-employee-management >----------------
+
+[INFO] Building SBA301 Lab03 Employee Management 0.0.1-SNAPSHOT
+
+[INFO]   from pom.xml
+
+[INFO] --------------------------------[ jar ]---------------------------------
+
+[INFO]
+
+[INFO] --- resources:3.3.1:resources (default-resources) @ lab03-employee-management ---
+
+[INFO] Copying 1 resource from src\main\resources to target\classes
+
+[INFO] Copying 0 resource from src\main\resources to target\classes
+
+[INFO]
+
+[INFO] --- compiler:3.13.0:compile (default-compile) @ lab03-employee-management ---
+
+[INFO] Recompiling the module because of changed source code.
+
+[INFO] Compiling 16 source files with javac [debug parameters release 21] to target\classes
+
+[INFO]
+
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ lab03-employee-management ---
+
+[INFO] skip non existing resourceDirectory C:\SBA301\b�i t?p\sba-301\lab3\src\test\resources
+
+[INFO]
+
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ lab03-employee-management ---
+
+[INFO] Recompiling the module because of changed dependency.
+
+[INFO] Compiling 5 source files with javac [debug parameters release 21] to target\test-classes
+
+[INFO]
+
+[INFO] --- surefire:3.2.5:test (default-test) @ lab03-employee-management ---
+
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+
+[INFO]
+
+[INFO] -------------------------------------------------------
+
+[INFO]  T E S T S
+
+[INFO] -------------------------------------------------------
+
+[INFO] Running com.example.employeemanagement.EmployeeControllerTest
+
+09:27:14.983 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.employeemanagement.EmployeeControllerTest]: EmployeeControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+
+09:27:15.522 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.employeemanagement.EmployeeManagementApplication for test class com.example.employeemanagement.EmployeeControllerTest
+
+
+
+  .   ____          _            __ _ _
+
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+
+ =========|_|==============|___/=/_/_/_/
+
+
+
+ :: Spring Boot ::                (v3.3.4)
+
+
+
+2026-10-07T09:27:16.506+07:00  INFO 12244 --- [sba301-lab03-employee-management] [           main] c.e.e.EmployeeControllerTest             : Starting EmployeeControllerTest using Java 21.0.11 with PID 12244 (started by quoct in C:\SBA301\b�i t?p\sba-301\lab3)
+
+2026-10-07T09:27:16.508+07:00  INFO 12244 --- [sba301-lab03-employee-management] [           main] c.e.e.EmployeeControllerTest             : No active profile set, falling back to 1 default profile: "default"
+
+mvnw.cmd : WARNING: A Java agent has been loaded dynamically
+
+(C:\Users\quoct\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.19\byte-buddy-agent-1.14.19.jar)
+
+At C:\SBA301\bài tập\sba-301\lab3\scripts\break-it.ps1:17 char:5
+
++     & .\mvnw.cmd -B '-Dtest=EmployeeControllerTest#create_valid_retur ...
+
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    + CategoryInfo          : NotSpecified: (WARNING: A Java...nt-1.14.19.jar):String) [], RemoteException
+
+    + FullyQualifiedErrorId : NativeCommandError
+
+
+
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has
+
+been appended
+
+2026-10-07T09:27:24.824+07:00  INFO 12244 --- [sba301-lab03-employee-management] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+2026-10-07T09:27:24.826+07:00  INFO 12244 --- [sba301-lab03-employee-management] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+
+2026-10-07T09:27:24.847+07:00  INFO 12244 --- [sba301-lab03-employee-management] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 9 ms
+
+2026-10-07T09:27:24.969+07:00  INFO 12244 --- [sba301-lab03-employee-management] [           main] c.e.e.EmployeeControllerTest             : Started EmployeeControllerTest in 9.138 seconds (process running for 11.572)
+
+
+
+MockHttpServletRequest:
+
+      HTTP Method = POST
+
+      Request URI = /api/employees
+
+       Parameters = {}
+
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"127"]
+
+             Body = {"empId":"E101","empName":"Nguy?n An","designation":"Developer","salary":15000000,"email":"an@example.com","department":"IT"}
+
+    Session Attrs = {}
+
+
+
+Handler:
+
+             Type = com.example.employeemanagement.controllers.EmployeeController
+
+           Method = com.example.employeemanagement.controllers.EmployeeController#create(Employee, HttpServletRequest)
+
+
+
+Async:
+
+    Async started = false
+
+     Async result = null
+
+
+
+Resolved Exception:
+
+             Type = null
+
+
+
+ModelAndView:
+
+        View name = null
+
+             View = null
+
+            Model = null
+
+
+
+FlashMap:
+
+       Attributes = null
+
+
+
+MockHttpServletResponse:
+
+           Status = 200
+
+    Error message = null
+
+          Headers = [Content-Type:"application/json"]
+
+     Content type = application/json
+
+             Body = {"empId":"E101","empName":"Nguy?n An","designation":"Developer","salary":15000000}
+
+    Forwarded URL = null
+
+   Redirected URL = null
+
+          Cookies = []
+
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 12.09 s <<< FAILURE! -- in com.example.employeemanagement.EmployeeControllerTest
+
+[ERROR] com.example.employeemanagement.EmployeeControllerTest.create_valid_returns201LocationAndBody -- Time elapsed: 1.454 s <<< FAILURE!
+
+java.lang.AssertionError: Status expected:<201> but was:<200>
+
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+
+	at com.example.employeemanagement.EmployeeControllerTest.create_valid_returns201LocationAndBody(EmployeeControllerTest.java:78)
+
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+
+
+[INFO]
+
+[INFO] Results:
+
+[INFO]
+
+[ERROR] Failures:
+
+[ERROR]   EmployeeControllerTest.create_valid_returns201LocationAndBody:78 Status expected:<201> but was:<200>
+
+[INFO]
+
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+
+[INFO]
+
+[INFO] ------------------------------------------------------------------------
+
+[INFO] BUILD FAILURE
+
+[INFO] ------------------------------------------------------------------------
+
+[INFO] Total time:  22.547 s
+
+[INFO] Finished at: 2026-10-07T09:27:26+07:00
+
+[INFO] ------------------------------------------------------------------------
+
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project lab03-employee-management: There are test failures.
+
+[ERROR]
+
+[ERROR] Please refer to C:\SBA301\b�i t?p\sba-301\lab3\target\surefire-reports for the individual test results.
+
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+
+[ERROR] -> [Help 1]
+
+[ERROR]
+
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+
+[ERROR]
+
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

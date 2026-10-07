@@ -1,0 +1,98 @@
+{
+  "name": "T01 Baseline thirty employees",
+  "method": "GET",
+  "status": 200,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Transfer-Encoding",
+      "value": "chunked"
+    },
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:55 GMT"
+    },
+    {
+      "key": "Keep-Alive",
+      "value": "timeout=60"
+    },
+    {
+      "key": "Connection",
+      "value": "keep-alive"
+    }
+  ],
+  "body": {
+    "content": [
+      {
+        "empId": "E001",
+        "empName": "An",
+        "designation": "Developer",
+        "salary": 10250000
+      },
+      {
+        "empId": "E002",
+        "empName": "Binh",
+        "designation": "Tester",
+        "salary": 10500000
+      },
+      {
+        "empId": "E003",
+        "empName": "Chi",
+        "designation": "HR",
+        "salary": 10750000
+      },
+      {
+        "empId": "E004",
+        "empName": "Dung",
+        "designation": "Developer",
+        "salary": 11000000
+      },
+      {
+        "empId": "E005",
+        "empName": "Giang",
+        "designation": "Tester",
+        "salary": 11250000
+      },
+      {
+        "empId": "E006",
+        "empName": "Hoa",
+        "designation": "HR",
+        "salary": 11500000
+      },
+      {
+        "empId": "E007",
+        "empName": "Khanh",
+        "designation": "Developer",
+        "salary": 11750000
+      },
+      {
+        "empId": "E008",
+        "empName": "Linh",
+        "designation": "Tester",
+        "salary": 12000000
+      },
+      {
+        "empId": "E009",
+        "empName": "Minh",
+        "designation": "HR",
+        "salary": 12250000
+      },
+      {
+        "empId": "E010",
+        "empName": "Nam",
+        "designation": "Developer",
+        "salary": 12500000
+      }
+    ],
+    "page": 0,
+    "size": 10,
+    "numberOfElements": 10,
+    "totalElements": 30,
+    "totalPages": 3,
+    "hasNext": true,
+    "hasPrevious": false
+  }
+}

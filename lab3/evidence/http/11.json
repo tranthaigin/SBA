@@ -1,0 +1,52 @@
+{
+  "name": "T10 Last slice",
+  "method": "GET",
+  "status": 200,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Transfer-Encoding",
+      "value": "chunked"
+    },
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:55 GMT"
+    },
+    {
+      "key": "Keep-Alive",
+      "value": "timeout=60"
+    },
+    {
+      "key": "Connection",
+      "value": "keep-alive"
+    }
+  ],
+  "body": {
+    "content": [
+      {
+        "empId": "E029",
+        "empName": "Minh",
+        "designation": "Tester",
+        "salary": 17250000,
+        "email": "employee29@example.com",
+        "department": "Engineering"
+      },
+      {
+        "empId": "E030",
+        "empName": "Nam",
+        "designation": "HR",
+        "salary": 17500000,
+        "email": "employee30@example.com",
+        "department": "People"
+      }
+    ],
+    "page": 4,
+    "size": 7,
+    "numberOfElements": 2,
+    "hasNext": false,
+    "hasPrevious": true
+  }
+}

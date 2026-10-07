@@ -1,0 +1,865 @@
+{
+  "name": "T30 OpenAPI spec",
+  "method": "GET",
+  "status": 200,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Content-Length",
+      "value": "10115"
+    },
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:58 GMT"
+    },
+    {
+      "key": "Keep-Alive",
+      "value": "timeout=60"
+    },
+    {
+      "key": "Connection",
+      "value": "keep-alive"
+    }
+  ],
+  "body": {
+    "openapi": "3.0.1",
+    "info": {
+      "title": "SBA301 Lab03 Employee API",
+      "description": "In-memory Employee CRUD. Page is zero-based; size 1..100. Repeat sort=property,asc|desc for multi-sort. Default empId,asc; empId is a stable tie-breaker. V1 has four fields; V2 adds email and department. Restart resets the 30 seeded employees.",
+      "version": "1.0"
+    },
+    "servers": [
+      {
+        "url": "http://127.0.0.1:8083",
+        "description": "Generated server url"
+      }
+    ],
+    "paths": {
+      "/api/employees/{id}": {
+        "get": {
+          "tags": [
+            "employee-controller"
+          ],
+          "summary": "Get employee by empId",
+          "operationId": "getById_1",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "404": {
+              "description": "Employee not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EmployeeV1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "employee-controller"
+          ],
+          "summary": "Replace employee; path/body empId must agree",
+          "operationId": "update",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EmployeeV1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "employee-controller"
+          ],
+          "summary": "Delete employee",
+          "operationId": "delete",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Deleted; empty body"
+            },
+            "404": {
+              "description": "Employee not found"
+            }
+          }
+        }
+      },
+      "/api/v1/employees/{id}": {
+        "get": {
+          "tags": [
+            "employee-controller"
+          ],
+          "summary": "Get employee by empId",
+          "operationId": "getById_2",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "404": {
+              "description": "Employee not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EmployeeV1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "employee-controller"
+          ],
+          "summary": "Replace employee; path/body empId must agree",
+          "operationId": "update_1",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EmployeeV1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "employee-controller"
+          ],
+          "summary": "Delete employee",
+          "operationId": "delete_1",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Deleted; empty body"
+            },
+            "404": {
+              "description": "Employee not found"
+            }
+          }
+        }
+      },
+      "/api/v1/employees": {
+        "get": {
+          "tags": [
+            "employee-controller"
+          ],
+          "summary": "List employees with Page metadata (V1)",
+          "operationId": "getAll_1",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "minimum": 0,
+                "type": "integer",
+                "default": 0
+              }
+            },
+            {
+              "name": "size",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "maximum": 100,
+                "minimum": 1,
+                "type": "integer",
+                "default": 10
+              }
+            },
+            {
+              "name": "sort",
+              "in": "query",
+              "description": "Repeat sort=empName,asc&sort=salary,desc. Default empId,asc.",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PageResponseEmployeeV1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "employee-controller"
+          ],
+          "summary": "Create employee; duplicate empId returns 409",
+          "operationId": "create",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "Created; Location identifies the new employee",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EmployeeV1"
+                  }
+                }
+              }
+            },
+            "409": {
+              "description": "Duplicate empId",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EmployeeV1"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid employee",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EmployeeV1"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/employees": {
+        "get": {
+          "tags": [
+            "employee-controller"
+          ],
+          "summary": "List employees with Page metadata (V1)",
+          "operationId": "getAll_2",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "minimum": 0,
+                "type": "integer",
+                "default": 0
+              }
+            },
+            {
+              "name": "size",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "maximum": 100,
+                "minimum": 1,
+                "type": "integer",
+                "default": 10
+              }
+            },
+            {
+              "name": "sort",
+              "in": "query",
+              "description": "Repeat sort=empName,asc&sort=salary,desc. Default empId,asc.",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PageResponseEmployeeV1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "employee-controller"
+          ],
+          "summary": "Create employee; duplicate empId returns 409",
+          "operationId": "create_1",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "Created; Location identifies the new employee",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EmployeeV1"
+                  }
+                }
+              }
+            },
+            "409": {
+              "description": "Duplicate empId",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EmployeeV1"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid employee",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EmployeeV1"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v2/employees": {
+        "get": {
+          "tags": [
+            "employee-v-2-controller"
+          ],
+          "summary": "V2 Page adds email and department to employee representations",
+          "operationId": "getAll",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 0
+              }
+            },
+            {
+              "name": "size",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 10
+              }
+            },
+            {
+              "name": "sort",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PageResponseEmployee"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v2/employees/{id}": {
+        "get": {
+          "tags": [
+            "employee-v-2-controller"
+          ],
+          "summary": "Get V2 employee, including email and department",
+          "operationId": "getById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Employee"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v2/employees/slice": {
+        "get": {
+          "tags": [
+            "employee-v-2-controller"
+          ],
+          "summary": "V2 Slice adds email and department; no total count",
+          "operationId": "getSlice",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 0
+              }
+            },
+            {
+              "name": "size",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 10
+              }
+            },
+            {
+              "name": "sort",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SliceResponseEmployee"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/employees/slice": {
+        "get": {
+          "tags": [
+            "employee-controller"
+          ],
+          "summary": "List employees with Slice metadata, without totals (V1)",
+          "operationId": "getSlice_1",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 0
+              }
+            },
+            {
+              "name": "size",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 10
+              }
+            },
+            {
+              "name": "sort",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SliceResponseEmployeeV1"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/employees/slice": {
+        "get": {
+          "tags": [
+            "employee-controller"
+          ],
+          "summary": "List employees with Slice metadata, without totals (V1)",
+          "operationId": "getSlice_2",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 0
+              }
+            },
+            {
+              "name": "size",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 10
+              }
+            },
+            {
+              "name": "sort",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SliceResponseEmployeeV1"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Employee": {
+          "required": [
+            "designation",
+            "empId",
+            "empName",
+            "salary"
+          ],
+          "type": "object",
+          "properties": {
+            "empId": {
+              "pattern": "E[0-9]{3,6}",
+              "type": "string"
+            },
+            "empName": {
+              "maxLength": 100,
+              "minLength": 0,
+              "type": "string"
+            },
+            "designation": {
+              "maxLength": 100,
+              "minLength": 0,
+              "type": "string"
+            },
+            "salary": {
+              "minimum": 0.0,
+              "exclusiveMinimum": false,
+              "type": "number"
+            },
+            "email": {
+              "maxLength": 150,
+              "minLength": 0,
+              "type": "string"
+            },
+            "department": {
+              "maxLength": 100,
+              "minLength": 0,
+              "type": "string"
+            }
+          }
+        },
+        "EmployeeV1": {
+          "type": "object",
+          "properties": {
+            "empId": {
+              "type": "string"
+            },
+            "empName": {
+              "type": "string"
+            },
+            "designation": {
+              "type": "string"
+            },
+            "salary": {
+              "type": "number"
+            }
+          }
+        },
+        "PageResponseEmployee": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Employee"
+              }
+            },
+            "page": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "size": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "numberOfElements": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "totalElements": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "totalPages": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "hasNext": {
+              "type": "boolean"
+            },
+            "hasPrevious": {
+              "type": "boolean"
+            }
+          }
+        },
+        "SliceResponseEmployee": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Employee"
+              }
+            },
+            "page": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "size": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "numberOfElements": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "hasNext": {
+              "type": "boolean"
+            },
+            "hasPrevious": {
+              "type": "boolean"
+            }
+          }
+        },
+        "SliceResponseEmployeeV1": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/EmployeeV1"
+              }
+            },
+            "page": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "size": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "numberOfElements": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "hasNext": {
+              "type": "boolean"
+            },
+            "hasPrevious": {
+              "type": "boolean"
+            }
+          }
+        },
+        "PageResponseEmployeeV1": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/EmployeeV1"
+              }
+            },
+            "page": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "size": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "numberOfElements": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "totalElements": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "totalPages": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "hasNext": {
+              "type": "boolean"
+            },
+            "hasPrevious": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    }
+  }
+}

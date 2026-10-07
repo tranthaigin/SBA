@@ -1,0 +1,31 @@
+{
+  "name": "T12 Guard unknown sort",
+  "method": "GET",
+  "status": 400,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Transfer-Encoding",
+      "value": "chunked"
+    },
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:56 GMT"
+    },
+    {
+      "key": "Connection",
+      "value": "close"
+    }
+  ],
+  "body": {
+    "timestamp": "2026-10-07T02:27:56.826141100Z",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "sort must use distinct allowed properties: [designation, empId, department, empName, salary, email]",
+    "path": "/api/employees",
+    "fieldErrors": {}
+  }
+}

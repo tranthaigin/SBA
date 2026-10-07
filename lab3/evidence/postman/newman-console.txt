@@ -1,0 +1,455 @@
+newman.cmd : (node:8740) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+
+At C:\SBA301\bài tập\sba-301\lab3\scripts\verify-api.ps1:15 char:5
+
++     & .\node_modules\.bin\newman.cmd run Employee-Lab03.postman_colle ...
+
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    + CategoryInfo          : NotSpecified: ((node:8740) [DE...ts.F_OK instead:String) [], RemoteException
+
+    + FullyQualifiedErrorId : NativeCommandError
+
+
+
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+newman
+
+
+
+SBA301 Lab03 Employee API
+
+
+
+→ T01 Baseline thirty employees
+
+  GET http://127.0.0.1:8083/api/employees [200 OK, 1.03kB, 34ms]
+
+  √  HTTP 200
+
+  √  30 seeds and 3 pages
+
+
+
+→ T02 V1 four fields
+
+  GET http://127.0.0.1:8083/api/v1/employees/E001 [200 OK, 239B, 6ms]
+
+  √  HTTP 200
+
+  √  V1 contract
+
+
+
+→ T03 V2 extra fields
+
+  GET http://127.0.0.1:8083/api/v2/employees/E001 [200 OK, 299B, 6ms]
+
+  √  HTTP 200
+
+  √  V2 contract
+
+
+
+→ T04 Page zero
+
+  GET http://127.0.0.1:8083/api/employees?page=0&size=5 [200 OK, 660B, 5ms]
+
+  √  HTTP 200
+
+  √  page 0 content
+
+
+
+→ T05 Page one
+
+  GET http://127.0.0.1:8083/api/employees?page=1&size=5 [200 OK, 656B, 4ms]
+
+  √  HTTP 200
+
+  √  disjoint pages and metadata
+
+
+
+→ T06 Salary asc
+
+  GET http://127.0.0.1:8083/api/employees?size=100&sort=salary,asc [200 OK, 2.52kB, 5ms]
+
+  √  HTTP 200
+
+  √  numeric salary order
+
+
+
+→ T06 Salary desc
+
+  GET http://127.0.0.1:8083/api/employees?size=100&sort=salary,desc [200 OK, 2.52kB, 5ms]
+
+  √  HTTP 200
+
+  √  numeric salary order
+
+
+
+→ T07 Multi sort
+
+  GET http://127.0.0.1:8083/api/employees?size=3&sort=empName,asc&sort=salary,desc [200 OK, 504B, 5ms]
+
+  √  HTTP 200
+
+  √  name then salary
+
+
+
+→ T08 Stable name sort
+
+  GET http://127.0.0.1:8083/api/employees?size=3&sort=empName,asc [200 OK, 504B, 4ms]
+
+  √  HTTP 200
+
+  √  stable ID tie-break
+
+
+
+→ T09 First slice
+
+  GET http://127.0.0.1:8083/api/employees/slice?size=7 [200 OK, 775B, 11ms]
+
+  √  HTTP 200
+
+  √  hasNext without totals
+
+
+
+→ T10 Last slice
+
+  GET http://127.0.0.1:8083/api/v2/employees/slice?page=4&size=7 [200 OK, 511B, 4ms]
+
+  √  HTTP 200
+
+  √  last slice has two rows
+
+
+
+→ T11 Beyond range
+
+  GET http://127.0.0.1:8083/api/employees?page=2147483647&size=100 [200 OK, 297B, 4ms]
+
+  √  HTTP 200
+
+  √  empty page no overflow
+
+
+
+→ T12 Guard negative page
+
+  GET http://127.0.0.1:8083/api/employees?page=-1 [400 Bad Request, 331B, 18ms]
+
+  √  HTTP 400
+
+  √  structured error
+
+
+
+→ T12 Guard zero size
+
+  GET http://127.0.0.1:8083/api/employees?size=0 [400 Bad Request, 331B, 4ms]
+
+  √  HTTP 400
+
+  √  structured error
+
+
+
+→ T12 Guard oversized page
+
+  GET http://127.0.0.1:8083/api/employees?size=101 [400 Bad Request, 331B, 8ms]
+
+  √  HTTP 400
+
+  √  structured error
+
+
+
+→ T12 Guard huge page size
+
+  GET http://127.0.0.1:8083/api/employees?size=100000 [400 Bad Request, 331B, 5ms]
+
+  √  HTTP 400
+
+  √  structured error
+
+
+
+→ T12 Guard unknown sort
+
+  GET http://127.0.0.1:8083/api/employees?sort=password,asc [400 Bad Request, 378B, 6ms]
+
+  √  HTTP 400
+
+  √  structured error
+
+
+
+→ T12 Guard invalid direction
+
+  GET http://127.0.0.1:8083/api/employees?sort=empName,wrong [400 Bad Request, 313B, 5ms]
+
+  √  HTTP 400
+
+  √  structured error
+
+
+
+→ T12 Guard nonnumeric page
+
+  GET http://127.0.0.1:8083/api/employees?page=abc [400 Bad Request, 312B, 10ms]
+
+  √  HTTP 400
+
+  √  structured error
+
+
+
+→ T12 Guard duplicate sort
+
+  GET http://127.0.0.1:8083/api/employees?sort=empName,asc&sort=empName,desc [400 Bad Request, 378B, 5ms]
+
+  √  HTTP 400
+
+  √  structured error
+
+
+
+→ T13 Missing employee
+
+  GET http://127.0.0.1:8083/api/employees/E999 [404 Not Found, 336B, 6ms]
+
+  √  HTTP 404
+
+  √  missing ID contract
+
+
+
+→ T14 Unsupported URI version
+
+  GET http://127.0.0.1:8083/api/v3/employees [404 Not Found, 418B, 7ms]
+
+  √  HTTP 404
+
+
+
+→ T15 Unsupported Accept
+
+  GET http://127.0.0.1:8083/api/employees [406 Not Acceptable, 161B, 23ms]
+
+  √  HTTP 406
+
+
+
+→ T16 Validation blank name
+
+  POST http://127.0.0.1:8083/api/employees [400 Bad Request, 334B, 188ms]
+
+  √  HTTP 400
+
+
+
+→ T16 Validation negative salary
+
+  POST http://127.0.0.1:8083/api/employees [400 Bad Request, 352B, 68ms]
+
+  √  HTTP 400
+
+
+
+→ T16 Validation invalid email
+
+  POST http://127.0.0.1:8083/api/employees [400 Bad Request, 350B, 16ms]
+
+  √  HTTP 400
+
+
+
+→ T16 Validation invalid ID
+
+  POST http://127.0.0.1:8083/api/employees [400 Bad Request, 338B, 21ms]
+
+  √  HTTP 400
+
+
+
+→ T17 Malformed JSON
+
+  POST http://127.0.0.1:8083/api/employees [400 Bad Request, 312B, 11ms]
+
+  √  HTTP 400
+
+
+
+→ T18 Unsupported body type
+
+  POST http://127.0.0.1:8083/api/employees [415 Unsupported Media Type, 389B, 16ms]
+
+  √  HTTP 415
+
+
+
+→ T19 Create Unicode employee
+
+  POST http://127.0.0.1:8083/api/employees [201 Created, 289B, 19ms]
+
+  √  HTTP 201
+
+  √  Location and Unicode body
+
+
+
+→ T20 Duplicate ID
+
+  POST http://127.0.0.1:8083/api/employees [409 Conflict, 330B, 5ms]
+
+  √  HTTP 409
+
+
+
+→ T21 Read created V2
+
+  GET http://127.0.0.1:8083/api/v2/employees/E901 [200 OK, 297B, 6ms]
+
+  √  HTTP 200
+
+  √  retained Unicode and V2 fields
+
+
+
+→ T22 Replace employee
+
+  PUT http://127.0.0.1:8083/api/employees/E901 [200 OK, 248B, 7ms]
+
+  √  HTTP 200
+
+  √  updated representation
+
+
+
+→ T23 Read replacement
+
+  GET http://127.0.0.1:8083/api/employees/E901 [200 OK, 248B, 3ms]
+
+  √  HTTP 200
+
+  √  updated state persisted in repository
+
+
+
+→ T24 Path/body mismatch
+
+  PUT http://127.0.0.1:8083/api/employees/E901 [400 Bad Request, 316B, 5ms]
+
+  √  HTTP 400
+
+
+
+→ T25 Update missing
+
+  PUT http://127.0.0.1:8083/api/employees/E999 [404 Not Found, 336B, 5ms]
+
+  √  HTTP 404
+
+
+
+→ T26 Delete employee
+
+  DELETE http://127.0.0.1:8083/api/employees/E901 [204 No Content, 112B, 4ms]
+
+  √  HTTP 204
+
+  √  204 empty body
+
+
+
+→ T27 Get deleted
+
+  GET http://127.0.0.1:8083/api/employees/E901 [404 Not Found, 333B, 3ms]
+
+  √  HTTP 404
+
+
+
+→ T28 Delete missing
+
+  DELETE http://127.0.0.1:8083/api/employees/E901 [404 Not Found, 336B, 4ms]
+
+  √  HTTP 404
+
+
+
+→ T29 Final thirty seeds
+
+  GET http://127.0.0.1:8083/api/employees?size=100 [200 OK, 2.52kB, 4ms]
+
+  √  HTTP 200
+
+  √  test data cleaned
+
+
+
+→ T30 OpenAPI spec
+
+  GET http://127.0.0.1:8083/v3/api-docs [200 OK, 10.27kB, 200ms]
+
+  √  HTTP 200
+
+  √  documented endpoints and schemas
+
+
+
+→ T31 Swagger UI
+
+  GET http://127.0.0.1:8083/swagger-ui/index.html [200 OK, 1.04kB, 7ms]
+
+  √  HTTP 200
+
+  √  Swagger HTML
+
+
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+
+│                         │          executed │           failed │
+
+├─────────────────────────┼───────────────────┼──────────────────┤
+
+│              iterations │                 1 │                0 │
+
+├─────────────────────────┼───────────────────┼──────────────────┤
+
+│                requests │                42 │                0 │
+
+├─────────────────────────┼───────────────────┼──────────────────┤
+
+│            test-scripts │                42 │                0 │
+
+├─────────────────────────┼───────────────────┼──────────────────┤
+
+│      prerequest-scripts │                 0 │                0 │
+
+├─────────────────────────┼───────────────────┼──────────────────┤
+
+│              assertions │                71 │                0 │
+
+├─────────────────────────┴───────────────────┴──────────────────┤
+
+│ total run duration: 4.2s                                       │
+
+├────────────────────────────────────────────────────────────────┤
+
+│ total data received: 25.99kB (approx)                          │
+
+├────────────────────────────────────────────────────────────────┤
+
+│ average response time: 18ms [min: 3ms, max: 200ms, s.d.: 40ms] │
+
+└────────────────────────────────────────────────────────────────┘

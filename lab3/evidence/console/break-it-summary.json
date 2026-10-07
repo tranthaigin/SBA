@@ -1,0 +1,9 @@
+﻿{
+    "afterSha256":  "1C7CFED13AEA1AB4F9C6C14550197979203DC07BE3E356B627C132D1609205BF",
+    "beforeSha256":  "1C7CFED13AEA1AB4F9C6C14550197979203DC07BE3E356B627C132D1609205BF",
+    "mutation":  "POST 201 -\u003e 200",
+    "redExit":  1,
+    "test":  "EmployeeControllerTest#create_valid_returns201LocationAndBody",
+    "greenExit":  0,
+    "sourceRestored":  true
+}

@@ -1,0 +1,20 @@
+{
+  "name": "T26 Delete employee",
+  "method": "DELETE",
+  "status": 204,
+  "headers": [
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:58 GMT"
+    },
+    {
+      "key": "Keep-Alive",
+      "value": "timeout=60"
+    },
+    {
+      "key": "Connection",
+      "value": "keep-alive"
+    }
+  ],
+  "body": ""
+}

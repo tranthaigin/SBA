@@ -1,0 +1,37 @@
+{
+  "name": "T19 Create Unicode employee",
+  "method": "POST",
+  "status": 201,
+  "headers": [
+    {
+      "key": "Location",
+      "value": "/api/employees/E901"
+    },
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Transfer-Encoding",
+      "value": "chunked"
+    },
+    {
+      "key": "Date",
+      "value": "Wed, 07 Oct 2026 02:27:57 GMT"
+    },
+    {
+      "key": "Keep-Alive",
+      "value": "timeout=60"
+    },
+    {
+      "key": "Connection",
+      "value": "keep-alive"
+    }
+  ],
+  "body": {
+    "empId": "E901",
+    "empName": "Nguyễn Thị Ánh",
+    "designation": "Tester",
+    "salary": 12500000
+  }
+}
