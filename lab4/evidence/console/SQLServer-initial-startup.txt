@@ -33,37 +33,37 @@
 2026-10-07T09:06:20.533+07:00  INFO 23468 --- [slot18-orchid-lab] [nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2026-10-07T09:06:20.535+07:00  INFO 23468 --- [slot18-orchid-lab] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2026-10-07T09:06:20.539+07:00  INFO 23468 --- [slot18-orchid-lab] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
-2026-10-07T09:06:20.920+07:00 DEBUG 23468 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        : 
+2026-10-07T09:06:20.920+07:00 DEBUG 23468 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
         orchid_categories oc1_0
-2026-10-07T09:06:20.920+07:00 DEBUG 23468 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2026-10-07T09:06:20.920+07:00 DEBUG 23468 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
         orchid_categories oc1_0
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
         orchid_categories oc1_0
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
         orchid_categories oc1_0
-2026-10-07T09:06:20.931+07:00 DEBUG 23468 --- [slot18-orchid-lab] [           main] org.hibernate.SQL                        : 
+2026-10-07T09:06:20.931+07:00 DEBUG 23468 --- [slot18-orchid-lab] [           main] org.hibernate.SQL                        :
     select
-        count_big(*) 
+        count_big(*)
     from
         orchid_categories oc1_0
-Hibernate: 
+Hibernate:
     select
-        count_big(*) 
+        count_big(*)
     from
         orchid_categories oc1_0

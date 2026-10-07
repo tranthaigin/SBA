@@ -10,4 +10,3 @@ import java.util.Optional;
 public interface IOrchidCategoryRepository extends JpaRepository<OrchidCategory, Long> {
     Optional<OrchidCategory> findByCategoryNameIgnoreCase(String categoryName);
 }
-

@@ -13,4 +13,3 @@ public interface IOrchidService {
     Optional<Orchid> update(Long id, Orchid orchid);
     boolean delete(Long id);
 }
-

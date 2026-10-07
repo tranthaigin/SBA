@@ -10,4 +10,3 @@ import java.util.List;
 public interface IOrchidRepository extends JpaRepository<Orchid, Long> {
     List<Orchid> findByOrchidNameContainingIgnoreCase(String name);
 }
-

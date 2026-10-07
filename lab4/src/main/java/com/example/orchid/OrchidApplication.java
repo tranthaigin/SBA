@@ -10,4 +10,3 @@ public class OrchidApplication {
         SpringApplication.run(OrchidApplication.class, args);
     }
 }
-

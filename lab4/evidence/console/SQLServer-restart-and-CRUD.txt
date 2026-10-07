@@ -33,29 +33,29 @@
 2026-10-07T09:06:38.722+07:00  INFO 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2026-10-07T09:06:38.725+07:00  INFO 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2026-10-07T09:06:38.734+07:00  INFO 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
-2026-10-07T09:06:39.212+07:00 DEBUG 2188 --- [slot18-orchid-lab] [           main] org.hibernate.SQL                        : 
+2026-10-07T09:06:39.212+07:00 DEBUG 2188 --- [slot18-orchid-lab] [           main] org.hibernate.SQL                        :
     select
-        count_big(*) 
+        count_big(*)
     from
         orchid_categories oc1_0
-Hibernate: 
+Hibernate:
     select
-        count_big(*) 
+        count_big(*)
     from
         orchid_categories oc1_0
-2026-10-07T09:06:39.218+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        oc1_0.category_id,
-        oc1_0.category_name 
-    from
-        orchid_categories oc1_0
-Hibernate: 
+2026-10-07T09:06:39.218+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
         orchid_categories oc1_0
-2026-10-07T09:06:39.413+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        : 
+Hibernate:
+    select
+        oc1_0.category_id,
+        oc1_0.category_name
+    from
+        orchid_categories oc1_0
+2026-10-07T09:06:39.413+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -65,15 +65,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -83,31 +83,31 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:06:39.415+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [8]
-2026-10-07T09:06:40.053+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        : 
+2026-10-07T09:06:40.053+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        :
     select
-        count_big(*) 
+        count_big(*)
     from
-        orchids o1_0 
+        orchids o1_0
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
-        count_big(*) 
+        count_big(*)
     from
-        orchids o1_0 
+        orchids o1_0
     where
         o1_0.orchidid=?
 2026-10-07T09:06:40.054+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [8]
-2026-10-07T09:06:40.063+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        : 
+2026-10-07T09:06:40.063+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -117,15 +117,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -135,29 +135,29 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:06:40.066+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [8]
-2026-10-07T09:06:40.102+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        : 
-    delete 
+2026-10-07T09:06:40.102+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        :
+    delete
     from
-        orchids 
+        orchids
     where
         orchidid=?
-Hibernate: 
-    delete 
+Hibernate:
+    delete
     from
-        orchids 
+        orchids
     where
         orchidid=?
 2026-10-07T09:06:40.103+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [8]
-2026-10-07T09:06:40.137+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        : 
+2026-10-07T09:06:40.137+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -167,15 +167,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -185,61 +185,61 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:06:40.139+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [8]
-2026-10-07T09:06:40.162+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.SQL                        : 
+2026-10-07T09:06:40.162+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.SQL                        :
     select
-        count_big(*) 
+        count_big(*)
     from
-        orchids o1_0 
+        orchids o1_0
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
-        count_big(*) 
+        count_big(*)
     from
-        orchids o1_0 
+        orchids o1_0
     where
         o1_0.orchidid=?
 2026-10-07T09:06:40.164+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [8]
 2026-10-07T09:06:40.749+07:00  WARN 2188 --- [slot18-orchid-lab] [nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected end-of-input: expected close marker for Object (start marker at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1])]
 2026-10-07T09:06:40.782+07:00  WARN 2188 --- [slot18-orchid-lab] [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content-Type 'text/plain;charset=utf-8' is not supported]
-2026-10-07T09:06:40.832+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.SQL                        : 
+2026-10-07T09:06:40.832+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:06:40.833+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
-2026-10-07T09:06:40.847+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.SQL                        : 
-    insert 
+2026-10-07T09:06:40.847+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.SQL                        :
+    insert
     into
         orchids
-        (is_attractive, is_natural, category_id, orchid_description, orchid_name, orchidurl) 
+        (is_attractive, is_natural, category_id, orchid_description, orchid_name, orchidurl)
     values
         (?, ?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
+Hibernate:
+    insert
     into
         orchids
-        (is_attractive, is_natural, category_id, orchid_description, orchid_name, orchidurl) 
+        (is_attractive, is_natural, category_id, orchid_description, orchid_name, orchidurl)
     values
         (?, ?, ?, ?, ?, ?)
 2026-10-07T09:06:40.849+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BOOLEAN) <- [false]
@@ -248,22 +248,22 @@ Hibernate:
 2026-10-07T09:06:40.850+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (4:NVARCHAR) <- [Hoa lan kiểm thử lưu bền vững]
 2026-10-07T09:06:40.851+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (5:NVARCHAR) <- [Hoa lan Lab4 20261007090627 Updated]
 2026-10-07T09:06:40.851+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [https://example.com/orchid.jpg]
-2026-10-07T09:06:40.892+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-9] org.hibernate.SQL                        : 
+2026-10-07T09:06:40.892+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-9] org.hibernate.SQL                        :
     select
-        count_big(*) 
+        count_big(*)
     from
-        orchids o1_0 
+        orchids o1_0
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
-        count_big(*) 
+        count_big(*)
     from
-        orchids o1_0 
+        orchids o1_0
     where
         o1_0.orchidid=?
 2026-10-07T09:06:40.893+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [9]
-2026-10-07T09:06:40.899+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-9] org.hibernate.SQL                        : 
+2026-10-07T09:06:40.899+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-9] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -273,15 +273,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -291,57 +291,57 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:06:40.900+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [9]
-2026-10-07T09:06:40.906+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-9] org.hibernate.SQL                        : 
-    delete 
+2026-10-07T09:06:40.906+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-9] org.hibernate.SQL                        :
+    delete
     from
-        orchids 
+        orchids
     where
         orchidid=?
-Hibernate: 
-    delete 
+Hibernate:
+    delete
     from
-        orchids 
+        orchids
     where
         orchidid=?
 2026-10-07T09:06:40.907+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [9]
-2026-10-07T09:06:40.931+07:00 DEBUG 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.SQL                        : 
+2026-10-07T09:06:40.931+07:00 DEBUG 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:06:40.932+07:00 TRACE 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
-2026-10-07T09:06:40.936+07:00 DEBUG 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.SQL                        : 
-    insert 
+2026-10-07T09:06:40.936+07:00 DEBUG 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.SQL                        :
+    insert
     into
         orchids
-        (is_attractive, is_natural, category_id, orchid_description, orchid_name, orchidurl) 
+        (is_attractive, is_natural, category_id, orchid_description, orchid_name, orchidurl)
     values
         (?, ?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
+Hibernate:
+    insert
     into
         orchids
-        (is_attractive, is_natural, category_id, orchid_description, orchid_name, orchidurl) 
+        (is_attractive, is_natural, category_id, orchid_description, orchid_name, orchidurl)
     values
         (?, ?, ?, ?, ?, ?)
 2026-10-07T09:06:40.937+07:00 TRACE 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:BOOLEAN) <- [false]
@@ -350,7 +350,7 @@ Hibernate:
 2026-10-07T09:06:40.938+07:00 TRACE 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (4:NVARCHAR) <- [Hoa lan kiểm thử lưu bền vững]
 2026-10-07T09:06:40.939+07:00 TRACE 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (5:NVARCHAR) <- [Hoa lan Lab4 20261007090627 Updated]
 2026-10-07T09:06:40.939+07:00 TRACE 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [https://example.com/orchid.jpg]
-2026-10-07T09:06:40.963+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        : 
+2026-10-07T09:06:40.963+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -360,15 +360,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -378,31 +378,31 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:06:40.964+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [10]
-2026-10-07T09:06:40.984+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2026-10-07T09:06:40.984+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        :
     select
-        count_big(*) 
+        count_big(*)
     from
-        orchids o1_0 
+        orchids o1_0
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
-        count_big(*) 
+        count_big(*)
     from
-        orchids o1_0 
+        orchids o1_0
     where
         o1_0.orchidid=?
 2026-10-07T09:06:40.985+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [10]
-2026-10-07T09:06:40.989+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2026-10-07T09:06:40.989+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -412,15 +412,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -430,29 +430,29 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:06:40.990+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [10]
-2026-10-07T09:06:40.995+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        : 
-    delete 
+2026-10-07T09:06:40.995+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        :
+    delete
     from
-        orchids 
+        orchids
     where
         orchidid=?
-Hibernate: 
-    delete 
+Hibernate:
+    delete
     from
-        orchids 
+        orchids
     where
         orchidid=?
 2026-10-07T09:06:40.996+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [10]
-2026-10-07T09:06:41.041+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        : 
+2026-10-07T09:06:41.041+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -460,10 +460,10 @@ Hibernate:
         o1_0.category_id,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
         orchids o1_0
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -471,44 +471,44 @@ Hibernate:
         o1_0.category_id,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
         orchids o1_0
-2026-10-07T09:06:41.046+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        : 
+2026-10-07T09:06:41.046+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:06:41.046+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
-2026-10-07T09:06:41.050+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        : 
+2026-10-07T09:06:41.050+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:06:41.052+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
-2026-10-07T09:06:41.073+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.SQL                        : 
+2026-10-07T09:06:41.073+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -516,10 +516,10 @@ Hibernate:
         o1_0.category_id,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
         orchids o1_0
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -527,84 +527,84 @@ Hibernate:
         o1_0.category_id,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
         orchids o1_0
-2026-10-07T09:06:41.077+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.SQL                        : 
+2026-10-07T09:06:41.077+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:06:41.078+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
-2026-10-07T09:06:41.083+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.SQL                        : 
+2026-10-07T09:06:41.083+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:06:41.084+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
-2026-10-07T09:07:18.418+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-9] org.hibernate.SQL                        : 
+2026-10-07T09:07:18.418+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-9] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
         orchid_categories oc1_0
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
         orchid_categories oc1_0
-2026-10-07T09:07:18.530+07:00 DEBUG 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.SQL                        : 
+2026-10-07T09:07:18.530+07:00 DEBUG 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:07:18.531+07:00 TRACE 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
-2026-10-07T09:07:18.536+07:00 DEBUG 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.SQL                        : 
-    insert 
+2026-10-07T09:07:18.536+07:00 DEBUG 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.SQL                        :
+    insert
     into
         orchids
-        (is_attractive, is_natural, category_id, orchid_description, orchid_name, orchidurl) 
+        (is_attractive, is_natural, category_id, orchid_description, orchid_name, orchidurl)
     values
         (?, ?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
+Hibernate:
+    insert
     into
         orchids
-        (is_attractive, is_natural, category_id, orchid_description, orchid_name, orchidurl) 
+        (is_attractive, is_natural, category_id, orchid_description, orchid_name, orchidurl)
     values
         (?, ?, ?, ?, ?, ?)
 2026-10-07T09:07:18.537+07:00 TRACE 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:BOOLEAN) <- [true]
@@ -613,7 +613,7 @@ Hibernate:
 2026-10-07T09:07:18.538+07:00 TRACE 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (4:NVARCHAR) <- [Hoa lan kiem thu Lab4]
 2026-10-07T09:07:18.539+07:00 TRACE 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (5:NVARCHAR) <- [Postman Lab4 Orchid]
 2026-10-07T09:07:18.539+07:00 TRACE 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [https://example.com/orchid.jpg]
-2026-10-07T09:07:18.668+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        : 
+2026-10-07T09:07:18.668+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -621,10 +621,10 @@ Hibernate:
         o1_0.category_id,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
         orchids o1_0
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -632,44 +632,44 @@ Hibernate:
         o1_0.category_id,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
         orchids o1_0
-2026-10-07T09:07:18.672+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        : 
+2026-10-07T09:07:18.672+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:07:18.674+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
-2026-10-07T09:07:18.678+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        : 
+2026-10-07T09:07:18.678+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:07:18.679+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
-2026-10-07T09:07:18.809+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2026-10-07T09:07:18.809+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -677,12 +677,12 @@ Hibernate:
         o1_0.category_id,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     where
         upper(o1_0.orchid_name) like upper(?) escape '\'
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -690,30 +690,30 @@ Hibernate:
         o1_0.category_id,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     where
         upper(o1_0.orchid_name) like upper(?) escape '\'
 2026-10-07T09:07:18.810+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [%postman lab4%]
-2026-10-07T09:07:18.817+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2026-10-07T09:07:18.817+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:07:18.818+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
-2026-10-07T09:07:18.932+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        : 
+2026-10-07T09:07:18.932+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -723,15 +723,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -741,16 +741,16 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:07:18.934+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [11]
-2026-10-07T09:07:19.028+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        : 
+2026-10-07T09:07:19.028+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -760,15 +760,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -778,33 +778,33 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:07:19.030+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [999999]
-2026-10-07T09:07:19.216+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-7] org.hibernate.SQL                        : 
+2026-10-07T09:07:19.216+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-7] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:07:19.217+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [999999]
-2026-10-07T09:07:19.302+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.SQL                        : 
+2026-10-07T09:07:19.302+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -814,15 +814,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -832,54 +832,54 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:07:19.303+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [11]
-2026-10-07T09:07:19.309+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.SQL                        : 
+2026-10-07T09:07:19.309+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:07:19.310+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
-2026-10-07T09:07:19.324+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.SQL                        : 
+2026-10-07T09:07:19.324+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.SQL                        :
     update
-        orchids 
+        orchids
     set
         is_attractive=?,
         is_natural=?,
         category_id=?,
         orchid_description=?,
         orchid_name=?,
-        orchidurl=? 
+        orchidurl=?
     where
         orchidid=?
-Hibernate: 
+Hibernate:
     update
-        orchids 
+        orchids
     set
         is_attractive=?,
         is_natural=?,
         category_id=?,
         orchid_description=?,
         orchid_name=?,
-        orchidurl=? 
+        orchidurl=?
     where
         orchidid=?
 2026-10-07T09:07:19.325+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BOOLEAN) <- [false]
@@ -889,7 +889,7 @@ Hibernate:
 2026-10-07T09:07:19.327+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (5:NVARCHAR) <- [Postman Lab4 Orchid Updated]
 2026-10-07T09:07:19.328+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [https://example.com/orchid.jpg]
 2026-10-07T09:07:19.328+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (7:BIGINT) <- [11]
-2026-10-07T09:07:19.446+07:00 DEBUG 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.SQL                        : 
+2026-10-07T09:07:19.446+07:00 DEBUG 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -899,15 +899,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -917,16 +917,16 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:07:19.447+07:00 TRACE 2188 --- [slot18-orchid-lab] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [11]
-2026-10-07T09:07:19.560+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        : 
+2026-10-07T09:07:19.560+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -936,15 +936,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -954,16 +954,16 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:07:19.562+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [999999]
-2026-10-07T09:07:19.664+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2026-10-07T09:07:19.664+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -973,15 +973,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -991,33 +991,33 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:07:19.665+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [11]
-2026-10-07T09:07:19.669+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2026-10-07T09:07:19.669+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:07:19.670+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [999999]
-2026-10-07T09:07:19.774+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        : 
+2026-10-07T09:07:19.774+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -1027,15 +1027,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -1045,19 +1045,19 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:07:19.775+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [11]
 2026-10-07T09:07:19.912+07:00  WARN 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.example.orchid.controllers.OrchidController.create(com.example.orchid.pojos.Orchid): [Field error in object 'orchid' on field 'orchidName': rejected value [ ]; codes [NotBlank.orchid.orchidName,NotBlank.orchidName,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [orchid.orchidName,orchidName]; arguments []; default message [orchidName]]; default message [must not be blank]] ]
 2026-10-07T09:07:20.011+07:00  WARN 2188 --- [slot18-orchid-lab] [nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected end-of-input: expected close marker for Object (start marker at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1])]
 2026-10-07T09:07:20.100+07:00  WARN 2188 --- [slot18-orchid-lab] [nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content-Type 'text/plain;charset=UTF-8' is not supported]
-2026-10-07T09:07:20.295+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        : 
+2026-10-07T09:07:20.295+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -1065,10 +1065,10 @@ Hibernate:
         o1_0.category_id,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
         orchids o1_0
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -1076,44 +1076,44 @@ Hibernate:
         o1_0.category_id,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
         orchids o1_0
-2026-10-07T09:07:20.299+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        : 
+2026-10-07T09:07:20.299+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:07:20.300+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
-2026-10-07T09:07:20.303+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        : 
+2026-10-07T09:07:20.303+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:07:20.305+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
-2026-10-07T09:07:20.403+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2026-10-07T09:07:20.403+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -1121,10 +1121,10 @@ Hibernate:
         o1_0.category_id,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
         orchids o1_0
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -1132,59 +1132,59 @@ Hibernate:
         o1_0.category_id,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
         orchids o1_0
-2026-10-07T09:07:20.408+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2026-10-07T09:07:20.408+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:07:20.409+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
-2026-10-07T09:07:20.413+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        : 
+2026-10-07T09:07:20.413+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.SQL                        :
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
-Hibernate: 
+Hibernate:
     select
         oc1_0.category_id,
-        oc1_0.category_name 
+        oc1_0.category_name
     from
-        orchid_categories oc1_0 
+        orchid_categories oc1_0
     where
         oc1_0.category_id=?
 2026-10-07T09:07:20.414+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
-2026-10-07T09:07:20.527+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        : 
+2026-10-07T09:07:20.527+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        :
     select
-        count_big(*) 
+        count_big(*)
     from
-        orchids o1_0 
+        orchids o1_0
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
-        count_big(*) 
+        count_big(*)
     from
-        orchids o1_0 
+        orchids o1_0
     where
         o1_0.orchidid=?
 2026-10-07T09:07:20.529+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [11]
-2026-10-07T09:07:20.534+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        : 
+2026-10-07T09:07:20.534+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -1194,15 +1194,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -1212,29 +1212,29 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:07:20.536+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [11]
-2026-10-07T09:07:20.541+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        : 
-    delete 
+2026-10-07T09:07:20.541+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.SQL                        :
+    delete
     from
-        orchids 
+        orchids
     where
         orchidid=?
-Hibernate: 
-    delete 
+Hibernate:
+    delete
     from
-        orchids 
+        orchids
     where
         orchidid=?
 2026-10-07T09:07:20.542+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [11]
-2026-10-07T09:07:20.631+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        : 
+2026-10-07T09:07:20.631+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.SQL                        :
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -1244,15 +1244,15 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
         o1_0.orchidid,
         o1_0.is_attractive,
@@ -1262,27 +1262,27 @@ Hibernate:
         oc1_0.category_name,
         o1_0.orchid_description,
         o1_0.orchid_name,
-        o1_0.orchidurl 
+        o1_0.orchidurl
     from
-        orchids o1_0 
+        orchids o1_0
     join
-        orchid_categories oc1_0 
-            on oc1_0.category_id=o1_0.category_id 
+        orchid_categories oc1_0
+            on oc1_0.category_id=o1_0.category_id
     where
         o1_0.orchidid=?
 2026-10-07T09:07:20.632+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [11]
-2026-10-07T09:07:20.729+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.SQL                        : 
+2026-10-07T09:07:20.729+07:00 DEBUG 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.SQL                        :
     select
-        count_big(*) 
+        count_big(*)
     from
-        orchids o1_0 
+        orchids o1_0
     where
         o1_0.orchidid=?
-Hibernate: 
+Hibernate:
     select
-        count_big(*) 
+        count_big(*)
     from
-        orchids o1_0 
+        orchids o1_0
     where
         o1_0.orchidid=?
 2026-10-07T09:07:20.738+07:00 TRACE 2188 --- [slot18-orchid-lab] [nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [11]
