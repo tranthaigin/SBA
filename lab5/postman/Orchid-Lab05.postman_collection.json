@@ -1,0 +1,270 @@
+{
+  "info": {
+    "name": "SBA301 Lab05 Orchid CRUD",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/orchids"
+    },
+    {
+      "key": "orchidId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "T01 - GET list",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"JSON list\", () => pm.expect(pm.response.json()).to.be.an(\"array\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T02 - POST seed data",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orchidName\": \"Taichung Beauty\",\n  \"natural\": true,\n  \"orchidDescription\": \"Demo orchid for SBA301 Lab 05\",\n  \"orchidCategory\": \"Cattleya\",\n  \"attractive\": true,\n  \"orchidURL\": \"https://example.com/orchid.jpg\",\n  \"orchidId\": 999999\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+              "const o = pm.response.json();",
+              "pm.test(\"Generated ID and JSON fields\", () => { pm.expect(o.orchidId).to.be.a(\"number\"); pm.expect(o.orchidId).not.to.eql(999999); pm.expect(o.natural).to.eql(true); pm.expect(o.attractive).to.eql(true); pm.expect(o.orchidName).to.eql(\"Taichung Beauty\"); });",
+              "pm.collectionVariables.set(\"orchidId\", o.orchidId);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T03 - GET created detail",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/{{orchidId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Created name\", () => pm.expect(pm.response.json().orchidName).to.eql(\"Taichung Beauty\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T04 - PUT existing",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/{{orchidId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orchidName\": \"Taichung Beauty Updated\",\n  \"natural\": false,\n  \"orchidDescription\": \"Demo orchid for SBA301 Lab 05\",\n  \"orchidCategory\": \"Cattleya\",\n  \"attractive\": false,\n  \"orchidURL\": \"https://example.com/orchid.jpg\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const o = pm.response.json();",
+              "pm.test(\"Same ID and updated fields\", () => { pm.expect(o.orchidId).to.eql(Number(pm.collectionVariables.get(\"orchidId\"))); pm.expect(o.orchidName).to.eql(\"Taichung Beauty Updated\"); pm.expect(o.natural).to.eql(false); pm.expect(o.attractive).to.eql(false); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T04 - GET after update",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/{{orchidId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Update persisted\", () => pm.expect(pm.response.json().orchidName).to.eql(\"Taichung Beauty Updated\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T05 - DELETE existing",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/{{orchidId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));",
+              "pm.test(\"Empty response\", () => pm.expect(pm.response.text()).to.eql(\"\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T05 - GET deleted",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/{{orchidId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T04 negative - PUT missing",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/{{orchidId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orchidName\": \"Taichung Beauty Updated\",\n  \"natural\": false,\n  \"orchidDescription\": \"Demo orchid for SBA301 Lab 05\",\n  \"orchidCategory\": \"Cattleya\",\n  \"attractive\": false,\n  \"orchidURL\": \"https://example.com/orchid.jpg\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T05 negative - DELETE missing",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/{{orchidId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

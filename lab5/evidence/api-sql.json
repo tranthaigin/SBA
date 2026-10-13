@@ -1,0 +1,59 @@
+﻿{
+    "database":  "SBA301_OrchidDB",
+    "rowCountAfter":  10,
+    "steps":  [
+                  {
+                      "step":  "Create",
+                      "httpStatus":  201,
+                      "sql":  {
+                                  "OrchidID":  12,
+                                  "OrchidName":  "Taichung Beauty",
+                                  "IsNatural":  true,
+                                  "OrchidDescription":  "Demo orchid for SBA301 Lab 05",
+                                  "OrchidCategory":  "Cattleya",
+                                  "IsAttractive":  true,
+                                  "OrchidURL":  "https://example.com/orchid.jpg"
+                              },
+                      "response":  {
+                                       "orchidId":  12,
+                                       "orchidName":  "Taichung Beauty",
+                                       "orchidDescription":  "Demo orchid for SBA301 Lab 05",
+                                       "orchidCategory":  "Cattleya",
+                                       "orchidURL":  "https://example.com/orchid.jpg",
+                                       "attractive":  true,
+                                       "natural":  true
+                                   }
+                  },
+                  {
+                      "step":  "Update",
+                      "httpStatus":  200,
+                      "sql":  {
+                                  "OrchidID":  12,
+                                  "OrchidName":  "Taichung Beauty Updated",
+                                  "IsNatural":  false,
+                                  "OrchidDescription":  "Demo orchid for SBA301 Lab 05",
+                                  "OrchidCategory":  "Cattleya",
+                                  "IsAttractive":  false,
+                                  "OrchidURL":  "https://example.com/orchid.jpg"
+                              },
+                      "response":  {
+                                       "orchidId":  12,
+                                       "orchidName":  "Taichung Beauty Updated",
+                                       "orchidDescription":  "Demo orchid for SBA301 Lab 05",
+                                       "orchidCategory":  "Cattleya",
+                                       "orchidURL":  "https://example.com/orchid.jpg",
+                                       "attractive":  false,
+                                       "natural":  false
+                                   }
+                  },
+                  {
+                      "step":  "Delete",
+                      "httpStatus":  204,
+                      "sql":  {
+                                  "remaining":  0
+                              },
+                      "detailAfterDelete":  404
+                  }
+              ],
+    "rowCountBefore":  10
+}

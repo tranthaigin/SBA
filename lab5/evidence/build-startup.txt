@@ -1,0 +1,7 @@
+﻿Backend: .\mvnw.cmd -q -DskipTests package -> exit 0 (no additional Java tests).
+Frontend: npm.cmd run build -> exit 0, Vite 8.3.4, 390 modules.
+Backend and frontend installed/built separately according to Lab05.
+Final backend startup and schema update:
+       alter column OrchidDescription nvarchar(1000)
+       alter column OrchidDescription nvarchar(1000)
+2026-10-13T00:38:41.936+07:00  INFO 20532 --- [chapter15api] [           main] f.s.c.Chapter15apiApplication            : Started Chapter15apiApplication in 6.687 seconds (process running for 7.862)

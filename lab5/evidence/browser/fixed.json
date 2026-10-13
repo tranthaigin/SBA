@@ -1,0 +1,56 @@
+{
+  "scenario": "fixed",
+  "appUrl": "http://localhost:5173",
+  "network": [
+    {
+      "event": "request",
+      "id": "21016.24",
+      "method": "GET",
+      "url": "http://localhost:8080/orchids/"
+    },
+    {
+      "event": "request",
+      "id": "21016.25",
+      "method": "GET",
+      "url": "http://localhost:8080/orchids/"
+    },
+    {
+      "event": "response",
+      "id": "21016.24",
+      "url": "http://localhost:8080/orchids/",
+      "status": 200,
+      "headers": {
+        "Transfer-Encoding": "chunked",
+        "Access-Control-Allow-Origin": "http://localhost:5173",
+        "Keep-Alive": "timeout=60",
+        "Date": "Mon, 12 Oct 2026 17:50:16 GMT",
+        "Content-Type": "application/json",
+        "Vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "Connection": "keep-alive"
+      }
+    },
+    {
+      "event": "response",
+      "id": "21016.25",
+      "url": "http://localhost:8080/orchids/",
+      "status": 200,
+      "headers": {
+        "Transfer-Encoding": "chunked",
+        "Access-Control-Allow-Origin": "http://localhost:5173",
+        "Keep-Alive": "timeout=60",
+        "Date": "Mon, 12 Oct 2026 17:50:16 GMT",
+        "Content-Type": "application/json",
+        "Vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+        "Connection": "keep-alive"
+      }
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "pageErrors": [],
+  "passed": true,
+  "sql": {
+    "rowCount": 10
+  }
+}

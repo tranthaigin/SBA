@@ -1,0 +1,14 @@
+{
+  "break": {
+    "method": "POST",
+    "url": "http://localhost:8080/orchids/1",
+    "status": 405
+  },
+  "diagnose": "Detail route has GET/PUT/DELETE mappings; no POST mapping",
+  "fix": {
+    "method": "GET",
+    "status": 200,
+    "orchidId": 1
+  },
+  "boundary": "Axios terminal request; browser Network not observed"
+}

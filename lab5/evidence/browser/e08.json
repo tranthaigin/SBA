@@ -1,0 +1,49 @@
+{
+  "scenario": "E08",
+  "appUrl": "http://localhost:5174",
+  "network": [
+    {
+      "event": "request",
+      "id": "26344.24",
+      "method": "GET",
+      "url": "http://localhost:8080/orchids/"
+    },
+    {
+      "event": "request",
+      "id": "26344.25",
+      "method": "GET",
+      "url": "http://localhost:8080/orchids/"
+    },
+    {
+      "event": "failed",
+      "id": "26344.24",
+      "error": "net::ERR_FAILED",
+      "corsError": {
+        "corsError": "MissingAllowOriginHeader",
+        "failedParameter": ""
+      }
+    },
+    {
+      "event": "failed",
+      "id": "26344.25",
+      "error": "net::ERR_FAILED",
+      "corsError": {
+        "corsError": "MissingAllowOriginHeader",
+        "failedParameter": ""
+      }
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Access to XMLHttpRequest at 'http://localhost:8080/orchids/' from origin 'http://localhost:5174' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to XMLHttpRequest at 'http://localhost:8080/orchids/' from origin 'http://localhost:5174' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED"
+  ],
+  "pageErrors": [],
+  "passed": true,
+  "backendStillHealthy": true,
+  "sql": {
+    "rowCount": 10
+  }
+}

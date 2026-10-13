@@ -1,0 +1,213 @@
+{
+  "baseline": {
+    "rowCount": 10
+  },
+  "seedsBefore": [
+    {
+      "OrchidID": 1,
+      "OrchidName": "White Phalaenopsis",
+      "IsNatural": true,
+      "OrchidDescription": "White Phalaenopsis moth orchid with a dark pink and yellow center.",
+      "OrchidCategory": "Phalaenopsis",
+      "IsAttractive": true,
+      "OrchidURL": "https://upload.wikimedia.org/wikipedia/commons/4/49/Phalaenopsis_Orchid.jpg"
+    },
+    {
+      "OrchidID": 2,
+      "OrchidName": "Cattleya Trianaei",
+      "IsNatural": true,
+      "OrchidDescription": "Large pale lavender Cattleya orchid with a ruffled magenta and yellow lip.",
+      "OrchidCategory": "Cattleya",
+      "IsAttractive": true,
+      "OrchidURL": "https://cdn.shopify.com/s/files/1/0959/4313/1445/files/75c23c75-bbc0-4990-89e7-880ca1ae398a__83491.jpg?v=1774571823"
+    },
+    {
+      "OrchidID": 3,
+      "OrchidName": "Pink Dendrobium",
+      "IsNatural": true,
+      "OrchidDescription": "Pink and white Dendrobium orchid with clusters of flowers along the stem.",
+      "OrchidCategory": "Dendrobium",
+      "IsAttractive": true,
+      "OrchidURL": "https://4.bp.blogspot.com/-_Ny7GGEcHVM/Vh0DIHcewVI/AAAAAAAAAN8/lT07yDlah8Q/s1600/Dendrobium%2BOrchid%2BCare.jpg"
+    },
+    {
+      "OrchidID": 4,
+      "OrchidName": "Cooktown Orchid",
+      "IsNatural": true,
+      "OrchidDescription": "Purple Cooktown orchid, also known as Dendrobium bigibbum.",
+      "OrchidCategory": "Dendrobium",
+      "IsAttractive": true,
+      "OrchidURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Cooktown_orchids_and_bud.jpg/500px-Cooktown_orchids_and_bud.jpg"
+    },
+    {
+      "OrchidID": 5,
+      "OrchidName": "Lady Slipper Orchid",
+      "IsNatural": true,
+      "OrchidDescription": "Paphiopedilum orchid characterized by its distinctive slipper-shaped pouch.",
+      "OrchidCategory": "Paphiopedilum",
+      "IsAttractive": true,
+      "OrchidURL": "https://secretgarden.ro/cdn/shop/products/image_71cd5445-7480-42e6-a6ad-c091e4097dd4.jpg?v=1676106611&width=3840"
+    },
+    {
+      "OrchidID": 6,
+      "OrchidName": "Dancing Lady Orchid",
+      "IsNatural": true,
+      "OrchidDescription": "Yellow Oncidium orchid whose flowers resemble dancing ladies.",
+      "OrchidCategory": "Oncidium",
+      "IsAttractive": true,
+      "OrchidURL": "https://images.squarespace-cdn.com/content/v1/64c524cb6ca49752316125a9/a2f5f5f8-1a23-4289-a9fc-f974043c9431/Oncidium%2BAlliance.jpg?format=2500w"
+    },
+    {
+      "OrchidID": 7,
+      "OrchidName": "Orange Epidendrum",
+      "IsNatural": true,
+      "OrchidDescription": "Orange Epidendrum orchid with clusters of vivid orange and yellow flowers.",
+      "OrchidCategory": "Epidendrum",
+      "IsAttractive": true,
+      "OrchidURL": "https://media.casaegiardino.it/images/2024/09/epidendrum-07.jpg"
+    },
+    {
+      "OrchidID": 8,
+      "OrchidName": "Miltonia Pansy Orchid",
+      "IsNatural": true,
+      "OrchidDescription": "Magenta and white Miltonia orchid commonly known as the pansy orchid.",
+      "OrchidCategory": "Miltonia",
+      "IsAttractive": true,
+      "OrchidURL": "https://www.mainau.de/sites/default/files/styles/squared_small/public/2025-03/5-miltonia-vko.jpg.webp?itok=-Ehee3V5"
+    },
+    {
+      "OrchidID": 9,
+      "OrchidName": "Yellow Cymbidium",
+      "IsNatural": true,
+      "OrchidDescription": "Yellow Cymbidium orchid with deep red markings on the flower lip.",
+      "OrchidCategory": "Cymbidium",
+      "IsAttractive": true,
+      "OrchidURL": "https://www.trianglenursery.co.uk/pictures/products/medium/CYMBIDIUM-ORCHID-COOKSBRIDGE-60cm.jpg"
+    },
+    {
+      "OrchidID": 10,
+      "OrchidName": "Pink Veined Phalaenopsis",
+      "IsNatural": false,
+      "OrchidDescription": "Cultivated Phalaenopsis hybrid with pink veins and a deep magenta center.",
+      "OrchidCategory": "Phalaenopsis Hybrid",
+      "IsAttractive": true,
+      "OrchidURL": "https://www.biosphaere-potsdam.de/fileadmin/_processed_/b/b/csm_Online-Ratespiel_Motiv-Phalaenopsis_1500px_0678bbccf0.jpg"
+    }
+  ],
+  "created": {
+    "OrchidID": 13,
+    "OrchidName": "Taichung Beauty",
+    "IsNatural": true,
+    "OrchidDescription": "Demo orchid for SBA301 Lab 05",
+    "OrchidCategory": "Cattleya",
+    "IsAttractive": true,
+    "OrchidURL": "https://example.com/orchid.jpg"
+  },
+  "updated": {
+    "OrchidID": 13,
+    "OrchidName": "Taichung Beauty Updated",
+    "IsNatural": false,
+    "OrchidDescription": "Updated demo orchid for SBA301 Lab 05",
+    "OrchidCategory": "Cattleya Updated",
+    "IsAttractive": false,
+    "OrchidURL": "https://example.com/orchid-updated.jpg"
+  },
+  "deleted": {
+    "rowCount": 0
+  },
+  "final": {
+    "rowCount": 10
+  },
+  "seedsAfter": [
+    {
+      "OrchidID": 1,
+      "OrchidName": "White Phalaenopsis",
+      "IsNatural": true,
+      "OrchidDescription": "White Phalaenopsis moth orchid with a dark pink and yellow center.",
+      "OrchidCategory": "Phalaenopsis",
+      "IsAttractive": true,
+      "OrchidURL": "https://upload.wikimedia.org/wikipedia/commons/4/49/Phalaenopsis_Orchid.jpg"
+    },
+    {
+      "OrchidID": 2,
+      "OrchidName": "Cattleya Trianaei",
+      "IsNatural": true,
+      "OrchidDescription": "Large pale lavender Cattleya orchid with a ruffled magenta and yellow lip.",
+      "OrchidCategory": "Cattleya",
+      "IsAttractive": true,
+      "OrchidURL": "https://cdn.shopify.com/s/files/1/0959/4313/1445/files/75c23c75-bbc0-4990-89e7-880ca1ae398a__83491.jpg?v=1774571823"
+    },
+    {
+      "OrchidID": 3,
+      "OrchidName": "Pink Dendrobium",
+      "IsNatural": true,
+      "OrchidDescription": "Pink and white Dendrobium orchid with clusters of flowers along the stem.",
+      "OrchidCategory": "Dendrobium",
+      "IsAttractive": true,
+      "OrchidURL": "https://4.bp.blogspot.com/-_Ny7GGEcHVM/Vh0DIHcewVI/AAAAAAAAAN8/lT07yDlah8Q/s1600/Dendrobium%2BOrchid%2BCare.jpg"
+    },
+    {
+      "OrchidID": 4,
+      "OrchidName": "Cooktown Orchid",
+      "IsNatural": true,
+      "OrchidDescription": "Purple Cooktown orchid, also known as Dendrobium bigibbum.",
+      "OrchidCategory": "Dendrobium",
+      "IsAttractive": true,
+      "OrchidURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Cooktown_orchids_and_bud.jpg/500px-Cooktown_orchids_and_bud.jpg"
+    },
+    {
+      "OrchidID": 5,
+      "OrchidName": "Lady Slipper Orchid",
+      "IsNatural": true,
+      "OrchidDescription": "Paphiopedilum orchid characterized by its distinctive slipper-shaped pouch.",
+      "OrchidCategory": "Paphiopedilum",
+      "IsAttractive": true,
+      "OrchidURL": "https://secretgarden.ro/cdn/shop/products/image_71cd5445-7480-42e6-a6ad-c091e4097dd4.jpg?v=1676106611&width=3840"
+    },
+    {
+      "OrchidID": 6,
+      "OrchidName": "Dancing Lady Orchid",
+      "IsNatural": true,
+      "OrchidDescription": "Yellow Oncidium orchid whose flowers resemble dancing ladies.",
+      "OrchidCategory": "Oncidium",
+      "IsAttractive": true,
+      "OrchidURL": "https://images.squarespace-cdn.com/content/v1/64c524cb6ca49752316125a9/a2f5f5f8-1a23-4289-a9fc-f974043c9431/Oncidium%2BAlliance.jpg?format=2500w"
+    },
+    {
+      "OrchidID": 7,
+      "OrchidName": "Orange Epidendrum",
+      "IsNatural": true,
+      "OrchidDescription": "Orange Epidendrum orchid with clusters of vivid orange and yellow flowers.",
+      "OrchidCategory": "Epidendrum",
+      "IsAttractive": true,
+      "OrchidURL": "https://media.casaegiardino.it/images/2024/09/epidendrum-07.jpg"
+    },
+    {
+      "OrchidID": 8,
+      "OrchidName": "Miltonia Pansy Orchid",
+      "IsNatural": true,
+      "OrchidDescription": "Magenta and white Miltonia orchid commonly known as the pansy orchid.",
+      "OrchidCategory": "Miltonia",
+      "IsAttractive": true,
+      "OrchidURL": "https://www.mainau.de/sites/default/files/styles/squared_small/public/2025-03/5-miltonia-vko.jpg.webp?itok=-Ehee3V5"
+    },
+    {
+      "OrchidID": 9,
+      "OrchidName": "Yellow Cymbidium",
+      "IsNatural": true,
+      "OrchidDescription": "Yellow Cymbidium orchid with deep red markings on the flower lip.",
+      "OrchidCategory": "Cymbidium",
+      "IsAttractive": true,
+      "OrchidURL": "https://www.trianglenursery.co.uk/pictures/products/medium/CYMBIDIUM-ORCHID-COOKSBRIDGE-60cm.jpg"
+    },
+    {
+      "OrchidID": 10,
+      "OrchidName": "Pink Veined Phalaenopsis",
+      "IsNatural": false,
+      "OrchidDescription": "Cultivated Phalaenopsis hybrid with pink veins and a deep magenta center.",
+      "OrchidCategory": "Phalaenopsis Hybrid",
+      "IsAttractive": true,
+      "OrchidURL": "https://www.biosphaere-potsdam.de/fileadmin/_processed_/b/b/csm_Online-Ratespiel_Motiv-Phalaenopsis_1500px_0678bbccf0.jpg"
+    }
+  ]
+}

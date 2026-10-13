@@ -1,0 +1,24 @@
+database_name
+-------------
+SBA301_OrchidDB
+COLUMN_NAME DATA_TYPE CHARACTER_MAXIMUM_LENGTH
+----------- --------- ------------------------
+OrchidID int NULL
+OrchidName nvarchar 100
+IsNatural bit NULL
+OrchidDescription nvarchar 1000
+OrchidCategory nvarchar 100
+IsAttractive bit NULL
+OrchidURL nvarchar 500
+OrchidID OrchidName IsNatural OrchidCategory IsAttractive
+-------- ---------- --------- -------------- ------------
+1 White Phalaenopsis 1 Phalaenopsis 1
+2 Cattleya Trianaei 1 Cattleya 1
+3 Pink Dendrobium 1 Dendrobium 1
+4 Cooktown Orchid 1 Dendrobium 1
+5 Lady Slipper Orchid 1 Paphiopedilum 1
+6 Dancing Lady Orchid 1 Oncidium 1
+7 Orange Epidendrum 1 Epidendrum 1
+8 Miltonia Pansy Orchid 1 Miltonia 1
+9 Yellow Cymbidium 1 Cymbidium 1
+10 Pink Veined Phalaenopsis 0 Phalaenopsis Hybrid 1
