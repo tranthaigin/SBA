@@ -1,0 +1,1849 @@
+{
+  "database": "FUNewsManagementSBA301",
+  "apiBaseUrl": "http://localhost:8082",
+  "baseline": {
+    "categories": [
+      {
+        "categoryId": 1,
+        "categoryName": "Academic news",
+        "categoryDescription": "Academic announcements",
+        "parentCategoryId": null,
+        "active": true
+      },
+      {
+        "categoryId": 2,
+        "categoryName": "Student Affairs",
+        "categoryDescription": "Student activities and events",
+        "parentCategoryId": null,
+        "active": true
+      },
+      {
+        "categoryId": 3,
+        "categoryName": "Campus Safety",
+        "categoryDescription": "Campus safety information",
+        "parentCategoryId": null,
+        "active": true
+      }
+    ],
+    "news": [
+      {
+        "newsArticleId": "S22-SEED-001",
+        "categoryId": 1
+      }
+    ]
+  },
+  "requests": [
+    {
+      "name": "T01 - GET categories",
+      "method": "GET",
+      "url": "http://localhost:8082/api/categories?page=0&size=10&sort=categoryName,asc",
+      "status": 200,
+      "body": {
+        "content": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "pageable": {
+          "pageNumber": 0,
+          "pageSize": 10,
+          "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+          },
+          "offset": 0,
+          "paged": true,
+          "unpaged": false
+        },
+        "last": true,
+        "totalPages": 1,
+        "totalElements": 3,
+        "size": 10,
+        "number": 0,
+        "sort": {
+          "empty": false,
+          "sorted": true,
+          "unsorted": false
+        },
+        "first": true,
+        "numberOfElements": 3,
+        "empty": false
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T02 - GET existing id",
+      "method": "GET",
+      "url": "http://localhost:8082/api/categories/1",
+      "status": 200,
+      "body": {
+        "categoryId": 1,
+        "categoryName": "Academic news",
+        "categoryDescription": "Academic announcements",
+        "parentCategoryId": null,
+        "active": true
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T03 - GET missing id",
+      "method": "GET",
+      "url": "http://localhost:8082/api/categories/32767",
+      "status": 404,
+      "body": {
+        "code": "NOT_FOUND",
+        "message": "Category 32767 not found",
+        "timestamp": "2026-10-13T04:09:05.916034300Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T04 - POST valid",
+      "method": "POST",
+      "url": "http://localhost:8082/api/categories",
+      "status": 201,
+      "body": {
+        "categoryId": 4,
+        "categoryName": "Technology News",
+        "categoryDescription": "Technology and software engineering news",
+        "parentCategoryId": null,
+        "active": true
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 4,
+            "categoryName": "Technology News",
+            "categoryDescription": "Technology and software engineering news",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T05 - POST invalid",
+      "method": "POST",
+      "url": "http://localhost:8082/api/categories",
+      "status": 400,
+      "body": {
+        "timestamp": "2026-10-13T04:09:06.846+00:00",
+        "status": 400,
+        "error": "Bad Request",
+        "path": "/api/categories"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 4,
+            "categoryName": "Technology News",
+            "categoryDescription": "Technology and software engineering news",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T06 - POST duplicate",
+      "method": "POST",
+      "url": "http://localhost:8082/api/categories",
+      "status": 409,
+      "body": {
+        "code": "CONFLICT",
+        "message": "Category name already exists",
+        "timestamp": "2026-10-13T04:09:07.160858900Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 4,
+            "categoryName": "Technology News",
+            "categoryDescription": "Technology and software engineering news",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "Duplicate - normalized name",
+      "method": "POST",
+      "url": "http://localhost:8082/api/categories",
+      "status": 409,
+      "body": {
+        "code": "CONFLICT",
+        "message": "Category name already exists",
+        "timestamp": "2026-10-13T04:09:07.454183900Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 4,
+            "categoryName": "Technology News",
+            "categoryDescription": "Technology and software engineering news",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T07 - PUT existing",
+      "method": "PUT",
+      "url": "http://localhost:8082/api/categories/4",
+      "status": 200,
+      "body": {
+        "categoryId": 4,
+        "categoryName": "Academic & Research News",
+        "categoryDescription": "Academic and research announcements",
+        "parentCategoryId": 2,
+        "active": false
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 4,
+            "categoryName": "Academic & Research News",
+            "categoryDescription": "Academic and research announcements",
+            "parentCategoryId": 2,
+            "active": false
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T07 - GET after PUT",
+      "method": "GET",
+      "url": "http://localhost:8082/api/categories/4",
+      "status": 200,
+      "body": {
+        "categoryId": 4,
+        "categoryName": "Academic & Research News",
+        "categoryDescription": "Academic and research announcements",
+        "parentCategoryId": 2,
+        "active": false
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 4,
+            "categoryName": "Academic & Research News",
+            "categoryDescription": "Academic and research announcements",
+            "parentCategoryId": 2,
+            "active": false
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "PUT duplicate - unchanged row",
+      "method": "PUT",
+      "url": "http://localhost:8082/api/categories/4",
+      "status": 409,
+      "body": {
+        "code": "CONFLICT",
+        "message": "Category name already exists",
+        "timestamp": "2026-10-13T04:09:08.284937400Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 4,
+            "categoryName": "Academic & Research News",
+            "categoryDescription": "Academic and research announcements",
+            "parentCategoryId": 2,
+            "active": false
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T08 - PUT missing",
+      "method": "PUT",
+      "url": "http://localhost:8082/api/categories/32767",
+      "status": 404,
+      "body": {
+        "code": "NOT_FOUND",
+        "message": "Category 32767 not found",
+        "timestamp": "2026-10-13T04:09:08.544590500Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 4,
+            "categoryName": "Academic & Research News",
+            "categoryDescription": "Academic and research announcements",
+            "parentCategoryId": 2,
+            "active": false
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T10 - DELETE referenced category",
+      "method": "DELETE",
+      "url": "http://localhost:8082/api/categories/1",
+      "status": 409,
+      "body": {
+        "code": "CONFLICT",
+        "message": "Category is used by one or more news articles",
+        "timestamp": "2026-10-13T04:09:08.822391Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 4,
+            "categoryName": "Academic & Research News",
+            "categoryDescription": "Academic and research announcements",
+            "parentCategoryId": 2,
+            "active": false
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T09 - DELETE free category",
+      "method": "DELETE",
+      "url": "http://localhost:8082/api/categories/4",
+      "status": 204,
+      "body": null,
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T09 - GET deleted category",
+      "method": "GET",
+      "url": "http://localhost:8082/api/categories/4",
+      "status": 404,
+      "body": {
+        "code": "NOT_FOUND",
+        "message": "Category 4 not found",
+        "timestamp": "2026-10-13T04:09:09.414279700Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T11 - Search keyword",
+      "method": "GET",
+      "url": "http://localhost:8082/api/categories?keyword=ACAdemic&page=0&size=5",
+      "status": 200,
+      "body": {
+        "content": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "pageable": {
+          "pageNumber": 0,
+          "pageSize": 5,
+          "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+          },
+          "offset": 0,
+          "paged": true,
+          "unpaged": false
+        },
+        "last": true,
+        "totalPages": 1,
+        "totalElements": 1,
+        "size": 5,
+        "number": 0,
+        "sort": {
+          "empty": false,
+          "sorted": true,
+          "unsorted": false
+        },
+        "first": true,
+        "numberOfElements": 1,
+        "empty": false
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "T12 - Pagination",
+      "method": "GET",
+      "url": "http://localhost:8082/api/categories?page=1&size=1&sort=categoryName,asc",
+      "status": 200,
+      "body": {
+        "content": [
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "pageable": {
+          "pageNumber": 1,
+          "pageSize": 1,
+          "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+          },
+          "offset": 1,
+          "paged": true,
+          "unpaged": false
+        },
+        "last": false,
+        "totalPages": 3,
+        "totalElements": 3,
+        "size": 1,
+        "number": 1,
+        "sort": {
+          "empty": false,
+          "sorted": true,
+          "unsorted": false
+        },
+        "first": false,
+        "numberOfElements": 1,
+        "empty": false
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "Pagination - maximum size",
+      "method": "GET",
+      "url": "http://localhost:8082/api/categories?size=101",
+      "status": 200,
+      "body": {
+        "content": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "pageable": {
+          "pageNumber": 0,
+          "pageSize": 100,
+          "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+          },
+          "offset": 0,
+          "paged": true,
+          "unpaged": false
+        },
+        "last": true,
+        "totalPages": 1,
+        "totalElements": 3,
+        "size": 100,
+        "number": 0,
+        "sort": {
+          "empty": false,
+          "sorted": true,
+          "unsorted": false
+        },
+        "first": true,
+        "numberOfElements": 3,
+        "empty": false
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "Sort - invalid property",
+      "method": "GET",
+      "url": "http://localhost:8082/api/categories?sort=doesNotExist,asc",
+      "status": 400,
+      "body": {
+        "code": "INVALID_INPUT",
+        "message": "Unsupported category sort field",
+        "timestamp": "2026-10-13T04:09:10.495742900Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "N01 - GET news list",
+      "method": "GET",
+      "url": "http://localhost:8082/api/news-articles",
+      "status": 200,
+      "body": {
+        "content": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ],
+        "pageable": {
+          "pageNumber": 0,
+          "pageSize": 10,
+          "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+          },
+          "offset": 0,
+          "paged": true,
+          "unpaged": false
+        },
+        "last": true,
+        "totalPages": 1,
+        "totalElements": 1,
+        "size": 10,
+        "number": 0,
+        "sort": {
+          "empty": false,
+          "sorted": true,
+          "unsorted": false
+        },
+        "first": true,
+        "numberOfElements": 1,
+        "empty": false
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "N02 - POST news valid",
+      "method": "POST",
+      "url": "http://localhost:8082/api/news-articles",
+      "status": 201,
+      "body": {
+        "newsArticleId": "S22-TEMP-001",
+        "categoryId": 2
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          },
+          {
+            "newsArticleId": "S22-TEMP-001",
+            "categoryId": 2
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "N03 - GET news detail",
+      "method": "GET",
+      "url": "http://localhost:8082/api/news-articles/S22-TEMP-001",
+      "status": 200,
+      "body": {
+        "newsArticleId": "S22-TEMP-001",
+        "categoryId": 2
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          },
+          {
+            "newsArticleId": "S22-TEMP-001",
+            "categoryId": 2
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "N04 - POST news duplicate",
+      "method": "POST",
+      "url": "http://localhost:8082/api/news-articles",
+      "status": 409,
+      "body": {
+        "code": "CONFLICT",
+        "message": "News article ID already exists",
+        "timestamp": "2026-10-13T04:09:12.294990100Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          },
+          {
+            "newsArticleId": "S22-TEMP-001",
+            "categoryId": 2
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "N05 - POST news invalid",
+      "method": "POST",
+      "url": "http://localhost:8082/api/news-articles",
+      "status": 400,
+      "body": {
+        "timestamp": "2026-10-13T04:09:12.648+00:00",
+        "status": 400,
+        "error": "Bad Request",
+        "path": "/api/news-articles"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          },
+          {
+            "newsArticleId": "S22-TEMP-001",
+            "categoryId": 2
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "N06 - POST missing category",
+      "method": "POST",
+      "url": "http://localhost:8082/api/news-articles",
+      "status": 404,
+      "body": {
+        "code": "NOT_FOUND",
+        "message": "Category 32767 not found",
+        "timestamp": "2026-10-13T04:09:13.063426300Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          },
+          {
+            "newsArticleId": "S22-TEMP-001",
+            "categoryId": 2
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "N07 - PUT news existing",
+      "method": "PUT",
+      "url": "http://localhost:8082/api/news-articles/S22-TEMP-001",
+      "status": 200,
+      "body": {
+        "newsArticleId": "S22-TEMP-001",
+        "categoryId": 3
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          },
+          {
+            "newsArticleId": "S22-TEMP-001",
+            "categoryId": 3
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "N08 - PUT missing category",
+      "method": "PUT",
+      "url": "http://localhost:8082/api/news-articles/S22-TEMP-001",
+      "status": 404,
+      "body": {
+        "code": "NOT_FOUND",
+        "message": "Category 32767 not found",
+        "timestamp": "2026-10-13T04:09:13.751915100Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          },
+          {
+            "newsArticleId": "S22-TEMP-001",
+            "categoryId": 3
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "N09 - PUT missing news",
+      "method": "PUT",
+      "url": "http://localhost:8082/api/news-articles/S22-MISSING",
+      "status": 404,
+      "body": {
+        "code": "NOT_FOUND",
+        "message": "News article S22-MISSING not found",
+        "timestamp": "2026-10-13T04:09:14.054535900Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          },
+          {
+            "newsArticleId": "S22-TEMP-001",
+            "categoryId": 3
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "N10 - Search news",
+      "method": "GET",
+      "url": "http://localhost:8082/api/news-articles?keyword=temp&page=0&size=1",
+      "status": 200,
+      "body": {
+        "content": [
+          {
+            "newsArticleId": "S22-TEMP-001",
+            "categoryId": 3
+          }
+        ],
+        "pageable": {
+          "pageNumber": 0,
+          "pageSize": 1,
+          "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+          },
+          "offset": 0,
+          "paged": true,
+          "unpaged": false
+        },
+        "last": true,
+        "totalPages": 1,
+        "totalElements": 1,
+        "size": 1,
+        "number": 0,
+        "sort": {
+          "empty": false,
+          "sorted": true,
+          "unsorted": false
+        },
+        "first": true,
+        "numberOfElements": 1,
+        "empty": false
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          },
+          {
+            "newsArticleId": "S22-TEMP-001",
+            "categoryId": 3
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "N11 - DELETE news",
+      "method": "DELETE",
+      "url": "http://localhost:8082/api/news-articles/S22-TEMP-001",
+      "status": 204,
+      "body": null,
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "N12 - GET deleted news",
+      "method": "GET",
+      "url": "http://localhost:8082/api/news-articles/S22-TEMP-001",
+      "status": 404,
+      "body": {
+        "code": "NOT_FOUND",
+        "message": "News article S22-TEMP-001 not found",
+        "timestamp": "2026-10-13T04:09:15.129816Z"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "B01 - Break text plain",
+      "method": "POST",
+      "url": "http://localhost:8082/api/categories",
+      "status": 415,
+      "body": {
+        "timestamp": "2026-10-13T04:09:15.653+00:00",
+        "status": 415,
+        "error": "Unsupported Media Type",
+        "path": "/api/categories"
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "B02 - Fix JSON content type",
+      "method": "POST",
+      "url": "http://localhost:8082/api/categories",
+      "status": 201,
+      "body": {
+        "categoryId": 5,
+        "categoryName": "Workshop Category",
+        "categoryDescription": "Technology and software engineering news",
+        "parentCategoryId": null,
+        "active": true
+      },
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 5,
+            "categoryName": "Workshop Category",
+            "categoryDescription": "Technology and software engineering news",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    },
+    {
+      "name": "B03 - Cleanup workshop row",
+      "method": "DELETE",
+      "url": "http://localhost:8082/api/categories/5",
+      "status": 204,
+      "body": null,
+      "sql": {
+        "categories": [
+          {
+            "categoryId": 1,
+            "categoryName": "Academic news",
+            "categoryDescription": "Academic announcements",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 2,
+            "categoryName": "Student Affairs",
+            "categoryDescription": "Student activities and events",
+            "parentCategoryId": null,
+            "active": true
+          },
+          {
+            "categoryId": 3,
+            "categoryName": "Campus Safety",
+            "categoryDescription": "Campus safety information",
+            "parentCategoryId": null,
+            "active": true
+          }
+        ],
+        "news": [
+          {
+            "newsArticleId": "S22-SEED-001",
+            "categoryId": 1
+          }
+        ]
+      },
+      "databaseMatches": true
+    }
+  ],
+  "final": {
+    "categories": [
+      {
+        "categoryId": 1,
+        "categoryName": "Academic news",
+        "categoryDescription": "Academic announcements",
+        "parentCategoryId": null,
+        "active": true
+      },
+      {
+        "categoryId": 2,
+        "categoryName": "Student Affairs",
+        "categoryDescription": "Student activities and events",
+        "parentCategoryId": null,
+        "active": true
+      },
+      {
+        "categoryId": 3,
+        "categoryName": "Campus Safety",
+        "categoryDescription": "Campus safety information",
+        "parentCategoryId": null,
+        "active": true
+      }
+    ],
+    "news": [
+      {
+        "newsArticleId": "S22-SEED-001",
+        "categoryId": 1
+      }
+    ]
+  },
+  "sqlFailures": [],
+  "stats": {
+    "iterations": {
+      "total": 1,
+      "pending": 0,
+      "failed": 0
+    },
+    "items": {
+      "total": 33,
+      "pending": 0,
+      "failed": 0
+    },
+    "scripts": {
+      "total": 33,
+      "pending": 0,
+      "failed": 0
+    },
+    "prerequests": {
+      "total": 33,
+      "pending": 0,
+      "failed": 0
+    },
+    "requests": {
+      "total": 33,
+      "pending": 0,
+      "failed": 0
+    },
+    "tests": {
+      "total": 33,
+      "pending": 0,
+      "failed": 0
+    },
+    "assertions": {
+      "total": 49,
+      "pending": 0,
+      "failed": 0
+    },
+    "testScripts": {
+      "total": 33,
+      "pending": 0,
+      "failed": 0
+    },
+    "prerequestScripts": {
+      "total": 0,
+      "pending": 0,
+      "failed": 0
+    }
+  },
+  "newmanFailures": [],
+  "error": null
+}

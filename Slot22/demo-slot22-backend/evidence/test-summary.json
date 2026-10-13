@@ -1,0 +1,29 @@
+{
+  "classes": [
+    {
+      "name": "com.fpt.sba301.slot22.controller.CategoryControllerTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.fpt.sba301.slot22.service.CategoryServiceTest",
+      "tests": "6",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "com.fpt.sba301.slot22.service.NewsArticleServiceTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ],
+  "tests": 15,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0
+}

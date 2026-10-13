@@ -1,0 +1,23 @@
+database_name
+-------------
+FUNewsManagementSBA301
+TABLE_NAME COLUMN_NAME DATA_TYPE CHARACTER_MAXIMUM_LENGTH IS_NULLABLE
+---------- ----------- --------- ------------------------ -----------
+Category CategoryID smallint NULL NO
+Category CategoryName nvarchar 100 NO
+Category CategoryDesciption nvarchar 250 NO
+Category ParentCategoryID smallint NULL YES
+Category IsActive bit NULL YES
+NewsArticle NewsArticleID nvarchar 20 NO
+NewsArticle CategoryID smallint NULL NO
+name child_table parent_table
+---- ----------- ------------
+FK_NewsArticle_Category NewsArticle Category
+CategoryID CategoryName CategoryDesciption ParentCategoryID IsActive
+---------- ------------ ------------------ ---------------- --------
+1 Academic news Academic announcements NULL 1
+2 Student Affairs Student activities and events NULL 1
+3 Campus Safety Campus safety information NULL 1
+NewsArticleID CategoryID
+------------- ----------
+S22-SEED-001 1

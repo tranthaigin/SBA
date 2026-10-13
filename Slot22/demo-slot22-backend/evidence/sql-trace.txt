@@ -1,0 +1,50 @@
+T04 - CREATE Category
+2026-10-13T11:09:06.205+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/categories", parameters={}
+2026-10-13T11:09:06.205+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.fpt.sba301.slot22.controller.CategoryController#create(CategoryRequest)
+2026-10-13T11:09:06.307+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [CategoryRequest[categoryName=Technology News, categoryDescription=Technology and software engineerin (truncated)...]
+2026-10-13T11:09:06.421+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] org.hibernate.SQL                        :
+    select
+        top (?) c1_0.CategoryID
+    from
+        Category c1_0
+    where
+        upper(c1_0.CategoryName)=upper(?)
+2026-10-13T11:09:06.466+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] org.hibernate.SQL                        :
+    insert
+    into
+        Category
+        (IsActive, CategoryDesciption, CategoryName, ParentCategoryID)
+    values
+        (?, ?, ?, ?)
+2026-10-13T11:09:06.510+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-10-13T11:09:06.510+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CategoryResponse[categoryId=4, categoryName=Technology News, categoryDescription=Technology and soft (truncated)...]
+2026-10-13T11:09:06.512+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 201 CREATED
+
+B01 - text/plain failure
+2026-10-13T11:09:15.626+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/categories", parameters={}
+2026-10-13T11:09:15.627+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.fpt.sba301.slot22.controller.CategoryController#create(CategoryRequest)
+2026-10-13T11:09:15.642+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] o.s.web.method.HandlerMethod             : Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<com.fpt.sba301.slot22.dto.CategoryResponse> com.fpt.sba301.slot22.controller.CategoryController.create(com.fpt.sba301.slot22.dto.CategoryRequest): Content-Type 'text/plain;charset=UTF-8' is not supported
+2026-10-13T11:09:15.645+07:00  WARN 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content-Type 'text/plain;charset=UTF-8' is not supported]
+2026-10-13T11:09:15.646+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 415 UNSUPPORTED_MEDIA_TYPE
+
+B02 - corrected application/json
+2026-10-13T11:09:16.040+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-8] o.s.web.servlet.DispatcherServlet        : POST "/api/categories", parameters={}
+2026-10-13T11:09:16.042+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.fpt.sba301.slot22.controller.CategoryController#create(CategoryRequest)
+2026-10-13T11:09:16.044+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [CategoryRequest[categoryName=Workshop Category, categoryDescription=Technology and software engineer (truncated)...]
+2026-10-13T11:09:16.051+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-8] org.hibernate.SQL                        :
+    select
+        top (?) c1_0.CategoryID
+    from
+        Category c1_0
+    where
+        upper(c1_0.CategoryName)=upper(?)
+2026-10-13T11:09:16.057+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-8] org.hibernate.SQL                        :
+    insert
+    into
+        Category
+        (IsActive, CategoryDesciption, CategoryName, ParentCategoryID)
+    values
+        (?, ?, ?, ?)
+2026-10-13T11:09:16.068+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2026-10-13T11:09:16.068+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CategoryResponse[categoryId=5, categoryName=Workshop Category, categoryDescription=Technology and so (truncated)...]
+2026-10-13T11:09:16.070+07:00 DEBUG 4192 --- [demo-slot22-backend] [http-nio-8082-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 201 CREATED

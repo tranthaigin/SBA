@@ -1,0 +1,16 @@
+﻿[INFO] +- org.springframework.boot:spring-boot-starter-web:jar:3.3.4:compile
+[INFO] |  +- org.springframework.boot:spring-boot-starter:jar:3.3.4:compile
+[INFO] |  |  +- org.springframework.boot:spring-boot:jar:3.3.4:compile
+[INFO] |  |  +- org.springframework.boot:spring-boot-autoconfigure:jar:3.3.4:compile
+[INFO] |  |  \- org.springframework.boot:spring-boot-starter-logging:jar:3.3.4:compile
+[INFO] |  +- org.springframework.boot:spring-boot-starter-json:jar:3.3.4:compile
+[INFO] |  \- org.springframework.boot:spring-boot-starter-tomcat:jar:3.3.4:compile
+[INFO] +- org.springframework.boot:spring-boot-starter-data-jpa:jar:3.3.4:compile
+[INFO] |  +- org.springframework.boot:spring-boot-starter-aop:jar:3.3.4:compile
+[INFO] |  \- org.springframework.boot:spring-boot-starter-jdbc:jar:3.3.4:compile
+[INFO] +- org.springframework.boot:spring-boot-starter-validation:jar:3.3.4:compile
+[INFO] +- com.microsoft.sqlserver:mssql-jdbc:jar:12.6.4.jre11:runtime
+[INFO] \- org.springframework.boot:spring-boot-starter-test:jar:3.3.4:test
+[INFO]    +- org.springframework.boot:spring-boot-test:jar:3.3.4:test
+[INFO]    \- org.springframework.boot:spring-boot-test-autoconfigure:jar:3.3.4:test
+[INFO] BUILD SUCCESS

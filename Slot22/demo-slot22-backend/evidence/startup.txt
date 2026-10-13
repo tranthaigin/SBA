@@ -1,0 +1,7 @@
+﻿2026-10-13T11:02:52.163+07:00  INFO 4192 --- [demo-slot22-backend] [main] c.fpt.sba301.slot22.Slot22Application    : Starting Slot22Application v0.0.1-SNAPSHOT using Java 21.0.11 with PID 4192 (C:\SBA301\bài tập\sba-301\Slot22\demo-slot22-backend\target\demo-slot22-backend-0.0.1-SNAPSHOT.jar started by quoct in C:\SBA301\bài tập\sba-301\Slot22\demo-slot22-backend)
+2026-10-13T11:02:54.156+07:00  INFO 4192 --- [demo-slot22-backend] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2026-10-13T11:02:55.773+07:00  INFO 4192 --- [demo-slot22-backend] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection ConnectionID:1 ClientConnectionId: 25e2b2ac-8211-4f75-99ac-3fe04c33f65a
+2026-10-13T11:02:55.779+07:00  INFO 4192 --- [demo-slot22-backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-13T11:02:57.454+07:00  INFO 4192 --- [demo-slot22-backend] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-13T11:02:58.746+07:00  INFO 4192 --- [demo-slot22-backend] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2026-10-13T11:02:58.785+07:00  INFO 4192 --- [demo-slot22-backend] [main] c.fpt.sba301.slot22.Slot22Application    : Started Slot22Application in 7.281 seconds (process running for 8.152)

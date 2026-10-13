@@ -1,0 +1,976 @@
+{
+  "info": {
+    "name": "SBA301 Slot22 Category and NewsArticle Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "categoryId",
+      "value": ""
+    },
+    {
+      "key": "workshopId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "T01 - GET categories",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories?page=0&size=10&sort=categoryName,asc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Seed page\", () => { const p=pm.response.json(); pm.expect(p.content.length).to.eql(3); pm.expect(p.totalElements).to.eql(3); pm.expect(p.size).to.eql(10); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T02 - GET existing id",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories/1"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Existing category\", () => pm.expect(pm.response.json().categoryName).to.eql(\"Academic news\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T03 - GET missing id",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories/32767"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+              "pm.test(\"NOT_FOUND contract\", () => pm.expect(pm.response.json().code).to.eql(\"NOT_FOUND\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T04 - POST valid",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryName\": \"Technology News\",\n  \"categoryDescription\": \"Technology and software engineering news\",\n  \"parentCategoryId\": null,\n  \"active\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+              "const c=pm.response.json(); pm.collectionVariables.set(\"categoryId\",c.categoryId);",
+              "pm.test(\"Generated ID\", () => { pm.expect(c.categoryId).to.be.a(\"number\"); pm.expect(c.categoryId).to.be.above(3); pm.expect(c.categoryName).to.eql(\"Technology News\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T05 - POST invalid",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryName\": \"\",\n  \"categoryDescription\": \"\",\n  \"active\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T06 - POST duplicate",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryName\": \"Technology News\",\n  \"categoryDescription\": \"Technology and software engineering news\",\n  \"parentCategoryId\": null,\n  \"active\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+              "pm.test(\"CONFLICT contract\", () => pm.expect(pm.response.json().code).to.eql(\"CONFLICT\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Duplicate - normalized name",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryName\": \" technology NEWS \",\n  \"categoryDescription\": \"Technology and software engineering news\",\n  \"parentCategoryId\": null,\n  \"active\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T07 - PUT existing",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories/{{categoryId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryName\": \"Academic & Research News\",\n  \"categoryDescription\": \"Academic and research announcements\",\n  \"parentCategoryId\": 2,\n  \"active\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Same ID and updated fields\", () => { const c=pm.response.json(); pm.expect(c.categoryId).to.eql(Number(pm.collectionVariables.get(\"categoryId\"))); pm.expect(c.categoryName).to.eql(\"Academic & Research News\"); pm.expect(c.parentCategoryId).to.eql(2); pm.expect(c.active).to.eql(false); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T07 - GET after PUT",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories/{{categoryId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Update persisted\", () => pm.expect(pm.response.json().categoryName).to.eql(\"Academic & Research News\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PUT duplicate - unchanged row",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories/{{categoryId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryName\": \"Student Affairs\",\n  \"categoryDescription\": \"Academic and research announcements\",\n  \"parentCategoryId\": 2,\n  \"active\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T08 - PUT missing",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories/32767",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryName\": \"Technology News\",\n  \"categoryDescription\": \"Technology and software engineering news\",\n  \"parentCategoryId\": null,\n  \"active\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T10 - DELETE referenced category",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories/1"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+              "pm.test(\"Business rule\", () => { const e=pm.response.json(); pm.expect(e.code).to.eql(\"CONFLICT\"); pm.expect(e.message).to.include(\"news articles\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T09 - DELETE free category",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories/{{categoryId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));",
+              "pm.test(\"No response body\", () => pm.expect(pm.response.text()).to.eql(\"\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T09 - GET deleted category",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories/{{categoryId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T11 - Search keyword",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories?keyword=ACAdemic&page=0&size=5"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Case-insensitive filter\", () => { const p=pm.response.json(); pm.expect(p.content).to.have.length(1); pm.expect(p.content.every(c=>c.categoryName.toLowerCase().includes(\"academic\"))).to.eql(true); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "T12 - Pagination",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories?page=1&size=1&sort=categoryName,asc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Bounded second page\", () => { const p=pm.response.json(); pm.expect(p.content).to.have.length(1); pm.expect(p.number).to.eql(1); pm.expect(p.size).to.eql(1); pm.expect(p.totalElements).to.eql(3); pm.expect(p.content[0].categoryName).to.eql(\"Campus Safety\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pagination - maximum size",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories?size=101"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Size capped at 100\", () => pm.expect(pm.response.json().size).to.eql(100));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sort - invalid property",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories?sort=doesNotExist,asc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "N01 - GET news list",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/news-articles"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Minimal seed article\", () => { const p=pm.response.json(); pm.expect(p.content).to.have.length(1); pm.expect(p.content[0].newsArticleId).to.eql(\"S22-SEED-001\"); pm.expect(p.content[0].categoryId).to.eql(1); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "N02 - POST news valid",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/news-articles",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"newsArticleId\": \"S22-TEMP-001\",\n  \"categoryId\": 2\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+              "pm.test(\"Article FK\", () => pm.expect(pm.response.json().categoryId).to.eql(2));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "N03 - GET news detail",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/news-articles/S22-TEMP-001"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "N04 - POST news duplicate",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/news-articles",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"newsArticleId\": \"S22-TEMP-001\",\n  \"categoryId\": 3\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "N05 - POST news invalid",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/news-articles",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"newsArticleId\": \"\",\n  \"categoryId\": null\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "N06 - POST missing category",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/news-articles",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"newsArticleId\": \"S22-NO-FK\",\n  \"categoryId\": 32767\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "N07 - PUT news existing",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/news-articles/S22-TEMP-001",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryId\": 3\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"ID retained, FK changed\", () => { const a=pm.response.json(); pm.expect(a.newsArticleId).to.eql(\"S22-TEMP-001\"); pm.expect(a.categoryId).to.eql(3); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "N08 - PUT missing category",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/news-articles/S22-TEMP-001",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryId\": 32767\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "N09 - PUT missing news",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/news-articles/S22-MISSING",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "N10 - Search news",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/news-articles?keyword=temp&page=0&size=1"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Filtered news\", () => { const p=pm.response.json(); pm.expect(p.content).to.have.length(1); pm.expect(p.content[0].newsArticleId).to.eql(\"S22-TEMP-001\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "N11 - DELETE news",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/news-articles/S22-TEMP-001"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "N12 - GET deleted news",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/news-articles/S22-TEMP-001"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "B01 - Break text plain",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/plain"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryName\": \"Workshop Category\",\n  \"categoryDescription\": \"Technology and software engineering news\",\n  \"parentCategoryId\": null,\n  \"active\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 415\", () => pm.response.to.have.status(415));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "B02 - Fix JSON content type",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryName\": \"Workshop Category\",\n  \"categoryDescription\": \"Technology and software engineering news\",\n  \"parentCategoryId\": null,\n  \"active\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set(\"workshopId\",pm.response.json().categoryId);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "B03 - Cleanup workshop row",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/categories/{{workshopId}}"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
