@@ -11,6 +11,8 @@ dist-ssr/
 **/dist-ssr/
 build/
 **/build/
+bin/
+**/bin/
 out/
 **/out/
 

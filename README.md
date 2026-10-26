@@ -17,6 +17,8 @@ Repository [tranthaigin/SBA](https://github.com/tranthaigin/SBA) tập hợp cá
 | Slot 10 | [Slot10](Slot10/README.md) | Orchid Router SPA |
 | Slot 12 | [Slot12](Slot12/README.md) | REST fundamentals, Spring Boot skeleton |
 | Slot 13 | [Slot13](Slot13/README.md) | Spring Boot REST API, kiến trúc 3 layer |
+| Slot 22 | [Slot22](Slot22/README.md) | Chapter 15 Part A: CRUD Category & NewsArticle với Spring Boot, JPA, SQL Server |
+| Slot 29 | [Slot29](Slot29/README.md) | Chapter 17 Part B: Many-to-Many, DAO, Repository, Service & Transaction Boundary |
 | Lab 01 | [lab1](lab1/README.md) | Orchid Gallery với Props và State |
 | Lab 02 | [lab2](lab2/README.md) | Orchid Gallery SPA, API loading/error/empty states |
 | Lab 03 | [lab3](lab3/README.md) | Employee REST API, versioning, Page/Slice, Swagger và automated testing |
