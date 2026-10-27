@@ -1,0 +1,11 @@
+IF DB_ID(N'LibraryDB') IS NULL
+BEGIN
+    CREATE DATABASE LibraryDB;
+END;
+GO
+
+USE LibraryDB;
+GO
+
+SELECT DB_NAME() AS CurrentDatabase;
+GO

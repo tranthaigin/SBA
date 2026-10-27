@@ -22,6 +22,7 @@ Repository [tranthaigin/SBA](https://github.com/tranthaigin/SBA) tập hợp cá
 | Slot 24 | [Slot24](Slot24/README.md) | Chapter 16 Part A: REST Security / Authentication / Authorization / JWT |
 | Slot 25 | [Slot25](Slot25/README.md) | Chapter 16 Part B: Authentication & Authorization JWT Implementation |
 | Slot 26 | [Slot26](Slot26/README.md) | Chapter 16 Part C: Security Consolidation, Roles, CORS & Negative Tests |
+| Slot 28 | [Slot28](Slot28/README.md) | Chapter 17 Part A: Hibernate Architecture, Configuration, Mapping và HQL |
 | Slot 29 | [Slot29](Slot29/README.md) | Chapter 17 Part B: Many-to-Many, DAO, Repository, Service & Transaction Boundary |
 | Lab 01 | [lab1](lab1/README.md) | Orchid Gallery với Props và State |
 | Lab 02 | [lab2](lab2/README.md) | Orchid Gallery SPA, API loading/error/empty states |
