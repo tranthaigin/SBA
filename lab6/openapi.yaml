@@ -1,0 +1,119 @@
+openapi: 3.0.3
+info:
+  title: SBA301 Lab 06 JWT API
+  version: 1.0.0
+  description: Core Lab API for registration, login, and JWT-protected user endpoints.
+servers:
+  - url: http://localhost:8005
+paths:
+  /auth/signup:
+    post:
+      summary: Register a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/RegisterRequest'}
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/User'}
+        '400': {$ref: '#/components/responses/BadRequest'}
+        '409':
+          description: Email already registered
+  /auth/login:
+    post:
+      summary: Authenticate and receive a JWT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/LoginRequest'}
+      responses:
+        '200':
+          description: Authentication succeeded
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/LoginResponse'}
+        '400': {$ref: '#/components/responses/BadRequest'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+  /users/me:
+    get:
+      summary: Get the authenticated user
+      security: [{bearerAuth: []}]
+      responses:
+        '200':
+          description: Current user
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/User'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+  /users:
+    get:
+      summary: List users (Core Lab policy - any authenticated user)
+      security: [{bearerAuth: []}]
+      responses:
+        '200':
+          description: User list without password fields
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/User'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [email, password, fullName]
+      properties:
+        email: {type: string, format: email, maxLength: 100}
+        password: {type: string, minLength: 8, maxLength: 72, format: password}
+        fullName: {type: string, maxLength: 150}
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email: {type: string, format: email}
+        password: {type: string, format: password}
+    LoginResponse:
+      type: object
+      required: [token, expiresIn]
+      properties:
+        token: {type: string}
+        expiresIn: {type: integer, format: int64, description: Token lifetime in milliseconds}
+    User:
+      type: object
+      required: [id, email, fullName]
+      properties:
+        id: {type: integer}
+        email: {type: string, format: email}
+        fullName: {type: string}
+    ApiError:
+      type: object
+      properties:
+        timestamp: {type: string, format: date-time}
+        status: {type: integer}
+        error: {type: string}
+        path: {type: string}
+        fields:
+          type: object
+          additionalProperties: {type: string}
+  responses:
+    BadRequest:
+      description: Request validation failed
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/ApiError'}
+    Unauthorized:
+      description: Missing, invalid, expired token, or invalid credentials
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/ApiError'}

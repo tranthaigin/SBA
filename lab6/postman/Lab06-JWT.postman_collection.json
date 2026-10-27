@@ -1,0 +1,66 @@
+{
+  "info": {
+    "name": "SBA301 Lab 06 - Spring Security JWT",
+    "description": "Core Lab requests. Login automatically stores the JWT in the collection variable.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:8005"},
+    {"key": "token", "value": ""}
+  ],
+  "item": [
+    {
+      "name": "Signup",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"fullName\": \"SBA301 Student\",\n  \"email\": \"student01@fpt.edu.vn\",\n  \"password\": \"P@ssword123\"\n}"},
+        "url": "{{baseUrl}}/auth/signup"
+      },
+      "event": [{"listen": "test", "script": {"exec": ["pm.test('Created or already exists', () => pm.expect([201, 409]).to.include(pm.response.code));"]}}]
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"email\": \"student01@fpt.edu.vn\",\n  \"password\": \"P@ssword123\"\n}"},
+        "url": "{{baseUrl}}/auth/login"
+      },
+      "event": [{"listen": "test", "script": {"exec": ["pm.test('Login succeeds', () => pm.response.to.have.status(200));", "const body = pm.response.json();", "pm.expect(body.token).to.be.a('string').and.not.empty;", "pm.collectionVariables.set('token', body.token);"]}}]
+    },
+    {
+      "name": "Current User",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}", "type": "text"}],
+        "url": "{{baseUrl}}/users/me"
+      },
+      "event": [{"listen": "test", "script": {"exec": ["pm.test('Returns current user', () => pm.response.to.have.status(200));", "pm.test('Does not expose password', () => pm.expect(pm.response.text()).not.to.include('password'));"]}}]
+    },
+    {
+      "name": "List Users",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}", "type": "text"}],
+        "url": "{{baseUrl}}/users"
+      },
+      "event": [{"listen": "test", "script": {"exec": ["pm.test('Returns users', () => pm.response.to.have.status(200));", "pm.test('Does not expose password', () => pm.expect(pm.response.text()).not.to.include('password'));"]}}]
+    },
+    {
+      "name": "No Token - 401",
+      "request": {"method": "GET", "url": "{{baseUrl}}/users/me"},
+      "event": [{"listen": "test", "script": {"exec": ["pm.test('Rejects missing token', () => pm.response.to.have.status(401));"]}}]
+    },
+    {
+      "name": "Invalid Signup - 400",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"fullName\":\"A\",\"email\":\"bad\",\"password\":\"123\"}"},
+        "url": "{{baseUrl}}/auth/signup"
+      },
+      "event": [{"listen": "test", "script": {"exec": ["pm.test('Rejects invalid input', () => pm.response.to.have.status(400));"]}}]
+    }
+  ]
+}
