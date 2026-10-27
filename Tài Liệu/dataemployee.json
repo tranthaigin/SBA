@@ -1,0 +1,53 @@
+[
+	{
+		"empId":"EMP01",
+		"name":"Steven Paris",
+		"designation":"A Technical Lead (Tech Lead) plays a crucial role in ensuring that technical projects are delivered successfully, maintaining high-quality standards, and guiding a team of engineers. Their tasks often span both leadership and technical areas. Below are some of the most common tasks a Tech Lead is responsible for: (1) Design Architecture: Lead the design and architectural decisions for software or systems, ensuring scalability, performance, and maintainability. (2) Tech Stack Selection: Choose the right technologies, tools, and frameworks that best fit the project requirements. (2) Code Review: Review team members' code to ensure quality, consistency, and adherence to coding standards and best practices. (3) Troubleshooting: Address technical challenges or bugs that arise during development, testing, or production stages.",
+		"salary":1500.0,
+		"url":"https://images.pexels.com/photos/1181534/pexels-photo-1181534.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+		"gender":false
+	}, 
+	{
+		"empId":"EMP02",
+		"name":"Madison Marley",
+		"designation":"The designation of Project Manager (PM) can vary depending on the organization, industry, or type of project, but it generally refers to someone responsible for planning, executing, and closing projects. Project managers are key to ensuring that projects are completed on time, within scope, and on budget while meeting the expected quality standards. Typically oversees multiple related projects (a program) and ensures that they align with organizational goals. Program managers have a broader scope than project managers and focus on the strategic aspects of project management.",
+		"salary":1000.0,
+		"url":"https://images.pexels.com/photos/8872618/pexels-photo-8872618.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+		"gender":false
+	}, 
+	{
+		"empId":"EMP03",
+		"name":"Clover Lavender",
+		"designation":"The designation of Tester typically refers to a role within software development or other industries focused on quality assurance (QA), where the individual is responsible for ensuring that products, systems, or software meet the required quality standards. Testers play a crucial role in identifying defects, issues, and inconsistencies within the product before it is released. A more technical role than a software tester. QA Engineers are involved in the entire process of quality assurance, which may include creating test cases, designing automated tests, and ensuring that development processes follow quality standards.",
+		"salary":1000.0,
+		"url":"https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+		"gender":false
+	}, 
+	{
+		"empId":"EMP04",
+		"name":"Oberon Kendall",
+		"designation":"A Front-End Developer is a software developer who specializes in creating the user interface (UI) and user experience (UX) aspects of web applications or websites. They focus on the client-side of development, which involves everything that users interact with directly in their web browsers. Front-End Developers ensure that the design is visually appealing, responsive, and works seamlessly across different devices and browsers. Communication with Back-End Services: Integrating front-end code with back-end APIs (Application Programming Interfaces) to retrieve and display dynamic content on the page. This often involves using AJAX or frameworks like Axios or Fetch for asynchronous requests.",
+		"salary":1000.0,
+		"url":"https://images.pexels.com/photos/3153198/pexels-photo-3153198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+		"gender":false
+	}, 
+	{
+		"empId":"EMP05",
+		"name":"Juliet Oscar",
+		"designation":"A Designer in the context of digital products, websites, and applications is responsible for creating the visual and interactive elements that users experience. Designers work to ensure that products are not only functional but also visually appealing and user-friendly. Their role often involves collaboration with developers, product managers, and stakeholders to translate user needs into a visually cohesive design that aligns with business goals. Focuses on the visual aspects of the product, including the layout, color schemes, typography, buttons, and other elements users interact with. They ensure that the design is both attractive and functional.",
+		"salary":1000.0,
+		"url":"https://cdn.prod.website-files.com/64022de562115a8189fe542a/651a82942e9abeceaa8d3d50_Employee-Surveys-Why-They-Are-An-Essential-Tool-For-Your-HR-Team.jpg",
+		"gender":false
+	}, 
+	{
+		"empId":"EMP06",
+		"name":"Willow Sawyer",
+		"designation":"An Accountant is a professional responsible for managing financial records, ensuring compliance with financial regulations, preparing reports, and supporting decision-making processes within an organization. Accountants play a crucial role in tracking, analyzing, and interpreting financial data to help organizations operate efficiently and comply with laws and regulations. Preparing Financial Statements: Accountants prepare balance sheets, income statements, and cash flow statements that provide a summary of an organization’s financial performance.",
+		"salary":1000.0,
+		"url":"https://img.freepik.com/free-photo/business-finance-employment-female-successful-entrepreneurs-concept-friendly-smiling-office-manager-greeting-new-coworker-businesswoman-welcome-clients-with-hand-wave-hold-laptop_1258-59122.jpg",
+		"gender":false
+	}
+
+]
+
+
