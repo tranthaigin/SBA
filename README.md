@@ -32,6 +32,7 @@ Repository [tranthaigin/SBA](https://github.com/tranthaigin/SBA) tập hợp cá
 | Lab 05 | [lab5](lab5/README.md) | Orchid Management FullStack SPA (Spring Boot REST API + ReactJS Vite) |
 | Lab 06 | [lab6](lab6/README.md) | Spring Security JWT authentication, contract tests và Postman |
 | Assignment 01 | [Assignment01](Assignment01/README.md) | FUNewsManagementSystem - ReactJS SPA, CRUD + Search, Modal & LocalStorage |
+| Assignment 02 | [Assignment02](Assignment02/README.md) | FUNewsManagementSystem - Spring Boot 3 REST API + ReactJS FullStack CRUD |
 
 Danh mục này phản ánh các thư mục thực tế trong repository, không khẳng định mọi Slot của môn học đều đã được triển khai. Các tài liệu Slot khác trong thư mục tài liệu là nội dung học tập, không phải bài làm tương ứng.
 
