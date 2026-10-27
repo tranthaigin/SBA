@@ -24,6 +24,7 @@ Repository [tranthaigin/SBA](https://github.com/tranthaigin/SBA) tập hợp cá
 | Slot 26 | [Slot26](Slot26/README.md) | Chapter 16 Part C: Security Consolidation, Roles, CORS & Negative Tests |
 | Slot 28 | [Slot28](Slot28/README.md) | Chapter 17 Part A: Hibernate Architecture, Configuration, Mapping và HQL |
 | Slot 29 | [Slot29](Slot29/README.md) | Chapter 17 Part B: Many-to-Many, DAO, Repository, Service & Transaction Boundary |
+| Slot 30 | [Slot30](Slot30/README.md) | Chapter 18 Part A: Hibernate CRUD Application 5 Layers, DAO, Repository & Service |
 | Lab 01 | [lab1](lab1/README.md) | Orchid Gallery với Props và State |
 | Lab 02 | [lab2](lab2/README.md) | Orchid Gallery SPA, API loading/error/empty states |
 | Lab 03 | [lab3](lab3/README.md) | Employee REST API, versioning, Page/Slice, Swagger và automated testing |
