@@ -31,9 +31,9 @@ Repository [tranthaigin/SBA](https://github.com/tranthaigin/SBA) tập hợp cá
 | Lab 04 | [lab4](lab4/README.md) | Orchid REST API, JPA, SQL Server, CRUD/search và evidence |
 | Lab 05 | [lab5](lab5/README.md) | Orchid Management FullStack SPA (Spring Boot REST API + ReactJS Vite) |
 | Lab 06 | [lab6](lab6/README.md) | Spring Security JWT authentication, contract tests và Postman |
-| Assignment 01 | [Assignment01](Assignment01/README.md) | FUNewsManagementSystem - ReactJS SPA, CRUD + Search, Modal & LocalStorage |
-| Assignment 02 | [Assignment02](Assignment02/README.md) | FUNewsManagementSystem - Spring Boot 3 REST API + ReactJS FullStack CRUD |
-| Assignment 03 | [Assignment03](Assignment03/README.md) | FUMiniHotelManagement - Spring Boot 3 Security JWT + ReactJS FullStack SPA |
+| Assignment 01 | [TranQuocThai_SE1910](TranQuocThai_SE1910/README.md) | FUNewsManagementSystem - ReactJS SPA, CRUD + Search, Modal & LocalStorage |
+| Assignment 02 | [A2TranQuocThai_SE1910](A2TranQuocThai_SE1910/README.md) | FUNewsManagementSystem - Spring Boot 3 REST API + ReactJS FullStack CRUD |
+| Assignment 03 | [A3TranQuocThai_SE1910](A3TranQuocThai_SE1910/README.md) | FUMiniHotelManagement - Spring Boot 3 Security JWT + ReactJS FullStack SPA |
 
 Danh mục này phản ánh các thư mục thực tế trong repository, không khẳng định mọi Slot của môn học đều đã được triển khai. Các tài liệu Slot khác trong thư mục tài liệu là nội dung học tập, không phải bài làm tương ứng.
 
