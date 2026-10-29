@@ -3,16 +3,21 @@ import { Container, Row, Col, Card, Button, Form, Badge, Modal, Alert, Spinner }
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 
+/**
+ * Component trang danh sách Tin tức (NewsList).
+ * Cho phép khách vãng lai đọc và tìm kiếm tin tức kích hoạt (Active);
+ * Cho phép nhân viên (Staff) quản lý thêm, sửa, xóa bài viết kèm chọn nhiều Tags.
+ */
 export default function NewsList() {
   const { user } = useAuth();
   const [news, setNews] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [tags,setTags] = useState([]);
+  const [tags, setTags] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Modal create/edit state
+  // Trạng thái modal tạo mới và chỉnh sửa bài viết
   const [showModal, setShowModal] = useState(false);
   const [editingArticle, setEditingArticle] = useState(null);
   const [formData, setFormData] = useState({
@@ -21,14 +26,18 @@ export default function NewsList() {
     newsContent: "",
     newsSource: "",
     categoryId: "",
-    tagIds: [], newsStatus: true
+    tagIds: [],
+    newsStatus: true
   });
 
-  // Detail modal state
+  // Trạng thái modal xem chi tiết bài viết
   const [viewArticle, setViewArticle] = useState(null);
 
   const isStaff = user?.accountRole === 2;
 
+  /**
+   * Gọi API tải danh sách bài viết từ server; nếu là Staff sẽ lấy toàn bộ, nếu là độc giả chỉ lấy tin Active.
+   */
   const fetchNews = async () => {
     setLoading(true);
     setError("");
@@ -45,6 +54,9 @@ export default function NewsList() {
     }
   };
 
+  /**
+   * Tải danh sách danh mục hoạt động và danh sách thẻ tags từ backend để nạp vào form.
+   */
   const fetchCategories = async () => {
     try {
       const res = await axios.get("/api/categories/active");
@@ -60,119 +72,153 @@ export default function NewsList() {
     fetchCategories();
   }, [user, search]);
 
+  /**
+   * Mở modal thêm bài viết mới với form sạch.
+   */
   const handleOpenCreate = () => {
     setEditingArticle(null);
     setFormData({
       newsTitle: "",
       headline: "",
       newsContent: "",
-      newsSource: "FPT University News",
+      newsSource: "",
       categoryId: categories[0]?.categoryId || "",
-      tagIds: [], newsStatus: true
+      tagIds: [],
+      newsStatus: true
     });
     setShowModal(true);
   };
 
-  const handleOpenEdit = (art) => {
-    setEditingArticle(art);
+  /**
+   * Mở modal chỉnh sửa với dữ liệu của bài viết được chọn.
+   */
+  const handleOpenEdit = (article) => {
+    setEditingArticle(article);
     setFormData({
-      newsTitle: art.newsTitle || "",
-      headline: art.headline || "",
-      newsContent: art.newsContent || "",
-      newsSource: art.newsSource || "",
-      categoryId: art.category?.categoryId || "",
-      tagIds: (art.tags || []).map(t=>t.tagId), newsStatus: art.newsStatus
+      newsTitle: article.newsTitle || "",
+      headline: article.headline || "",
+      newsContent: article.newsContent || "",
+      newsSource: article.newsSource || "",
+      categoryId: article.category?.categoryId || "",
+      tagIds: article.tags ? article.tags.map(t => t.tagId) : [],
+      newsStatus: article.newsStatus
     });
     setShowModal(true);
   };
 
+  /**
+   * Xử lý lưu bài viết (thêm mới hoặc cập nhật) gửi request REST lên backend.
+   */
   const handleSave = async (e) => {
     e.preventDefault();
     try {
       if (editingArticle) {
-        await axios.put(`/api/news/${editingArticle.newsArticleId}?updatedById=${user.accountId}`, {
-          ...formData,
-          categoryId: Number(formData.categoryId)
-        });
+        await axios.put(`/api/news/${editingArticle.newsArticleId}`, formData);
       } else {
-        await axios.post("/api/news", {
-          ...formData,
-          categoryId: Number(formData.categoryId),
-          createdById: user.accountId
-        });
+        await axios.post("/api/news", formData);
       }
       setShowModal(false);
       fetchNews();
     } catch (err) {
-      alert(err.response?.data?.message || "Failed to save news article");
+      setError(err.response?.data?.message || "Failed to save news article");
     }
   };
 
+  /**
+   * Xử lý xóa bài viết sau khi người dùng xác nhận.
+   */
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this news article?")) return;
     try {
       await axios.delete(`/api/news/${id}`);
       fetchNews();
     } catch (err) {
-      alert(err.response?.data?.message || "Failed to delete news article");
+      setError(err.response?.data?.message || "Failed to delete article");
     }
+  };
+
+  /**
+   * Xử lý chọn hoặc bỏ chọn thẻ Tag trên form bài viết.
+   */
+  const handleTagToggle = (tagId) => {
+    setFormData(prev => {
+      const exists = prev.tagIds.includes(tagId);
+      return {
+        ...prev,
+        tagIds: exists ? prev.tagIds.filter(id => id !== tagId) : [...prev.tagIds, tagId]
+      };
+    });
   };
 
   return (
     <Container className="py-2">
-      <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+      <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
-          <h2 className="mb-0">News Articles</h2>
+          <h2>News Articles</h2>
           <small className="text-muted">
-            {isStaff ? "Staff Workspace: Manage and publish articles" : "Public News Portal"}
+            {isStaff ? "Manage company news & editorial content" : "Read active public news"}
           </small>
         </div>
-        <div className="d-flex gap-2">
-          <Form.Control
-            type="text"
-            placeholder="Search news by title / headline..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            style={{ width: "280px" }}
-          />
-          {isStaff && (
-            <Button variant="success" onClick={handleOpenCreate}>
-              + Write New Article
-            </Button>
-          )}
-        </div>
+        {isStaff && (
+          <Button variant="primary" onClick={handleOpenCreate}>
+            + Create News Article
+          </Button>
+        )}
       </div>
 
-      {error && <Alert variant="danger">{error}</Alert>}
+      {error && <Alert variant="danger" dismissible onClose={() => setError("")}>{error}</Alert>}
+
+      <Form.Group className="mb-4">
+        <Form.Control
+          type="text"
+          placeholder="Search news by title, headline or content..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </Form.Group>
+
       {loading ? (
         <div className="text-center py-5">
           <Spinner animation="border" variant="primary" />
         </div>
       ) : news.length === 0 ? (
-        <div className="text-center py-5 text-muted">No news articles found.</div>
+        <div className="text-center py-5 text-muted">
+          No news articles found.
+        </div>
       ) : (
-        <Row className="g-4">
+        <Row xs={1} md={2} lg={3} className="g-4">
           {news.map((item) => (
-            <Col md={6} lg={4} key={item.newsArticleId}>
-              <Card className="h-100 shadow-sm border-0 d-flex flex-column">
+            <Col key={item.newsArticleId}>
+              <Card className="h-100 shadow-sm border-0">
                 <Card.Body className="d-flex flex-column">
                   <div className="d-flex justify-content-between align-items-start mb-2">
-                    <Badge bg="secondary">{item.category?.categoryName || "General"}</Badge>
-                    {isStaff && (
-                      <Badge bg={item.newsStatus ? "success" : "secondary"}>
-                        {item.newsStatus ? "Active" : "Inactive"}
-                      </Badge>
-                    )}
+                    <Badge bg="secondary">
+                      {item.category?.categoryName || "Uncategorized"}
+                    </Badge>
+                    <Badge bg={item.newsStatus ? "success" : "warning"}>
+                      {item.newsStatus ? "Active" : "Inactive"}
+                    </Badge>
                   </div>
-                  <Card.Title className="fs-5">{item.newsTitle || item.headline}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted small">
-                    {item.headline}
-                  </Card.Subtitle>
-                  <Card.Text className="text-muted small flex-grow-1">
-                    {item.newsContent ? item.newsContent.slice(0, 120) + "..." : ""}
+                  <Card.Title className="h5 mb-2">{item.newsTitle}</Card.Title>
+                  <Card.Subtitle className="mb-3 text-muted small">{item.headline}</Card.Subtitle>
+                  <Card.Text className="text-truncate flex-grow-1">
+                    {item.newsContent}
                   </Card.Text>
-                  <div className="d-flex justify-content-between align-items-center pt-2 border-top">
-                    <small className="text-muted">{item.newsSource || "FUNews"}</small>
+
+                  {item.tags && item.tags.length > 0 && (
+                    <div className="mb-3 d-flex flex-wrap gap-1">
+                      {item.tags.map(t => (
+                        <Badge key={t.tagId} bg="light" text="dark" className="border">
+                          #{t.tagName}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="mt-auto pt-2 border-top d-flex justify-content-between align-items-center">
+                    <small className="text-muted">
+                      By {item.createdBy?.accountName || "Staff"}
+                    </small>
                     <div className="d-flex gap-1">
                       <Button variant="outline-primary" size="sm" onClick={() => setViewArticle(item)}>
                         Read
@@ -196,102 +242,124 @@ export default function NewsList() {
         </Row>
       )}
 
-      {/* Read Article Modal */}
-      {viewArticle && (
-        <Modal show={true} onHide={() => setViewArticle(null)} size="lg" centered>
+      {/* Detail Modal */}
+      <Modal show={!!viewArticle} onHide={() => setViewArticle(null)} size="lg" centered>
+        {viewArticle && (
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>{viewArticle.newsTitle}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="d-flex gap-2 mb-3">
+                <Badge bg="primary">{viewArticle.category?.categoryName}</Badge>
+                <Badge bg={viewArticle.newsStatus ? "success" : "warning"}>
+                  {viewArticle.newsStatus ? "Active" : "Inactive"}
+                </Badge>
+              </div>
+              <h5 className="text-muted mb-3">{viewArticle.headline}</h5>
+              <p style={{ whiteSpace: "pre-wrap" }}>{viewArticle.newsContent}</p>
+              <div className="mt-4 pt-3 border-top text-muted small">
+                <div>Source: {viewArticle.newsSource || "FUNews Editorial"}</div>
+                <div>Author: {viewArticle.createdBy?.accountName} ({viewArticle.createdBy?.accountEmail})</div>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setViewArticle(null)}>Close</Button>
+            </Modal.Footer>
+          </>
+        )}
+      </Modal>
+
+      {/* Create/Edit Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg" centered>
+        <Form onSubmit={handleSave}>
           <Modal.Header closeButton>
-            <Modal.Title>{viewArticle.newsTitle || viewArticle.headline}</Modal.Title>
+            <Modal.Title>{editingArticle ? "Edit News Article" : "Create News Article"}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h6 className="text-muted mb-3">{viewArticle.headline}</h6>
-            <div className="mb-3">
-              <Badge bg="info" className="me-2">{viewArticle.category?.categoryName}</Badge>
-              <span className="small text-muted">Source: {viewArticle.newsSource}</span>
-            </div>
-            <div>{viewArticle.tags?.map(t=><Badge key={t.tagId} className="me-1">{t.tagName}</Badge>)}</div><p style={{ whiteSpace: "pre-line" }}>{viewArticle.newsContent}</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setViewArticle(null)}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      )}
-
-      {/* Create / Edit Modal */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg" centered>
-        <Modal.Header closeButton>
-          <Modal.Title>{editingArticle ? "Edit News Article" : "Create News Article"}</Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleSave}>
-          <Modal.Body>
             <Form.Group className="mb-3">
-              <Form.Label>Headline *</Form.Label>
+              <Form.Label>News Title *</Form.Label>
               <Form.Control
+                type="text"
                 required
-                value={formData.headline}
-                onChange={(e) => setFormData({ ...formData, headline: e.target.value })}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>News Title</Form.Label>
-              <Form.Control
                 value={formData.newsTitle}
                 onChange={(e) => setFormData({ ...formData, newsTitle: e.target.value })}
               />
             </Form.Group>
-            <Row>
-              <Col md={6}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Category *</Form.Label>
-                  <Form.Select
-                    required
-                    value={formData.categoryId}
-                    onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
-                  >
-                    <option value="">Select Category</option>
-                    {categories.map((c) => (
-                      <option key={c.categoryId} value={c.categoryId}>
-                        {c.categoryName}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group className="mb-3">
-                  <Form.Label>News Source</Form.Label>
-                  <Form.Control
-                    value={formData.newsSource}
-                    onChange={(e) => setFormData({ ...formData, newsSource: e.target.value })}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
+
             <Form.Group className="mb-3">
-              <Form.Label>News Content</Form.Label>
+              <Form.Label>Headline</Form.Label>
+              <Form.Control
+                type="text"
+                value={formData.headline}
+                onChange={(e) => setFormData({ ...formData, headline: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Category *</Form.Label>
+              <Form.Select
+                required
+                value={formData.categoryId}
+                onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
+              >
+                <option value="">Select Category</option>
+                {categories.map((c) => (
+                  <option key={c.categoryId} value={c.categoryId}>
+                    {c.categoryName}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Tags</Form.Label>
+              <div className="d-flex flex-wrap gap-2">
+                {tags.map(t => (
+                  <Button
+                    key={t.tagId}
+                    size="sm"
+                    variant={formData.tagIds.includes(t.tagId) ? "primary" : "outline-secondary"}
+                    onClick={() => handleTagToggle(t.tagId)}
+                    type="button"
+                  >
+                    #{t.tagName}
+                  </Button>
+                ))}
+              </div>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>News Content *</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={5}
+                required
                 value={formData.newsContent}
                 onChange={(e) => setFormData({ ...formData, newsContent: e.target.value })}
               />
             </Form.Group>
-            <Form.Label>Tags</Form.Label><Form.Select multiple aria-label="Tags" value={(formData.tagIds || []).map(String)} onChange={e=>setFormData({...formData,tagIds:Array.from(e.target.selectedOptions,o=>Number(o.value))})}>{tags.map(t=><option key={t.tagId} value={t.tagId}>{t.tagName}</option>)}</Form.Select>
+
+            <Form.Group className="mb-3">
+              <Form.Label>News Source</Form.Label>
+              <Form.Control
+                type="text"
+                value={formData.newsSource}
+                onChange={(e) => setFormData({ ...formData, newsSource: e.target.value })}
+              />
+            </Form.Group>
+
             <Form.Check
               type="checkbox"
-              id="newsStatusCheck"
               label="Active Status"
               checked={formData.newsStatus}
               onChange={(e) => setFormData({ ...formData, newsStatus: e.target.checked })}
             />
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowModal(false)}>
-              Cancel
-            </Button>
+            <Button variant="secondary" onClick={() => setShowModal(false)}>Cancel</Button>
             <Button variant="primary" type="submit">
-              Save Article
+              {editingArticle ? "Save Changes" : "Create Article"}
             </Button>
           </Modal.Footer>
         </Form>

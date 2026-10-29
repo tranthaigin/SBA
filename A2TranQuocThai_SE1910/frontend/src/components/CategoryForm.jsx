@@ -8,7 +8,11 @@ import {
   validateCategoryForm,
 } from "../utils/categoryForm";
 
-export default function CategoryForm({ show, onHide, onCreated, category }) {
+/**
+ * Component CategoryForm hộp thoại popup thêm mới và chỉnh sửa Thể loại.
+ * Thực hiện validation dữ liệu và gọi API tương ứng tới backend.
+ */
+export default function CategoryForm({ show, onHide, onCreated, onSaved, category }) {
   const [form, setForm] = useState(initialCategoryForm);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -52,7 +56,8 @@ export default function CategoryForm({ show, onHide, onCreated, category }) {
         await updateCategory(category.categoryId, toCategoryPayload(form));
       else await createCategory(toCategoryPayload(form));
       onHide();
-      await onCreated();
+      if (onCreated) await onCreated();
+      if (onSaved) await onSaved();
     } catch (requestError) {
       if (requestError.response?.status === 400) {
         setError(getApiErrorMessage(requestError, "Invalid category data."));

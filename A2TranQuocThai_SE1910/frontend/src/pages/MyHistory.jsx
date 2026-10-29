@@ -3,12 +3,19 @@ import { Container, Table, Button, Alert, Badge, Spinner } from "react-bootstrap
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 
+/**
+ * Component trang Lịch sử đăng bài (MyHistory) dành cho Staff (Role 2).
+ * Hiển thị toàn bộ các bài viết tin tức do chính tài khoản Staff này làm tác giả.
+ */
 export default function MyHistory() {
   const { user } = useAuth();
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  /**
+   * Tải danh sách các bài viết do user hiện tại tạo từ endpoint /api/news/created-by/{userId}.
+   */
   const fetchHistory = async () => {
     if (!user) return;
     setLoading(true);
@@ -27,6 +34,7 @@ export default function MyHistory() {
     fetchHistory();
   }, [user]);
 
+  // Yêu cầu quyền Staff
   if (!user || user.accountRole !== 2) {
     return (
       <Container className="py-5 text-center">
@@ -60,23 +68,29 @@ export default function MyHistory() {
           <thead className="table-light">
             <tr>
               <th>Article ID</th>
-              <th>Headline</th>
+              <th>Title</th>
               <th>Category</th>
-              <th>Created Date</th>
               <th>Status</th>
+              <th>Created Date</th>
             </tr>
           </thead>
           <tbody>
-            {history.map((art) => (
-              <tr key={art.newsArticleId}>
-                <td className="fw-mono text-muted">{art.newsArticleId}</td>
-                <td className="fw-semibold">{art.headline}</td>
-                <td>{art.category?.categoryName || "N/A"}</td>
-                <td>{art.createdDate ? new Date(art.createdDate).toLocaleDateString() : "N/A"}</td>
+            {history.map((a) => (
+              <tr key={a.newsArticleId}>
+                <td><code>{a.newsArticleId}</code></td>
+                <td className="fw-semibold">{a.newsTitle}</td>
                 <td>
-                  <Badge bg={art.newsStatus ? "success" : "secondary"}>
-                    {art.newsStatus ? "Active" : "Inactive"}
+                  <Badge bg="secondary">
+                    {a.category?.categoryName || "Uncategorized"}
                   </Badge>
+                </td>
+                <td>
+                  <Badge bg={a.newsStatus ? "success" : "warning"}>
+                    {a.newsStatus ? "Active" : "Inactive"}
+                  </Badge>
+                </td>
+                <td className="text-muted small">
+                  {a.createdDate ? new Date(a.createdDate).toLocaleString() : "-"}
                 </td>
               </tr>
             ))}

@@ -77,5 +77,12 @@ Thumbs.db
 # Specific test results / reports
 com.example.employeemanagement.*
 
+# Python caches
+__pycache__/
+*.pyc
+
+# Microsoft Office temporary lock files
+~$*
+
 # Maven build and report directories
 target/

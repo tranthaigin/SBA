@@ -9,7 +9,12 @@ import AccountList from "./pages/AccountList";
 import MyHistory from "./pages/MyHistory";
 import { AuthProvider } from "./context/AuthContext";
 
+/**
+ * Component App gốc của ứng dụng A2TranQuocThai_SE1910 (Frontend ReactJS).
+ * Cấu hình hệ thống định tuyến Route và bao bọc toàn bộ ứng dụng bằng AuthProvider.
+ */
 export default function App() {
+  // Trạng thái điều khiển việc đóng/mở popup đăng nhập
   const [showLogin, setShowLogin] = useState(false);
 
   return (

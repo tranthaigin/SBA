@@ -2,10 +2,17 @@ import { Container, Nav, Navbar, Button, Badge } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
+/**
+ * Component thanh điều hướng phía trên (Navbar) của hệ thống FUNews.
+ * Tự động hiển thị các mục menu tương ứng theo vai trò người dùng (Public, Staff, Admin).
+ */
 export default function AppNavBar({ onOpenLogin }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
+  /**
+   * Xử lý đăng xuất tài khoản và điều hướng người dùng về trang tin tức công khai.
+   */
   const handleLogout = () => {
     logout();
     navigate("/news");

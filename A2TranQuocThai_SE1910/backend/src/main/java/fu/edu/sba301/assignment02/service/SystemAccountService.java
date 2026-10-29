@@ -11,6 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Service xử lý logic nghiệp vụ cho Tài khoản người dùng (SystemAccount).
+ * Thực hiện kiểm tra tính duy nhất của email và kiểm tra ràng buộc không được xóa tác giả bài viết.
+ */
 @Service
 @Transactional
 public class SystemAccountService {
@@ -23,6 +27,9 @@ public class SystemAccountService {
         this.newsArticleRepository = newsArticleRepository;
     }
 
+    /**
+     * Lấy toàn bộ danh sách tài khoản hoặc lọc theo tên / email không phân biệt hoa thường.
+     */
     public List<SystemAccount> getAllAccounts(String search) {
         if (search != null && !search.isBlank()) {
             return accountRepository.findByAccountNameContainingIgnoreCaseOrAccountEmailContainingIgnoreCase(search.trim(), search.trim());
@@ -30,13 +37,21 @@ public class SystemAccountService {
         return accountRepository.findAll();
     }
 
+    /**
+     * Lấy thông tin tài khoản theo ID, ném ngoại lệ nếu không tìm thấy.
+     */
     public SystemAccount getAccountById(Short id) {
         return accountRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found with ID: " + id));
     }
 
+    /**
+     * Tạo tài khoản mới: bắt buộc có mật khẩu, kiểm tra email chưa tồn tại và tự sinh ID tự tăng.
+     */
     public SystemAccount createAccount(SystemAccountRequest req) {
-        if(req.getAccountPassword()==null || req.getAccountPassword().isBlank()) throw new BusinessRuleViolationException("Password is required");
+        if (req.getAccountPassword() == null || req.getAccountPassword().isBlank()) {
+            throw new BusinessRuleViolationException("Password is required");
+        }
         if (accountRepository.findByAccountEmail(req.getAccountEmail().trim()).isPresent()) {
             throw new BusinessRuleViolationException("Email already exists: " + req.getAccountEmail());
         }
@@ -58,6 +73,9 @@ public class SystemAccountService {
         return accountRepository.save(acc);
     }
 
+    /**
+     * Cập nhật thông tin tài khoản: kiểm tra không trùng email với tài khoản khác.
+     */
     public SystemAccount updateAccount(Short id, SystemAccountRequest req) {
         SystemAccount acc = getAccountById(id);
         accountRepository.findByAccountEmail(req.getAccountEmail().trim())
@@ -75,6 +93,9 @@ public class SystemAccountService {
         return accountRepository.save(acc);
     }
 
+    /**
+     * Xóa tài khoản; ngăn chặn xóa nếu tài khoản này là tác giả của các bài viết tin tức hiện có.
+     */
     public void deleteAccount(Short id) {
         SystemAccount acc = getAccountById(id);
         if (newsArticleRepository.existsByCreatedById(id)) {

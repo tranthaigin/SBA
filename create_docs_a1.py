@@ -260,7 +260,8 @@ def build_full_documentation():
         "dấu hiệu nhận biết kết quả đúng, cùng vị trí mã nguồn và giải thích chi tiết chức năng của các hàm xử lý."
     )
 
-    steps = [
+    global a1_steps
+    steps = a1_steps = [
         # Nhóm 1: Xác thực & Đăng nhập
         (
             "noteTT/screenshots_a1/01_login_initial.png",
