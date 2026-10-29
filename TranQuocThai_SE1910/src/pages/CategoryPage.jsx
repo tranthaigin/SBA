@@ -3,22 +3,38 @@ import ConfirmDialog from '../components/ConfirmDialog'
 import Modal from '../components/Modal'
 import StatusBadge from '../components/StatusBadge'
 
+// Dữ liệu mặc định cho form tạo mới thể loại
 const emptyForm = { name: '', status: 1 }
 
+/**
+ * Component quản lý Thể loại tin tức (Category Management).
+ * Cung cấp đầy đủ các thao tác CRUD và tìm kiếm thể loại tin tức.
+ */
 export default function CategoryPage({ categories, news, setCategories }) {
+  // Trạng thái từ khóa tìm kiếm
   const [keyword, setKeyword] = useState('')
+  // Chế độ mở modal: 'create', 'update' hoặc null (đóng)
   const [modalMode, setModalMode] = useState(null)
+  // ID thể loại đang được chọn chỉnh sửa
   const [selectedId, setSelectedId] = useState(null)
+  // Đối tượng thể loại đang được chọn để xác nhận xóa
   const [deleteTarget, setDeleteTarget] = useState(null)
+  // Dữ liệu binding của form nhập liệu thể loại
   const [form, setForm] = useState(emptyForm)
+  // Thông báo lỗi validation bên trong modal
   const [formError, setFormError] = useState('')
+  // Thông báo lỗi nghiệp vụ hiển thị trên trang (ví dụ lỗi ràng buộc dữ liệu)
   const [pageError, setPageError] = useState('')
 
+  // Lọc danh sách thể loại theo từ khóa tìm kiếm (không phân biệt chữ hoa/thường)
   const normalizedKeyword = keyword.trim().toLowerCase()
   const displayedCategories = categories.filter((category) =>
     category.name.toLowerCase().includes(normalizedKeyword),
   )
 
+  /**
+   * Mở modal ở chế độ thêm mới thể loại và làm sạch dữ liệu form.
+   */
   const openCreate = () => {
     setModalMode('create')
     setSelectedId(null)
@@ -27,6 +43,9 @@ export default function CategoryPage({ categories, news, setCategories }) {
     setPageError('')
   }
 
+  /**
+   * Mở modal ở chế độ chỉnh sửa với thông tin của thể loại đã chọn.
+   */
   const openUpdate = (category) => {
     setModalMode('update')
     setSelectedId(category.id)
@@ -35,21 +54,29 @@ export default function CategoryPage({ categories, news, setCategories }) {
     setPageError('')
   }
 
+  /**
+   * Đóng modal và reset trạng thái lựa chọn.
+   */
   const closeModal = () => {
     setModalMode(null)
     setSelectedId(null)
     setFormError('')
   }
 
+  /**
+   * Xử lý lưu thể loại (thêm mới hoặc cập nhật), kiểm tra tính hợp lệ và chống trùng lặp tên.
+   */
   const handleSubmit = (event) => {
     event.preventDefault()
     const name = form.name.trim()
 
+    // Bắt buộc nhập tên thể loại
     if (!name) {
       setFormError('Category name is required.')
       return
     }
 
+    // Kiểm tra tên thể loại có bị trùng lặp với bản ghi khác hay không
     const duplicate = categories.some(
       (category) => category.id !== selectedId && category.name.toLowerCase() === name.toLowerCase(),
     )
@@ -59,9 +86,11 @@ export default function CategoryPage({ categories, news, setCategories }) {
     }
 
     if (modalMode === 'create') {
+      // Tự sinh ID tiếp theo dựa trên max ID hiện tại
       const nextId = Math.max(0, ...categories.map((category) => category.id)) + 1
       setCategories((current) => [...current, { id: nextId, name, status: Number(form.status) }])
     } else {
+      // Cập nhật thông tin thể loại đã chọn trong mảng
       setCategories((current) =>
         current.map((category) =>
           category.id === selectedId
@@ -74,7 +103,11 @@ export default function CategoryPage({ categories, news, setCategories }) {
     closeModal()
   }
 
+  /**
+   * Xử lý xác nhận xóa thể loại: kiểm tra ràng buộc xem thể loại có bài viết tin tức hay không trước khi xóa.
+   */
   const handleDelete = () => {
+    // Ràng buộc toàn vẹn dữ liệu: không cho phép xóa thể loại đang có tin tức liên kết
     const isInUse = news.some((article) => article.categoryId === deleteTarget.id)
     if (isInUse) {
       setPageError(`Cannot delete “${deleteTarget.name}” because it is used by a news article.`)
@@ -82,6 +115,7 @@ export default function CategoryPage({ categories, news, setCategories }) {
       return
     }
 
+    // Loại bỏ thể loại khỏi mảng state
     setCategories((current) => current.filter((category) => category.id !== deleteTarget.id))
     setDeleteTarget(null)
     setPageError('')

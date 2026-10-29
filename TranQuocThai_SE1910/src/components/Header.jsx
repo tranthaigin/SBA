@@ -1,3 +1,7 @@
+/**
+ * Component Header hiển thị thanh điều hướng phía trên của hệ thống.
+ * Cung cấp thông tin tiêu đề trang hiện tại, tên tài khoản đăng nhập và nút Đăng xuất.
+ */
 export default function Header({ currentUser, pageTitle, onLogout }) {
   return (
     <header className="topbar">

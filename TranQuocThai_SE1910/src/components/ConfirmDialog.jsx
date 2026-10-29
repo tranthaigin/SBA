@@ -1,5 +1,9 @@
 import Modal from './Modal'
 
+/**
+ * Component ConfirmDialog hộp thoại xác nhận trước khi thực hiện hành động nguy hiểm (xóa dữ liệu).
+ * Đảm bảo người dùng xác nhận rõ ràng, tránh mất mát dữ liệu do bấm nhầm.
+ */
 export default function ConfirmDialog({ itemName, onCancel, onConfirm }) {
   return (
     <Modal title="Confirm deletion" onClose={onCancel}>

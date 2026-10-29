@@ -1,3 +1,7 @@
+/**
+ * Component trang Cài đặt và Hồ sơ người dùng (SettingsPage).
+ * Hiển thị thông tin tài khoản hiện tại, vai trò và cơ chế lưu trữ dữ liệu của hệ thống.
+ */
 export default function SettingsPage({ currentUser }) {
   return (
     <div className="page-stack">

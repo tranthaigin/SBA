@@ -1,3 +1,7 @@
+/**
+ * Component Modal hộp thoại popup tái sử dụng cho các chức năng Thêm mới và Chỉnh sửa.
+ * Cung cấp lớp nền mờ (backdrop), tiêu đề và nút đóng hộp thoại.
+ */
 export default function Modal({ children, title, onClose }) {
   return (
     <div className="modal-backdrop" role="presentation" onMouseDown={onClose}>

@@ -1,3 +1,4 @@
+// Danh sách cấu hình 5 mục menu điều hướng chính của hệ thống
 const menuItems = [
   { id: 'dashboard', label: 'Dashboard', shortLabel: 'DB' },
   { id: 'categories', label: 'Category', shortLabel: 'CT' },
@@ -6,6 +7,10 @@ const menuItems = [
   { id: 'settings', label: 'Settings', shortLabel: 'ST' },
 ]
 
+/**
+ * Component Sidebar thanh điều hướng bên trái giao diện quản trị.
+ * Hiển thị logo thương hiệu FUNews và các nút chuyển trang nhanh.
+ */
 export default function Sidebar({ activePage, onNavigate }) {
   return (
     <aside className="sidebar">

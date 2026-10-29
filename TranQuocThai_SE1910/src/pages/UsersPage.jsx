@@ -3,25 +3,43 @@ import ConfirmDialog from '../components/ConfirmDialog'
 import Modal from '../components/Modal'
 import StatusBadge from '../components/StatusBadge'
 
+// Dữ liệu mặc định cho form tạo người dùng mới
 const emptyForm = { username: '', password: '', role: 2, status: 1 }
 
+/**
+ * Hàm tiện ích chuyển đổi mã vai trò (role: 1 hoặc 2) sang tên vai trò thân thiện.
+ */
 function roleLabel(role) {
   return role === 1 ? 'Admin' : 'Staff'
 }
 
+/**
+ * Component quản lý Người dùng hệ thống (User Accounts Management).
+ * Hỗ trợ các chức năng hiển thị danh sách, thêm, sửa, xóa và tìm kiếm người dùng.
+ */
 export default function UsersPage({ users, setUsers }) {
+  // Trạng thái lưu từ khóa tìm kiếm tài khoản
   const [keyword, setKeyword] = useState('')
+  // Chế độ mở modal: 'create', 'update' hoặc null
   const [modalMode, setModalMode] = useState(null)
+  // ID người dùng đang chọn để sửa
   const [selectedId, setSelectedId] = useState(null)
+  // Đối tượng người dùng đang chọn để xóa
   const [deleteTarget, setDeleteTarget] = useState(null)
+  // Dữ liệu form người dùng
   const [form, setForm] = useState(emptyForm)
+  // Thông báo lỗi validation của form
   const [formError, setFormError] = useState('')
 
+  // Lọc danh sách người dùng theo username
   const normalizedKeyword = keyword.trim().toLowerCase()
   const displayedUsers = users.filter((user) =>
     user.username.toLowerCase().includes(normalizedKeyword),
   )
 
+  /**
+   * Mở modal thêm mới người dùng và đặt lại dữ liệu form rỗng.
+   */
   const openCreate = () => {
     setModalMode('create')
     setSelectedId(null)
@@ -29,6 +47,9 @@ export default function UsersPage({ users, setUsers }) {
     setFormError('')
   }
 
+  /**
+   * Mở modal chỉnh sửa với thông tin tài khoản được chọn.
+   */
   const openUpdate = (user) => {
     setModalMode('update')
     setSelectedId(user.id)
@@ -41,12 +62,18 @@ export default function UsersPage({ users, setUsers }) {
     setFormError('')
   }
 
+  /**
+   * Đóng modal và reset trạng thái lựa chọn.
+   */
   const closeModal = () => {
     setModalMode(null)
     setSelectedId(null)
     setFormError('')
   }
 
+  /**
+   * Xử lý thay đổi dữ liệu các trường trên form người dùng.
+   */
   const handleChange = (event) => {
     const { name, value } = event.target
     setForm((current) => ({
@@ -56,15 +83,20 @@ export default function UsersPage({ users, setUsers }) {
     setFormError('')
   }
 
+  /**
+   * Xử lý lưu tài khoản (tạo mới hoặc cập nhật), kiểm tra không trùng username và không để trống.
+   */
   const handleSubmit = (event) => {
     event.preventDefault()
     const username = form.username.trim()
 
+    // Bắt buộc nhập username và password
     if (!username || !form.password) {
       setFormError('Username and password are required.')
       return
     }
 
+    // Đảm bảo username không được trùng lặp với tài khoản khác
     const duplicate = users.some(
       (user) => user.id !== selectedId && user.username.toLowerCase() === username.toLowerCase(),
     )
@@ -81,9 +113,11 @@ export default function UsersPage({ users, setUsers }) {
     }
 
     if (modalMode === 'create') {
+      // Tự sinh ID cho tài khoản mới
       const nextId = Math.max(0, ...users.map((user) => user.id)) + 1
       setUsers((current) => [...current, { id: nextId, ...userData }])
     } else {
+      // Cập nhật tài khoản được chọn
       setUsers((current) =>
         current.map((user) => user.id === selectedId ? { ...user, ...userData } : user),
       )
@@ -92,6 +126,9 @@ export default function UsersPage({ users, setUsers }) {
     closeModal()
   }
 
+  /**
+   * Xử lý xác nhận xóa tài khoản khỏi danh sách người dùng.
+   */
   const handleDelete = () => {
     setUsers((current) => current.filter((user) => user.id !== deleteTarget.id))
     setDeleteTarget(null)

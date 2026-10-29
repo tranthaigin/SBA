@@ -1,28 +1,43 @@
 import { useState } from 'react'
 
+/**
+ * Component trang đăng nhập (LoginPage) cho phép người dùng nhập thông tin xác thực.
+ * Kiểm tra dữ liệu hợp lệ và phân quyền đăng nhập vào hệ thống.
+ */
 export default function LoginPage({ onLogin }) {
+  // Trạng thái lưu trữ giá trị username và password người dùng nhập
   const [form, setForm] = useState({ username: '', password: '' })
+  // Trạng thái lưu trữ thông báo lỗi validation nếu nhập sai hoặc để trống
   const [error, setError] = useState('')
 
+  /**
+   * Xử lý thay đổi giá trị trong input và tự động xóa thông báo lỗi trước đó.
+   */
   const handleChange = (event) => {
     const { name, value } = event.target
     setForm((current) => ({ ...current, [name]: value }))
     setError('')
   }
 
+  /**
+   * Xử lý sự kiện gửi form đăng nhập, kiểm tra thông tin và gọi callback onLogin nếu đúng.
+   */
   const handleSubmit = (event) => {
     event.preventDefault()
 
+    // Kiểm tra không được để trống username hoặc password
     if (!form.username.trim() || !form.password) {
       setError('Username and password are required.')
       return
     }
 
+    // Xác thực tài khoản Admin mặc định theo yêu cầu đề bài
     if (form.username === 'Admin' && form.password === 'Admin') {
       onLogin({ username: 'Admin', role: 1 })
       return
     }
 
+    // Hiển thị thông báo khi sai thông tin đăng nhập
     setError('Incorrect username or password.')
   }
 

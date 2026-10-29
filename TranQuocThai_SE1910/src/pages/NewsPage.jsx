@@ -3,6 +3,9 @@ import ConfirmDialog from '../components/ConfirmDialog'
 import Modal from '../components/Modal'
 import StatusBadge from '../components/StatusBadge'
 
+/**
+ * Khởi tạo dữ liệu mặc định cho form tạo bài viết tin tức mới.
+ */
 function makeEmptyForm(categories, username) {
   return {
     title: '',
@@ -13,19 +16,33 @@ function makeEmptyForm(categories, username) {
   }
 }
 
+/**
+ * Component quản lý Tin tức (News Management).
+ * Hỗ trợ tìm kiếm, thêm mới, xem, sửa và xóa các bài viết tin tức kèm liên kết thể loại.
+ */
 export default function NewsPage({ categories, currentUser, news, setNews }) {
+  // Trạng thái từ khóa tìm kiếm tin tức
   const [keyword, setKeyword] = useState('')
+  // Chế độ mở modal: 'create', 'update' hoặc null (đóng)
   const [modalMode, setModalMode] = useState(null)
+  // ID bài viết đang được chọn chỉnh sửa
   const [selectedId, setSelectedId] = useState(null)
+  // Đối tượng bài viết đang chọn để xóa
   const [deleteTarget, setDeleteTarget] = useState(null)
+  // Dữ liệu binding của form nhập liệu tin tức
   const [form, setForm] = useState(() => makeEmptyForm(categories, currentUser.username))
+  // Thông báo lỗi validation của form
   const [formError, setFormError] = useState('')
 
+  // Tìm kiếm bài viết theo cả tiêu đề hoặc nội dung
   const normalizedKeyword = keyword.trim().toLowerCase()
   const displayedNews = news.filter((article) =>
     `${article.title} ${article.content}`.toLowerCase().includes(normalizedKeyword),
   )
 
+  /**
+   * Mở modal ở chế độ thêm bài viết mới và thiết lập giá trị form ban đầu.
+   */
   const openCreate = () => {
     setModalMode('create')
     setSelectedId(null)
@@ -33,6 +50,9 @@ export default function NewsPage({ categories, currentUser, news, setNews }) {
     setFormError('')
   }
 
+  /**
+   * Mở modal ở chế độ cập nhật bài viết với dữ liệu của tin tức đã chọn.
+   */
   const openUpdate = (article) => {
     setModalMode('update')
     setSelectedId(article.id)
@@ -46,12 +66,18 @@ export default function NewsPage({ categories, currentUser, news, setNews }) {
     setFormError('')
   }
 
+  /**
+   * Đóng modal và reset trạng thái lựa chọn.
+   */
   const closeModal = () => {
     setModalMode(null)
     setSelectedId(null)
     setFormError('')
   }
 
+  /**
+   * Xử lý thay đổi dữ liệu trên form nhập liệu và tự động ép kiểu số cho các trường số.
+   */
   const handleChange = (event) => {
     const { name, value } = event.target
     const numericFields = ['categoryId', 'status']
@@ -62,17 +88,22 @@ export default function NewsPage({ categories, currentUser, news, setNews }) {
     setFormError('')
   }
 
+  /**
+   * Xử lý gửi form lưu bài viết: kiểm tra các trường bắt buộc và tính tồn tại của Category.
+   */
   const handleSubmit = (event) => {
     event.preventDefault()
     const title = form.title.trim()
     const content = form.content.trim()
     const categoryExists = categories.some((category) => category.id === Number(form.categoryId))
 
+    // Bắt buộc nhập tiêu đề và nội dung bài viết
     if (!title || !content) {
       setFormError('Title and content are required.')
       return
     }
 
+    // Đảm bảo thể loại được chọn phải tồn tại trong danh sách
     if (!categoryExists) {
       setFormError('Please select a valid category.')
       return
@@ -87,9 +118,11 @@ export default function NewsPage({ categories, currentUser, news, setNews }) {
     }
 
     if (modalMode === 'create') {
+      // Tự sinh ID tiếp theo cho bài viết mới
       const nextId = Math.max(0, ...news.map((article) => article.id)) + 1
       setNews((current) => [...current, { id: nextId, ...articleData }])
     } else {
+      // Cập nhật thông tin bài viết tương ứng
       setNews((current) =>
         current.map((article) =>
           article.id === selectedId ? { ...article, ...articleData } : article,
@@ -100,6 +133,9 @@ export default function NewsPage({ categories, currentUser, news, setNews }) {
     closeModal()
   }
 
+  /**
+   * Xử lý xóa bài viết tin tức đã chọn khỏi danh sách.
+   */
   const handleDelete = () => {
     setNews((current) => current.filter((article) => article.id !== deleteTarget.id))
     setDeleteTarget(null)

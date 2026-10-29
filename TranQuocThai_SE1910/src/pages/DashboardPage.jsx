@@ -1,6 +1,11 @@
 import StatusBadge from '../components/StatusBadge'
 
+/**
+ * Component trang Tổng quan (DashboardPage).
+ * Hiển thị các chỉ số thống kê tổng hợp và danh sách các bài viết tin tức mới nhất.
+ */
 export default function DashboardPage({ categories, news, users, onNavigate }) {
+  // Cấu hình danh sách các thẻ thống kê tổng quan với dữ liệu động
   const cards = [
     { label: 'Categories', value: categories.length, page: 'categories', note: `${categories.filter((item) => item.status === 1).length} active` },
     { label: 'News articles', value: news.length, page: 'news', note: `${news.filter((item) => item.status === 1).length} active` },
