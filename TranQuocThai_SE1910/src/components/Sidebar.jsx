@@ -1,3 +1,8 @@
+/**
+ * @author Trần Quốc Thái
+ * Class: SE1910
+ * Student ID: CE190243
+ */
 // Danh sách cấu hình 5 mục menu điều hướng chính của hệ thống
 const menuItems = [
   { id: 'dashboard', label: 'Dashboard', shortLabel: 'DB' },

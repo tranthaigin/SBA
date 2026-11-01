@@ -1,4 +1,9 @@
 /**
+ * @author Trần Quốc Thái
+ * Class: SE1910
+ * Student ID: CE190243
+ */
+/**
  * Component trang Cài đặt và Hồ sơ người dùng (SettingsPage).
  * Hiển thị thông tin tài khoản hiện tại, vai trò và cơ chế lưu trữ dữ liệu của hệ thống.
  */

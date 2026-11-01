@@ -1,4 +1,9 @@
 /**
+ * @author Trần Quốc Thái
+ * Class: SE1910
+ * Student ID: CE190243
+ */
+/**
  * Dữ liệu mẫu ban đầu cho Thể loại (Categories).
  * status: 1 = Active, 0 = Inactive.
  */

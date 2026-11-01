@@ -1,3 +1,8 @@
+/**
+ * @author Trần Quốc Thái
+ * Class: SE1910
+ * Student ID: CE190243
+ */
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button, Form, Badge, Modal, Alert, Spinner } from "react-bootstrap";
 import axios from "axios";

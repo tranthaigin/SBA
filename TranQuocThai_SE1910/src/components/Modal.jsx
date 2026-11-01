@@ -1,4 +1,9 @@
 /**
+ * @author Trần Quốc Thái
+ * Class: SE1910
+ * Student ID: CE190243
+ */
+/**
  * Component Modal hộp thoại popup tái sử dụng cho các chức năng Thêm mới và Chỉnh sửa.
  * Cung cấp lớp nền mờ (backdrop), tiêu đề và nút đóng hộp thoại.
  */

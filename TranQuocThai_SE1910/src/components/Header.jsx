@@ -1,4 +1,9 @@
 /**
+ * @author Trần Quốc Thái
+ * Class: SE1910
+ * Student ID: CE190243
+ */
+/**
  * Component Header hiển thị thanh điều hướng phía trên của hệ thống.
  * Cung cấp thông tin tiêu đề trang hiện tại, tên tài khoản đăng nhập và nút Đăng xuất.
  */

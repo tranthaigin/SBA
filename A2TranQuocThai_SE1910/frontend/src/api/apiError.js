@@ -1,3 +1,8 @@
+/**
+ * @author Trần Quốc Thái
+ * Class: SE1910
+ * Student ID: CE190243
+ */
 export function getApiErrorMessage(error, fallback) {
   if (error.response?.data?.message) {
     return error.response.data.message;

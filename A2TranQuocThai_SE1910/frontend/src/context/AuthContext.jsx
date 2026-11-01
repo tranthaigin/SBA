@@ -1,3 +1,8 @@
+/**
+ * @author Trần Quốc Thái
+ * Class: SE1910
+ * Student ID: CE190243
+ */
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 

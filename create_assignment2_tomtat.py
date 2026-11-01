@@ -16,34 +16,6 @@ from generate_docs_helper import (
 )
 from generate_combined_docs import a2_steps, add_a2_matrix_table
 
-def add_bullet_item(doc, title, content, level=0):
-    """Thêm một mục gạch đầu dòng có định dạng rõ ràng, chữ to thoáng để dễ thuyết trình."""
-    p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(3)
-    p.paragraph_format.space_after = Pt(4)
-    p.paragraph_format.line_spacing = 1.15
-    if level == 1:
-        p.paragraph_format.left_indent = Inches(0.3)
-        bullet_symbol = "– "
-    else:
-        p.paragraph_format.left_indent = Inches(0.15)
-        bullet_symbol = "• "
-
-    r_bullet = p.add_run(bullet_symbol)
-    r_bullet.font.bold = True
-    r_bullet.font.size = Pt(11)
-    r_bullet.font.color.rgb = PRIMARY_COLOR if level == 0 else SECONDARY_COLOR
-
-    if title:
-        r_title = p.add_run(title + ": ")
-        r_title.font.bold = True
-        r_title.font.size = Pt(10.5)
-        r_title.font.color.rgb = DARK_TEXT
-
-    r_content = p.add_run(content)
-    r_content.font.size = Pt(10.5)
-    r_content.font.color.rgb = DARK_TEXT
-
 def build_assignment2_tomtat_doc():
     doc = Document()
     
@@ -59,8 +31,8 @@ def build_assignment2_tomtat_doc():
     # =========================================================================
     p_title = doc.add_paragraph()
     p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_title.paragraph_format.space_before = Pt(10)
-    p_title.paragraph_format.space_after = Pt(16)
+    p_title.paragraph_format.space_before = Pt(8)
+    p_title.paragraph_format.space_after = Pt(14)
     
     r_title = p_title.add_run("Assignment 2")
     r_title.font.bold = True
@@ -68,258 +40,168 @@ def build_assignment2_tomtat_doc():
     r_title.font.color.rgb = PRIMARY_COLOR
 
     # =========================================================================
-    # PHẦN 1: YÊU CẦU CỦA ĐỀ BÀI (REQUIREMENTS)
+    # 1. YÊU CẦU (REQUIREMENTS)
     # =========================================================================
-    h1 = doc.add_heading("1. Yêu cầu của đề bài (Requirements)", level=1)
-    h1.paragraph_format.space_before = Pt(8)
-    h1.paragraph_format.space_after = Pt(8)
+    h1 = doc.add_heading("1. Yêu cầu (Requirements)", level=1)
+    h1.paragraph_format.space_before = Pt(6)
+    h1.paragraph_format.space_after = Pt(6)
     for r in h1.runs:
         r.font.color.rgb = PRIMARY_COLOR
-        r.font.size = Pt(15)
+        r.font.size = Pt(14)
         r.font.bold = True
 
-    p_intro1 = doc.add_paragraph()
-    p_intro1.paragraph_format.space_after = Pt(6)
-    r_intro1 = p_intro1.add_run(
-        "Các yêu cầu chính được quy định nguyên văn theo file đề bài chính thức của Assignment 02 (FUNewsManagementSystem):"
-    )
-    r_intro1.font.italic = True
-    r_intro1.font.size = Pt(10.5)
-    r_intro1.font.color.rgb = MUTED_TEXT
+    # Bảng Requirements ngắn gọn: STT | Yêu cầu | Mô tả
+    tbl_req = doc.add_table(rows=1, cols=3)
+    tbl_req.alignment = WD_TABLE_ALIGNMENT.CENTER
+    tbl_req.autofit = False
+    headers_req = ["STT", "Yêu cầu", "Mô tả"]
+    col_w_req = [Inches(0.6), Inches(2.2), Inches(4.2)]
 
-    # 1. Public
-    add_bullet_item(
-        doc,
-        "Độc giả công khai (Public News Access)",
-        "Độc giả vãng lai không cần đăng nhập vẫn được phép truy cập danh sách tin tức ở trạng thái kích hoạt (News status = Active/1), tìm kiếm bài viết theo từ khóa và mở xem toàn văn nội dung chi tiết bài báo."
-    )
+    for j, h_text in enumerate(headers_req):
+        c = tbl_req.rows[0].cells[j]
+        c.width = col_w_req[j]
+        set_cell_background(c, "1E3A8A")
+        set_cell_margins(c, 50, 50, 80, 80)
+        p = c.paragraphs[0]
+        r = p.add_run(h_text)
+        r.font.bold = True
+        r.font.size = Pt(9.5)
+        r.font.color.rgb = RGBColor(255, 255, 255)
 
-    # 2. Authentication
-    add_bullet_item(
-        doc,
-        "Xác thực & Phân quyền (Authentication & Authorization)",
-        "Thành viên (Staff) và Quản trị viên (Admin) đăng nhập hệ thống bằng Email và Password. Phân quyền theo 2 vai trò: Admin (Role = 1) và Staff (Role = 2). Phiên làm việc được quản lý bằng HttpSession, hỗ trợ đăng xuất an toàn."
-    )
+    requirements_data = [
+        ("1", "Public News", "Đọc, tìm kiếm và xem chi tiết bài viết Active không cần đăng nhập."),
+        ("2", "Login & Authentication", "Đăng nhập bằng Email và Password, phân quyền Staff (role 2) và Admin (role 1)."),
+        ("3", "Category Management", "Thêm, sửa, xóa, tìm kiếm danh mục; chặn xóa khi đang có bài viết."),
+        ("4", "News Management", "Thêm, sửa, xóa, tìm kiếm tin tức; gắn nhiều Thẻ Tags (Many-to-Many)."),
+        ("5", "Staff Profile", "Xem và cập nhật thông tin cá nhân (họ tên, email, đổi mật khẩu)."),
+        ("6", "My News History", "Xem lại toàn bộ danh sách các bài viết do chính mình xuất bản."),
+        ("7", "User Management", "Thêm, sửa, xóa, tìm kiếm tài khoản người dùng hệ thống; chặn xóa khi đã tạo bài viết."),
+        ("8", "Validation", "Kiểm tra dữ liệu đầu vào, thông báo lỗi, chống trùng Email và xác nhận trước khi xóa."),
+        ("9", "3-Layer Architecture", "Xây dựng Backend Spring Boot 3 + JPA + SQL Server và React Client."),
+    ]
 
-    # 3. Category
-    add_bullet_item(
-        doc,
-        "Quản lý Thể loại (Category Management - Dành cho Staff)",
-        "Nhân viên Staff thực hiện đầy đủ các thao tác CRUD (Xem danh sách, Thêm mới, Chỉnh sửa, Xóa) và Tìm kiếm thể loại theo tên. Hỗ trợ các thông tin: ID, Name, Description, Parent Category ID, Status (Active/Inactive)."
-    )
-    add_bullet_item(
-        doc,
-        "Ràng buộc nghiệp vụ Thể loại (Category Rule)",
-        "Chặn tuyệt đối việc xóa Thể loại nếu thể loại đó đang có bất kỳ bài viết tin tức nào liên kết (cannot delete if associated with existing news articles). Chỉ được xóa khi thể loại rỗng chưa có bài báo.",
-        level=1
-    )
+    for req_row in requirements_data:
+        row = tbl_req.add_row()
+        for c_idx, val in enumerate(req_row):
+            cell = row.cells[c_idx]
+            cell.width = col_w_req[c_idx]
+            set_cell_background(cell, "F8FAFC" if c_idx == 0 else "FFFFFF")
+            set_cell_margins(cell, 45, 45, 75, 75)
+            p = cell.paragraphs[0]
+            r = p.add_run(val)
+            r.font.size = Pt(9)
+            if c_idx == 0:
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                r.font.bold = True
+                r.font.color.rgb = PRIMARY_COLOR
+            elif c_idx == 1:
+                r.font.bold = True
+                r.font.color.rgb = DARK_TEXT
 
-    # 4. News
-    add_bullet_item(
-        doc,
-        "Quản lý Tin tức (News Article Management - Dành cho Staff)",
-        "Nhân viên Staff thực hiện CRUD (Đọc, Thêm mới, Chỉnh sửa, Xóa) và Tìm kiếm bài viết tin tức. Mỗi bài viết gồm: Title, Headline, Content, Category, Nguồn tin (News Source), Trạng thái (Active/Inactive)."
-    )
-    add_bullet_item(
-        doc,
-        "Quản lý Thẻ phân loại (Tags & Many-to-Many)",
-        "Một bài viết có thể gắn nhiều Thẻ Tags và một Thẻ có thể thuộc về nhiều bài viết (quan hệ Nhiều - Nhiều). Giao diện cho phép chọn linh hoạt nhiều Tags dạng nút bấm trực quan khi tạo hoặc chỉnh sửa bài viết.",
-        level=1
-    )
-    add_bullet_item(
-        doc,
-        "Tự động lưu vết tác giả & thời gian (Audit Metadata)",
-        "Tự động trích xuất thông tin nhân viên đăng nhập từ Session gán làm Tác giả (createdBy); tự động ghi nhận thời gian tạo (createdDate) và cập nhật thời gian sửa đổi (modifiedDate = LocalDateTime.now()).",
-        level=1
-    )
-
-    # 5. Profile & History
-    add_bullet_item(
-        doc,
-        "Hồ sơ cá nhân & Lịch sử bài viết (Staff Profile & History)",
-        "Nhân viên Staff được cung cấp 2 màn hình chuyên trách:"
-    )
-    add_bullet_item(
-        doc,
-        "My Profile",
-        "Xem và chỉnh sửa thông tin hồ sơ của chính mình (Họ và tên, Email) và cho phép đổi mật khẩu mới thuận tiện, an toàn.",
-        level=1
-    )
-    add_bullet_item(
-        doc,
-        "My News History",
-        "Xem lại toàn bộ danh sách các bài viết do chính tài khoản của mình tạo ra theo thứ tự thời gian xuất bản giảm dần.",
-        level=1
-    )
-
-    # 6. Account
-    add_bullet_item(
-        doc,
-        "Quản lý Tài khoản người dùng (Account Management - Dành cho Admin)",
-        "Quản trị viên Admin thực hiện CRUD (Xem danh sách, Thêm mới, Chỉnh sửa, Xóa) và Tìm kiếm tài khoản người dùng hệ thống. Cấp phát tài khoản mới, phân quyền vai trò Staff (Role 2) hoặc Admin (Role 1)."
-    )
-    add_bullet_item(
-        doc,
-        "Ràng buộc nghiệp vụ Tài khoản (Account Rule)",
-        "Chặn tuyệt đối việc xóa Tài khoản người dùng nếu tài khoản đó đã từng tạo bất kỳ bài viết tin tức nào trong hệ thống, nhằm bảo vệ toàn vẹn lịch sử tác giả bài báo.",
-        level=1
-    )
-    add_bullet_item(
-        doc,
-        "Chống trùng lặp Email (Email Validation)",
-        "Kiểm tra tính duy nhất của Email khi tạo hoặc sửa tài khoản: Tuyệt đối không cho phép tạo tài khoản có Email đã tồn tại trong database.",
-        level=1
-    )
-
-    # 7. UI / UX
-    add_bullet_item(
-        doc,
-        "Quy định về Giao diện & Trải nghiệm (UI / UX)",
-        "Mọi thao tác Thêm mới (Create) và Chỉnh sửa (Update) bắt buộc phải thực hiện thông qua Popup Dialog / Modal. Mọi thao tác Xóa (Delete) bắt buộc phải đi kèm hộp thoại xác nhận (Confirm Dialog) trước khi thực thi."
-    )
-
-    # 8. Architecture
-    add_bullet_item(
-        doc,
-        "Quy định về Kiến trúc hệ thống (3-Layer Architecture & REST API)",
-        "Backend triển khai mô hình 3 lớp chuẩn mực (Controller - Service - Repository) bằng Spring Boot 3 + Spring Data JPA kết nối cơ sở dữ liệu thật MS SQL Server. Frontend phát triển bằng ReactJS gọi RESTful API qua Axios Client."
-    )
-
-    doc.add_paragraph().paragraph_format.space_after = Pt(12)
+    doc.add_paragraph().paragraph_format.space_after = Pt(10)
 
     # =========================================================================
-    # PHẦN 2: GIẢI PHÁP ĐỀ XUẤT (PROPOSED SOLUTION) VÀ Ý NGHĨA CỦA DỰ ÁN
+    # 2. GIẢI PHÁP (PROPOSED SOLUTION) VÀ Ý NGHĨA DỰ ÁN
     # =========================================================================
-    h2 = doc.add_heading("2. Giải pháp kỹ thuật và Ý nghĩa của dự án", level=1)
-    h2.paragraph_format.space_before = Pt(8)
-    h2.paragraph_format.space_after = Pt(8)
+    h2 = doc.add_heading("2. Giải pháp (Proposed Solution)", level=1)
+    h2.paragraph_format.space_before = Pt(6)
+    h2.paragraph_format.space_after = Pt(6)
     for r in h2.runs:
         r.font.color.rgb = PRIMARY_COLOR
-        r.font.size = Pt(15)
+        r.font.size = Pt(14)
         r.font.bold = True
 
-    # 2.1 Giải pháp kỹ thuật đã triển khai
-    h2_1 = doc.add_heading("2.1. Giải pháp kỹ thuật đã triển khai (Proposed Solution)", level=2)
-    h2_1.paragraph_format.space_before = Pt(6)
-    h2_1.paragraph_format.space_after = Pt(6)
-    for r in h2_1.runs:
+    # Bảng Giải pháp ngắn gọn: Thành phần | Giải pháp
+    tbl_sol = doc.add_table(rows=1, cols=2)
+    tbl_sol.alignment = WD_TABLE_ALIGNMENT.CENTER
+    tbl_sol.autofit = False
+    headers_sol = ["Thành phần", "Giải pháp"]
+    col_w_sol = [Inches(2.2), Inches(4.8)]
+
+    for j, h_text in enumerate(headers_sol):
+        c = tbl_sol.rows[0].cells[j]
+        c.width = col_w_sol[j]
+        set_cell_background(c, "1E3A8A")
+        set_cell_margins(c, 50, 50, 80, 80)
+        p = c.paragraphs[0]
+        r = p.add_run(h_text)
+        r.font.bold = True
+        r.font.size = Pt(9.5)
+        r.font.color.rgb = RGBColor(255, 255, 255)
+
+    solutions_data = [
+        ("Frontend", "ReactJS + Vite"),
+        ("Backend", "Spring Boot 3 (Java 21) kiến trúc 3 lớp (Controller - Service - Repository)."),
+        ("Database", "Microsoft SQL Server, kết nối qua official JDBC Driver."),
+        ("ORM & Storage", "Spring Data JPA & Hibernate, quản lý bảng liên kết NewsTag và tự sinh khóa."),
+        ("UI", "React-Bootstrap + Bootstrap 5 tùy biến, giao diện responsive."),
+        ("Authentication", "Session-Based Auth qua HttpSession + HandlerInterceptor kiểm tra role."),
+        ("API Communication", "Axios Client (withCredentials: true) + Vite Reverse Proxy cổng 8082."),
+        ("Routing", "React Router DOM v6 để chuyển trang."),
+        ("State Management", "React Context API (AuthContext) + useState, useEffect."),
+        ("CRUD", "Xây dựng chức năng Create, Read, Update, Delete."),
+        ("Search", "Lọc dữ liệu theo từ khóa (kết hợp Backend JPA query và Client-side filter)."),
+        ("Form", "Popup Modal để thêm và chỉnh sửa."),
+        ("Validation", "Kiểm tra trường bắt buộc, chống trùng Email và xác nhận trước khi xóa."),
+    ]
+
+    for sol_row in solutions_data:
+        row = tbl_sol.add_row()
+        for c_idx, val in enumerate(sol_row):
+            cell = row.cells[c_idx]
+            cell.width = col_w_sol[c_idx]
+            set_cell_background(cell, "F8FAFC" if c_idx == 0 else "FFFFFF")
+            set_cell_margins(cell, 45, 45, 75, 75)
+            p = cell.paragraphs[0]
+            r = p.add_run(val)
+            r.font.size = Pt(9)
+            if c_idx == 0:
+                r.font.bold = True
+                r.font.color.rgb = PRIMARY_COLOR
+            else:
+                r.font.color.rgb = DARK_TEXT
+
+    doc.add_paragraph().paragraph_format.space_after = Pt(10)
+
+    # Mục Ý nghĩa của dự án (ngắn gọn, súc tích)
+    h2_sig = doc.add_heading("Ý nghĩa của dự án (Project Significance)", level=2)
+    h2_sig.paragraph_format.space_before = Pt(6)
+    h2_sig.paragraph_format.space_after = Pt(4)
+    for r in h2_sig.runs:
         r.font.color.rgb = SECONDARY_COLOR
-        r.font.size = Pt(13)
+        r.font.size = Pt(12)
         r.font.bold = True
 
-    add_bullet_item(
-        doc,
-        "Kiến trúc Backend 3 lớp (3-Tier Enterprise)",
-        "Xây dựng bằng Spring Boot 3 (Java 21) theo mô hình 3 lớp chuẩn mực: Controller (tiếp nhận HTTP REST API) -> Service (xử lý logic nghiệp vụ và ràng buộc) -> Repository (truy xuất cơ sở dữ liệu)."
-    )
-    add_bullet_item(
-        doc,
-        "Cơ sở dữ liệu & ORM",
-        "Sử dụng Microsoft SQL Server (database: A2TranQuocThai_SE1910) kết nối qua official JDBC Driver. Dùng Spring Data JPA và Hibernate ORM để tự động ánh xạ các Entity (Category, NewsArticle, SystemAccount, Tag) và bảng liên kết trung gian NewsTag; tự sinh khóa chính."
-    )
-    add_bullet_item(
-        doc,
-        "Kiến trúc Frontend & Giao diện",
-        "Xây dựng Single Page Application (SPA) bằng ReactJS 19 và công cụ build Vite. Sử dụng React-Bootstrap kết hợp tùy biến Bootstrap 5 hiện đại, giao diện responsive mượt mà trên mọi kích thước màn hình."
-    )
-    add_bullet_item(
-        doc,
-        "Xác thực & Bảo mật (Security & Session)",
-        "Áp dụng cơ chế Session-Based Authentication qua HttpSession. Đăng ký HandlerInterceptor (AccessConfig.java) tự động kiểm tra phiên đăng nhập và phân quyền mã vai trò (Role 1 cho Admin, Role 2 cho Staff) cho toàn bộ route /api/**."
-    )
-    add_bullet_item(
-        doc,
-        "Giao tiếp API & Reverse Proxy",
-        "Axios Client (axiosClient.js) cấu hình withCredentials: true để đồng bộ Cookie Session an toàn. Thiết lập Reverse Proxy trong vite.config.js chuyển tiếp các request /api sang cổng backend http://localhost:8082, giải quyết triệt để lỗi CORS."
-    )
-    add_bullet_item(
-        doc,
-        "Quản lý Trạng thái & Điều hướng",
-        "Dùng React Context API (AuthContext) lưu trữ trạng thái người dùng đăng nhập toàn cục; kết hợp useState và useEffect quản lý form và tải dữ liệu. React Router DOM v6 điều hướng trang không reload, bảo vệ các Private Routes theo đúng vai trò."
-    )
-    add_bullet_item(
-        doc,
-        "Biểu mẫu Modal & Hộp thoại xác nhận",
-        "Sử dụng Modal Popup của React-Bootstrap cho tất cả form Thêm mới và Chỉnh sửa (Category, News, Account). Sử dụng hộp thoại Confirm xác nhận an toàn trước khi xóa bất kỳ dữ liệu nào."
-    )
-    add_bullet_item(
-        doc,
-        "Tìm kiếm dữ liệu đa trường",
-        "Kết hợp tìm kiếm đa trường ở Backend với các query Spring Data JPA (ContainingIgnoreCase) và bộ lọc Client-Side tức thì cho trang độc giả công khai."
-    )
-    add_bullet_item(
-        doc,
-        "Xử lý Ngoại lệ tập trung & Ràng buộc toàn vẹn",
-        "Dùng @RestControllerAdvice (ApiExceptionHandler) bắt BusinessRuleViolationException và ResourceNotFoundException, trả về mã lỗi HTTP 400/404 JSON chuẩn REST. Tầng Service kiểm tra existsByCategory, existsByCreatedById, và findByAccountEmail trước khi ghi dữ liệu."
+    p_sig = doc.add_paragraph()
+    p_sig.paragraph_format.space_before = Pt(2)
+    p_sig.paragraph_format.space_after = Pt(4)
+    p_sig.paragraph_format.line_spacing = 1.15
+    
+    r_sig_biz = p_sig.add_run("• Về mặt nghiệp vụ: ")
+    r_sig_biz.font.bold = True
+    r_sig_biz.font.color.rgb = DARK_TEXT
+    r_sig_biz.font.size = Pt(10)
+    p_sig.add_run(
+        "Số hóa toàn bộ quy trình biên tập và xuất bản tin tức nội bộ trường đại học (FUNews); "
+        "phân quyền minh bạch giữa Độc giả, Biên tập viên (Staff) và Quản trị viên (Admin); "
+        "bảo toàn dữ liệu lịch sử xuất bản và loại bỏ hoàn toàn nguy cơ dữ liệu mồ côi (orphan records).\n"
     )
 
-    # 2.2 Ý nghĩa của dự án
-    h2_2 = doc.add_heading("2.2. Ý nghĩa của dự án (Project Significance)", level=2)
-    h2_2.paragraph_format.space_before = Pt(8)
-    h2_2.paragraph_format.space_after = Pt(6)
-    for r in h2_2.runs:
-        r.font.color.rgb = SECONDARY_COLOR
-        r.font.size = Pt(13)
-        r.font.bold = True
-
-    add_bullet_item(
-        doc,
-        "a) Ý nghĩa về mặt nghiệp vụ & thực tiễn (Business & Real-World Value)",
-        ""
-    )
-    add_bullet_item(
-        doc,
-        "Số hóa tòa soạn tin tức đại học",
-        "Cung cấp giải pháp phần mềm toàn diện giúp các trường đại học (hệ thống FUNews) chuyên nghiệp hóa quy trình biên tập, gắn thẻ chủ đề, phân loại chuyên mục và xuất bản tin tức chính thống đến sinh viên, cán bộ giảng viên.",
-        level=1
-    )
-    add_bullet_item(
-        doc,
-        "Phân định quyền hạn minh bạch, an toàn",
-        "Tách bạch rõ ràng quyền hạn giữa Độc giả (chỉ đọc tin active), Biên tập viên (Staff - toàn quyền sáng tạo nội dung, chọn thẻ tags và theo dõi lịch sử bài viết của chính mình) và Quản trị viên (Admin - kiểm soát tài khoản toàn hệ thống).",
-        level=1
-    )
-    add_bullet_item(
-        doc,
-        "Bảo toàn dữ liệu lịch sử xuất bản",
-        "Các quy tắc nghiệp vụ khắt khe (chặn xóa danh mục đang có bài viết, chặn xóa tác giả đã từng tạo tin) giúp lưu trữ trọn vẹn dấu vết lịch sử, loại bỏ hoàn toàn nguy cơ dữ liệu mồ côi (orphan records) trong cơ sở dữ liệu.",
-        level=1
-    )
-
-    add_bullet_item(
-        doc,
-        "b) Ý nghĩa về mặt kỹ thuật & học thuật phần mềm (Technical & Educational Value)",
-        ""
-    )
-    add_bullet_item(
-        doc,
-        "Thực hành chuẩn mực kiến trúc doanh nghiệp",
-        "Giúp người học làm chủ mô hình 3 lớp (3-Tier Enterprise Architecture) - nền tảng thiết yếu cho các hệ thống phần mềm quy mô lớn trong thực tế.",
-        level=1
-    )
-    add_bullet_item(
-        doc,
-        "Làm chủ công nghệ Fullstack tích hợp",
-        "Kết nối thành công Backend Java Spring Boot 3 mạnh mẽ với Frontend ReactJS hiện đại qua RESTful API, giải quyết các bài toán CORS và Session Cookie.",
-        level=1
-    )
-    add_bullet_item(
-        doc,
-        "Vận dụng sâu sắc ORM & quan hệ dữ liệu",
-        "Hiểu rõ và làm chủ các mối quan hệ thực thể phức tạp trong thực tế (One-to-Many giữa Category/Author và News, Many-to-Many giữa News và Tag qua bảng trung gian).",
-        level=1
-    )
-    add_bullet_item(
-        doc,
-        "Rèn luyện tư duy lập trình chuyên nghiệp",
-        "Hình thành tư duy kiểm soát ngoại lệ tập trung (Global Exception Handling), xác thực dữ liệu chặt chẽ từ tầng gốc và xây dựng trải nghiệm người dùng (UX) nhất quán.",
-        level=1
+    r_sig_tech = p_sig.add_run("• Về mặt kỹ thuật: ")
+    r_sig_tech.font.bold = True
+    r_sig_tech.font.color.rgb = DARK_TEXT
+    r_sig_tech.font.size = Pt(10)
+    p_sig.add_run(
+        "Làm chủ kiến trúc doanh nghiệp 3 lớp (3-Tier Enterprise); "
+        "tích hợp hệ thống Fullstack hoàn chỉnh giữa Spring Boot 3 RESTful API và ReactJS; "
+        "vận dụng sâu sắc ORM (quan hệ One-to-Many và Many-to-Many qua Spring Data JPA); "
+        "chuẩn hóa xử lý ngoại lệ tập trung và tối ưu trải nghiệm người dùng với Popup Modal và Confirm Dialog."
     )
 
     doc.add_paragraph().paragraph_format.space_after = Pt(12)
 
     # =========================================================================
-    # PHẦN 3: KẾT QUẢ KIỂM THỬ GIAO DIỆN VÀ MINH CHỨNG CHỨC NĂNG (33 BƯỚC)
+    # 3. KẾT QUẢ KIỂM THỬ GIAO DIỆN VÀ MINH CHỨNG CHỨC NĂNG (33 BƯỚC)
     # =========================================================================
     doc.add_page_break()
     h3 = doc.add_heading("3. Kết quả kiểm thử giao diện & Minh chứng chức năng (33 Bước)", level=1)
@@ -327,7 +209,7 @@ def build_assignment2_tomtat_doc():
     h3.paragraph_format.space_after = Pt(8)
     for r in h3.runs:
         r.font.color.rgb = PRIMARY_COLOR
-        r.font.size = Pt(15)
+        r.font.size = Pt(14)
         r.font.bold = True
 
     add_callout(
@@ -345,7 +227,7 @@ def build_assignment2_tomtat_doc():
         add_summary_step(doc, item[0], item[1], item[6])
 
     # =========================================================================
-    # PHẦN 4: BẢNG TỔNG KẾT MA TRẬN YÊU CẦU VÀ KIỂM THỬ (TEST MATRIX)
+    # 4. BẢNG TỔNG KẾT MA TRẬN YÊU CẦU VÀ KIỂM THỬ (TEST MATRIX)
     # =========================================================================
     doc.add_page_break()
     h4 = doc.add_heading("4. Bảng tổng kết Ma trận yêu cầu và kiểm thử Assignment 02 (Test Matrix)", level=1)
@@ -353,7 +235,7 @@ def build_assignment2_tomtat_doc():
     h4.paragraph_format.space_after = Pt(8)
     for r in h4.runs:
         r.font.color.rgb = PRIMARY_COLOR
-        r.font.size = Pt(15)
+        r.font.size = Pt(14)
         r.font.bold = True
 
     p_mat_intro = doc.add_paragraph()
@@ -364,14 +246,19 @@ def build_assignment2_tomtat_doc():
 
     add_a2_matrix_table(doc)
 
-    # Lưu tài liệu ra cả 2 nơi: noteTT/assignment2-tomtat.docx và assignment2-tomtat.docx
-    out_file1 = os.path.abspath("noteTT/assignment2-tomtat.docx")
-    doc.save(out_file1)
-    print(f"File 1 created successfully at: {out_file1}")
-
     out_file2 = os.path.abspath("assignment2-tomtat.docx")
     doc.save(out_file2)
-    print(f"File 2 created successfully at: {out_file2}")
+    print(f"File created successfully at: {out_file2}")
+
+    try:
+        out_file1 = os.path.abspath("noteTT/assignment2-tomtat.docx")
+        doc.save(out_file1)
+        print(f"File in noteTT updated successfully at: {out_file1}")
+    except PermissionError:
+        print("noteTT/assignment2-tomtat.docx is currently open in Word.")
+        out_file1_alt = os.path.abspath("noteTT/assignment2-tomtat_updated.docx")
+        doc.save(out_file1_alt)
+        print(f"Saved copy to: {out_file1_alt}")
 
 if __name__ == "__main__":
     build_assignment2_tomtat_doc()

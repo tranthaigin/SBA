@@ -1,4 +1,9 @@
 /**
+ * @author Trần Quốc Thái
+ * Class: SE1910
+ * Student ID: CE190243
+ */
+/**
  * Component StatusBadge hiển thị huy hiệu trạng thái (Active / Inactive) với màu sắc trực quan.
  */
 export default function StatusBadge({ status }) {

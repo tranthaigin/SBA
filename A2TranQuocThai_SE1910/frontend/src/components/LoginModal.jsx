@@ -1,3 +1,8 @@
+/**
+ * @author Trần Quốc Thái
+ * Class: SE1910
+ * Student ID: CE190243
+ */
 import { useState } from "react";
 import { Modal, Button, Form, Alert } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
