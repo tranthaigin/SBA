@@ -4,17 +4,37 @@ import docx
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_TABLE_ALIGNMENT
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 from generate_docs_helper import (
-    set_cell_background, set_cell_margins,
     add_callout, add_summary_step,
-    PRIMARY_COLOR, SECONDARY_COLOR, ACCENT_COLOR, DARK_TEXT, MUTED_TEXT, SUCCESS_COLOR
+    PRIMARY_COLOR, SECONDARY_COLOR, DARK_TEXT, SUCCESS_COLOR
 )
 from generate_combined_docs import a2_steps, add_a2_matrix_table
+
+def add_dash_item(doc, label, description):
+    """Thêm một dòng dạng gạch đầu dòng '- label: description', hoàn toàn không kẻ bảng."""
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(2)
+    p.paragraph_format.space_after = Pt(3)
+    p.paragraph_format.line_spacing = 1.15
+    p.paragraph_format.left_indent = Inches(0.2)
+
+    r_dash = p.add_run("- ")
+    r_dash.font.bold = True
+    r_dash.font.size = Pt(10.5)
+    r_dash.font.color.rgb = PRIMARY_COLOR
+
+    r_label = p.add_run(label + ": ")
+    r_label.font.bold = True
+    r_label.font.size = Pt(10.5)
+    r_label.font.color.rgb = DARK_TEXT
+
+    r_desc = p.add_run(description)
+    r_desc.font.size = Pt(10.5)
+    r_desc.font.color.rgb = DARK_TEXT
 
 def build_assignment2_tomtat_doc():
     doc = Document()
@@ -40,7 +60,7 @@ def build_assignment2_tomtat_doc():
     r_title.font.color.rgb = PRIMARY_COLOR
 
     # =========================================================================
-    # 1. YÊU CẦU (REQUIREMENTS)
+    # 1. YÊU CẦU (REQUIREMENTS) - DẠNG GẠCH ĐẦU DÒNG, TUYỆT ĐỐI KHÔNG KẺ BẢNG
     # =========================================================================
     h1 = doc.add_heading("1. Yêu cầu (Requirements)", level=1)
     h1.paragraph_format.space_before = Pt(6)
@@ -50,58 +70,25 @@ def build_assignment2_tomtat_doc():
         r.font.size = Pt(14)
         r.font.bold = True
 
-    # Bảng Requirements ngắn gọn: STT | Yêu cầu | Mô tả
-    tbl_req = doc.add_table(rows=1, cols=3)
-    tbl_req.alignment = WD_TABLE_ALIGNMENT.CENTER
-    tbl_req.autofit = False
-    headers_req = ["STT", "Yêu cầu", "Mô tả"]
-    col_w_req = [Inches(0.6), Inches(2.2), Inches(4.2)]
-
-    for j, h_text in enumerate(headers_req):
-        c = tbl_req.rows[0].cells[j]
-        c.width = col_w_req[j]
-        set_cell_background(c, "1E3A8A")
-        set_cell_margins(c, 50, 50, 80, 80)
-        p = c.paragraphs[0]
-        r = p.add_run(h_text)
-        r.font.bold = True
-        r.font.size = Pt(9.5)
-        r.font.color.rgb = RGBColor(255, 255, 255)
-
-    requirements_data = [
-        ("1", "Public News", "Đọc, tìm kiếm và xem chi tiết bài viết Active không cần đăng nhập."),
-        ("2", "Login & Authentication", "Đăng nhập bằng Email và Password, phân quyền Staff (role 2) và Admin (role 1)."),
-        ("3", "Category Management", "Thêm, sửa, xóa, tìm kiếm danh mục; chặn xóa khi đang có bài viết."),
-        ("4", "News Management", "Thêm, sửa, xóa, tìm kiếm tin tức; gắn nhiều Thẻ Tags (Many-to-Many)."),
-        ("5", "Staff Profile", "Xem và cập nhật thông tin cá nhân (họ tên, email, đổi mật khẩu)."),
-        ("6", "My News History", "Xem lại toàn bộ danh sách các bài viết do chính mình xuất bản."),
-        ("7", "User Management", "Thêm, sửa, xóa, tìm kiếm tài khoản người dùng hệ thống; chặn xóa khi đã tạo bài viết."),
-        ("8", "Validation", "Kiểm tra dữ liệu đầu vào, thông báo lỗi, chống trùng Email và xác nhận trước khi xóa."),
-        ("9", "3-Layer Architecture", "Xây dựng Backend Spring Boot 3 + JPA + SQL Server và React Client."),
+    requirements = [
+        ("Yêu cầu 1 (Public News)", "Đọc, tìm kiếm và xem chi tiết bài viết Active không cần đăng nhập."),
+        ("Yêu cầu 2 (Login & Authentication)", "Đăng nhập bằng Email và Password, phân quyền Staff (role 2) và Admin (role 1)."),
+        ("Yêu cầu 3 (Category Management)", "Thêm, sửa, xóa, tìm kiếm danh mục; chặn xóa khi đang có bài viết liên kết."),
+        ("Yêu cầu 4 (News Management)", "Thêm, sửa, xóa, tìm kiếm tin tức; gắn nhiều Thẻ Tags (Many-to-Many)."),
+        ("Yêu cầu 5 (Staff Profile)", "Xem và cập nhật thông tin cá nhân (họ tên, email, đổi mật khẩu)."),
+        ("Yêu cầu 6 (My News History)", "Xem lại toàn bộ danh sách các bài viết do chính mình xuất bản."),
+        ("Yêu cầu 7 (User Management)", "Thêm, sửa, xóa, tìm kiếm tài khoản người dùng hệ thống; chặn xóa khi đã tạo bài viết."),
+        ("Yêu cầu 8 (Validation)", "Kiểm tra dữ liệu đầu vào, thông báo lỗi, chống trùng Email và xác nhận trước khi xóa."),
+        ("Yêu cầu 9 (3-Layer Architecture)", "Xây dựng Backend Spring Boot 3 + JPA + SQL Server và React Client."),
     ]
 
-    for req_row in requirements_data:
-        row = tbl_req.add_row()
-        for c_idx, val in enumerate(req_row):
-            cell = row.cells[c_idx]
-            cell.width = col_w_req[c_idx]
-            set_cell_background(cell, "F8FAFC" if c_idx == 0 else "FFFFFF")
-            set_cell_margins(cell, 45, 45, 75, 75)
-            p = cell.paragraphs[0]
-            r = p.add_run(val)
-            r.font.size = Pt(9)
-            if c_idx == 0:
-                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                r.font.bold = True
-                r.font.color.rgb = PRIMARY_COLOR
-            elif c_idx == 1:
-                r.font.bold = True
-                r.font.color.rgb = DARK_TEXT
+    for label, desc in requirements:
+        add_dash_item(doc, label, desc)
 
-    doc.add_paragraph().paragraph_format.space_after = Pt(10)
+    doc.add_paragraph().paragraph_format.space_after = Pt(8)
 
     # =========================================================================
-    # 2. GIẢI PHÁP (PROPOSED SOLUTION) VÀ Ý NGHĨA DỰ ÁN
+    # 2. GIẢI PHÁP (PROPOSED SOLUTION) - DẠNG GẠCH ĐẦU DÒNG, TUYỆT ĐỐI KHÔNG KẺ BẢNG
     # =========================================================================
     h2 = doc.add_heading("2. Giải pháp (Proposed Solution)", level=1)
     h2.paragraph_format.space_before = Pt(6)
@@ -111,25 +98,7 @@ def build_assignment2_tomtat_doc():
         r.font.size = Pt(14)
         r.font.bold = True
 
-    # Bảng Giải pháp ngắn gọn: Thành phần | Giải pháp
-    tbl_sol = doc.add_table(rows=1, cols=2)
-    tbl_sol.alignment = WD_TABLE_ALIGNMENT.CENTER
-    tbl_sol.autofit = False
-    headers_sol = ["Thành phần", "Giải pháp"]
-    col_w_sol = [Inches(2.2), Inches(4.8)]
-
-    for j, h_text in enumerate(headers_sol):
-        c = tbl_sol.rows[0].cells[j]
-        c.width = col_w_sol[j]
-        set_cell_background(c, "1E3A8A")
-        set_cell_margins(c, 50, 50, 80, 80)
-        p = c.paragraphs[0]
-        r = p.add_run(h_text)
-        r.font.bold = True
-        r.font.size = Pt(9.5)
-        r.font.color.rgb = RGBColor(255, 255, 255)
-
-    solutions_data = [
+    solutions = [
         ("Frontend", "ReactJS + Vite"),
         ("Backend", "Spring Boot 3 (Java 21) kiến trúc 3 lớp (Controller - Service - Repository)."),
         ("Database", "Microsoft SQL Server, kết nối qua official JDBC Driver."),
@@ -145,25 +114,12 @@ def build_assignment2_tomtat_doc():
         ("Validation", "Kiểm tra trường bắt buộc, chống trùng Email và xác nhận trước khi xóa."),
     ]
 
-    for sol_row in solutions_data:
-        row = tbl_sol.add_row()
-        for c_idx, val in enumerate(sol_row):
-            cell = row.cells[c_idx]
-            cell.width = col_w_sol[c_idx]
-            set_cell_background(cell, "F8FAFC" if c_idx == 0 else "FFFFFF")
-            set_cell_margins(cell, 45, 45, 75, 75)
-            p = cell.paragraphs[0]
-            r = p.add_run(val)
-            r.font.size = Pt(9)
-            if c_idx == 0:
-                r.font.bold = True
-                r.font.color.rgb = PRIMARY_COLOR
-            else:
-                r.font.color.rgb = DARK_TEXT
+    for label, desc in solutions:
+        add_dash_item(doc, label, desc)
 
-    doc.add_paragraph().paragraph_format.space_after = Pt(10)
+    doc.add_paragraph().paragraph_format.space_after = Pt(6)
 
-    # Mục Ý nghĩa của dự án (ngắn gọn, súc tích)
+    # Ý nghĩa của dự án (dạng gạch đầu dòng, không kẻ bảng)
     h2_sig = doc.add_heading("Ý nghĩa của dự án (Project Significance)", level=2)
     h2_sig.paragraph_format.space_before = Pt(6)
     h2_sig.paragraph_format.space_after = Pt(4)
@@ -172,30 +128,15 @@ def build_assignment2_tomtat_doc():
         r.font.size = Pt(12)
         r.font.bold = True
 
-    p_sig = doc.add_paragraph()
-    p_sig.paragraph_format.space_before = Pt(2)
-    p_sig.paragraph_format.space_after = Pt(4)
-    p_sig.paragraph_format.line_spacing = 1.15
-    
-    r_sig_biz = p_sig.add_run("• Về mặt nghiệp vụ: ")
-    r_sig_biz.font.bold = True
-    r_sig_biz.font.color.rgb = DARK_TEXT
-    r_sig_biz.font.size = Pt(10)
-    p_sig.add_run(
-        "Số hóa toàn bộ quy trình biên tập và xuất bản tin tức nội bộ trường đại học (FUNews); "
-        "phân quyền minh bạch giữa Độc giả, Biên tập viên (Staff) và Quản trị viên (Admin); "
-        "bảo toàn dữ liệu lịch sử xuất bản và loại bỏ hoàn toàn nguy cơ dữ liệu mồ côi (orphan records).\n"
+    add_dash_item(
+        doc,
+        "Về mặt nghiệp vụ",
+        "Số hóa toàn bộ quy trình biên tập và xuất bản tin tức nội bộ trường đại học (FUNews); phân quyền minh bạch giữa Độc giả, Biên tập viên (Staff) và Quản trị viên (Admin); bảo toàn dữ liệu lịch sử xuất bản và loại bỏ hoàn toàn nguy cơ dữ liệu mồ côi (orphan records)."
     )
-
-    r_sig_tech = p_sig.add_run("• Về mặt kỹ thuật: ")
-    r_sig_tech.font.bold = True
-    r_sig_tech.font.color.rgb = DARK_TEXT
-    r_sig_tech.font.size = Pt(10)
-    p_sig.add_run(
-        "Làm chủ kiến trúc doanh nghiệp 3 lớp (3-Tier Enterprise); "
-        "tích hợp hệ thống Fullstack hoàn chỉnh giữa Spring Boot 3 RESTful API và ReactJS; "
-        "vận dụng sâu sắc ORM (quan hệ One-to-Many và Many-to-Many qua Spring Data JPA); "
-        "chuẩn hóa xử lý ngoại lệ tập trung và tối ưu trải nghiệm người dùng với Popup Modal và Confirm Dialog."
+    add_dash_item(
+        doc,
+        "Về mặt kỹ thuật",
+        "Làm chủ kiến trúc doanh nghiệp 3 lớp (3-Tier Enterprise); tích hợp hệ thống Fullstack hoàn chỉnh giữa Spring Boot 3 RESTful API và ReactJS; vận dụng sâu sắc ORM (quan hệ One-to-Many và Many-to-Many qua Spring Data JPA); chuẩn hóa xử lý ngoại lệ tập trung và tối ưu trải nghiệm người dùng với Popup Modal và Confirm Dialog."
     )
 
     doc.add_paragraph().paragraph_format.space_after = Pt(12)
@@ -246,19 +187,21 @@ def build_assignment2_tomtat_doc():
 
     add_a2_matrix_table(doc)
 
+    # Lưu tài liệu ra cả 2 nơi: noteTT/assignment2-tomtat.docx và assignment2-tomtat.docx
+    out_file1 = os.path.abspath("noteTT/assignment2-tomtat.docx")
+    doc.save(out_file1)
+    print(f"File 1 updated at: {out_file1}")
+
     out_file2 = os.path.abspath("assignment2-tomtat.docx")
     doc.save(out_file2)
-    print(f"File created successfully at: {out_file2}")
+    print(f"File 2 updated at: {out_file2}")
 
-    try:
-        out_file1 = os.path.abspath("noteTT/assignment2-tomtat.docx")
-        doc.save(out_file1)
-        print(f"File in noteTT updated successfully at: {out_file1}")
-    except PermissionError:
-        print("noteTT/assignment2-tomtat.docx is currently open in Word.")
-        out_file1_alt = os.path.abspath("noteTT/assignment2-tomtat_updated.docx")
-        doc.save(out_file1_alt)
-        print(f"Saved copy to: {out_file1_alt}")
+    # Xóa file backup nếu có
+    if os.path.exists("noteTT/assignment2-tomtat_updated.docx"):
+        try:
+            os.remove("noteTT/assignment2-tomtat_updated.docx")
+        except:
+            pass
 
 if __name__ == "__main__":
     build_assignment2_tomtat_doc()
