@@ -119,6 +119,33 @@ def build_assignment2_tomtat_doc():
 
     doc.add_paragraph().paragraph_format.space_after = Pt(6)
 
+    # Mục đích của dự án (dạng gạch đầu dòng, không kẻ bảng)
+    h2_obj = doc.add_heading("Mục đích của dự án (Project Objectives)", level=2)
+    h2_obj.paragraph_format.space_before = Pt(8)
+    h2_obj.paragraph_format.space_after = Pt(4)
+    for r in h2_obj.runs:
+        r.font.color.rgb = SECONDARY_COLOR
+        r.font.size = Pt(12)
+        r.font.bold = True
+
+    add_dash_item(
+        doc,
+        "Về mặt nghiệp vụ (Thực tế)",
+        "Xây dựng hệ thống quản lý tin tức nội bộ (FUNews) giúp nhà trường số hóa toàn diện quy trình biên tập, phân loại chuyên mục, gắn thẻ chủ đề và xuất bản tin tức chính thống đến sinh viên, cán bộ giảng viên."
+    )
+    add_dash_item(
+        doc,
+        "Về mặt kỹ thuật",
+        "Triển khai hoàn chỉnh ứng dụng Web Service RESTful theo kiến trúc 3 lớp (3-Tier) với Backend Spring Boot 3 kết nối cơ sở dữ liệu Microsoft SQL Server qua Spring Data JPA và Frontend Single Page Application (SPA) bằng ReactJS qua Axios."
+    )
+    add_dash_item(
+        doc,
+        "Về mặt học phần SBA301",
+        "Đáp ứng trọn vẹn các chuẩn đầu ra của môn học về thiết kế kiến trúc phần mềm doanh nghiệp, phân quyền bảo mật phiên (Session-based Auth qua HandlerInterceptor) và bảo toàn tính toàn vẹn dữ liệu qua các ràng buộc nghiệp vụ khắt khe."
+    )
+
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+
     # Ý nghĩa của dự án (dạng gạch đầu dòng, không kẻ bảng)
     h2_sig = doc.add_heading("Ý nghĩa của dự án (Project Significance)", level=2)
     h2_sig.paragraph_format.space_before = Pt(6)
@@ -187,21 +214,26 @@ def build_assignment2_tomtat_doc():
 
     add_a2_matrix_table(doc)
 
-    # Lưu tài liệu ra cả 2 nơi: noteTT/assignment2-tomtat.docx và assignment2-tomtat.docx
-    out_file1 = os.path.abspath("noteTT/assignment2-tomtat.docx")
-    doc.save(out_file1)
-    print(f"File 1 updated at: {out_file1}")
-
+    # Lưu tài liệu ra assignment2-tomtat.docx trước
     out_file2 = os.path.abspath("assignment2-tomtat.docx")
     doc.save(out_file2)
     print(f"File 2 updated at: {out_file2}")
 
-    # Xóa file backup nếu có
-    if os.path.exists("noteTT/assignment2-tomtat_updated.docx"):
-        try:
-            os.remove("noteTT/assignment2-tomtat_updated.docx")
-        except:
-            pass
+    # Cố gắng lưu đè vào noteTT/assignment2-tomtat.docx nếu không bị khóa bởi Word
+    out_file1 = os.path.abspath("noteTT/assignment2-tomtat.docx")
+    try:
+        doc.save(out_file1)
+        print(f"File 1 updated at: {out_file1}")
+        if os.path.exists("noteTT/assignment2-tomtat_updated.docx"):
+            try:
+                os.remove("noteTT/assignment2-tomtat_updated.docx")
+            except:
+                pass
+    except PermissionError:
+        print("noteTT/assignment2-tomtat.docx đang mở trong Word, lưu sang noteTT/assignment2-tomtat_updated.docx")
+        alt_path = os.path.abspath("noteTT/assignment2-tomtat_updated.docx")
+        doc.save(alt_path)
+        print(f"File backup updated at: {alt_path}")
 
 if __name__ == "__main__":
     build_assignment2_tomtat_doc()
