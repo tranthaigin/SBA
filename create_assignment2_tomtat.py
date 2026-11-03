@@ -14,23 +14,24 @@ from generate_docs_helper import (
 )
 from generate_combined_docs import a2_steps, add_a2_matrix_table
 
-def add_dash_item(doc, label, description):
+def add_dash_item(doc, label, description, indent=0.2):
     """Thêm một dòng dạng gạch đầu dòng '- label: description', hoàn toàn không kẻ bảng."""
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(2)
     p.paragraph_format.space_after = Pt(3)
     p.paragraph_format.line_spacing = 1.15
-    p.paragraph_format.left_indent = Inches(0.2)
+    p.paragraph_format.left_indent = Inches(indent)
 
     r_dash = p.add_run("- ")
     r_dash.font.bold = True
     r_dash.font.size = Pt(10.5)
     r_dash.font.color.rgb = PRIMARY_COLOR
 
-    r_label = p.add_run(label + ": ")
-    r_label.font.bold = True
-    r_label.font.size = Pt(10.5)
-    r_label.font.color.rgb = DARK_TEXT
+    if label:
+        r_label = p.add_run(label + ": ")
+        r_label.font.bold = True
+        r_label.font.size = Pt(10.5)
+        r_label.font.color.rgb = DARK_TEXT
 
     r_desc = p.add_run(description)
     r_desc.font.size = Pt(10.5)
@@ -143,6 +144,42 @@ def build_assignment2_tomtat_doc():
         "Về mặt học phần SBA301",
         "Đáp ứng trọn vẹn các chuẩn đầu ra của môn học về thiết kế kiến trúc phần mềm doanh nghiệp, phân quyền bảo mật phiên (Session-based Auth qua HandlerInterceptor) và bảo toàn tính toàn vẹn dữ liệu qua các ràng buộc nghiệp vụ khắt khe."
     )
+
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+
+    # Cấu trúc tổ chức mã nguồn (Source Code Organization)
+    h2_struct = doc.add_heading("Cấu trúc tổ chức mã nguồn (Source Code Organization)", level=2)
+    h2_struct.paragraph_format.space_before = Pt(8)
+    h2_struct.paragraph_format.space_after = Pt(4)
+    for r in h2_struct.runs:
+        r.font.color.rgb = SECONDARY_COLOR
+        r.font.size = Pt(12)
+        r.font.bold = True
+
+    add_dash_item(doc, "Phần Backend (Spring Boot 3 - Java)", "Tổ chức theo kiến trúc 3 lớp phân tách trách nhiệm rõ ràng:")
+    backend_parts = [
+        ("controller", "Chứa các REST Controller tiếp nhận request HTTP từ Client và trả về JSON."),
+        ("service", "Chứa logic nghiệp vụ chính và xử lý các quy tắc ràng buộc (chặn xóa, kiểm tra trùng lặp)."),
+        ("repository", "Chứa các interface Spring Data JPA để truy xuất và thao tác với database SQL Server."),
+        ("entity", "Định nghĩa các thực thể và ánh xạ trực tiếp thành các bảng trong database (Category, News, Account, Tag)."),
+        ("dto", "Chứa các đối tượng truyền nhận dữ liệu (Request/Response) giữa Client và Server."),
+        ("config", "Cấu hình hệ thống, Interceptor phân quyền phiên làm việc (AccessConfig) và nạp dữ liệu mẫu ban đầu."),
+        ("exception", "Chứa các Exception tùy biến và bộ xử lý ngoại lệ tập trung (ApiExceptionHandler) trả về HTTP 400/404."),
+    ]
+    for pkg, desc in backend_parts:
+        add_dash_item(doc, pkg, desc, indent=0.4)
+
+    add_dash_item(doc, "Phần Frontend (ReactJS + Vite)", "Tổ chức theo mô hình Component hóa hiện đại:")
+    frontend_parts = [
+        ("pages", "Chứa các file giao diện của từng màn hình chính (NewsList, CategoryList, AccountList, Profile, MyHistory)."),
+        ("components", "Chứa các thành phần giao diện dùng chung hoặc tái sử dụng (AppNavBar, CategoryForm, LoginModal)."),
+        ("context", "Quản lý trạng thái phiên đăng nhập toàn cục (AuthContext) và thông tin người dùng."),
+        ("api", "Cấu hình Axios Client gọi REST API và bộ xử lý bắt lỗi phản hồi từ máy chủ (axiosClient, apiError)."),
+        ("utils", "Chứa các hàm tiện ích hỗ trợ format và chuẩn hóa dữ liệu biểu mẫu."),
+        ("App.jsx & main.jsx", "Điểm khởi chạy ứng dụng, quản lý định tuyến trang (Routes) và bố cục tổng thể."),
+    ]
+    for folder, desc in frontend_parts:
+        add_dash_item(doc, folder, desc, indent=0.4)
 
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
