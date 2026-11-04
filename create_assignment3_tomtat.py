@@ -371,11 +371,11 @@ def build_assignment3_tomtat_doc():
 
     add_dash_item(doc, "Phần Frontend (ReactJS + Vite)", "Tổ chức theo mô hình Component hóa hiện đại:")
     frontend_parts = [
+        ("main.jsx & App.jsx", "Khởi tạo BrowserRouter, nạp Context toàn cục và cấu hình toàn bộ các tuyến đường Routes."),
         ("pages", "Chứa các trang giao diện chính (RoomCatalog, CustomerBookings, Profile, AdminRooms, AdminCustomers, AdminBookings)."),
         ("components", "Chứa các component dùng chung (AppNavBar, LoginModal, RegisterModal)."),
         ("context", "Quản lý trạng thái xác thực toàn cục, lưu giữ JWT token và thông tin người dùng trong LocalStorage (AuthContext)."),
         ("api", "Cấu hình Axios Client tự động đính kèm Bearer Token vào header và bộ bắt lỗi API tập trung (axiosClient, apiError)."),
-        ("App.jsx & main.jsx", "Khởi tạo định tuyến (React Router DOM) và bố cục tổng thể ứng dụng."),
     ]
     for folder, desc in frontend_parts:
         add_dash_item(doc, folder, desc, indent=0.4)
@@ -462,8 +462,8 @@ def build_assignment3_tomtat_doc():
         r.font.size = Pt(14)
         r.font.bold = True
 
-    # 5.1. Luồng chạy tổng quan xuyên suốt toàn hệ thống
-    h5_1 = doc.add_heading("5.1. Luồng chạy tổng quan xuyên suốt toàn hệ thống (End-to-End Flow)", level=2)
+    # 5.1. Khởi đầu kiến trúc ứng dụng từ main.jsx và App.jsx
+    h5_1 = doc.add_heading("5.1. Khởi đầu kiến trúc ứng dụng từ main.jsx và App.jsx (App Entry & Routing Setup)", level=2)
     h5_1.paragraph_format.space_before = Pt(6)
     h5_1.paragraph_format.space_after = Pt(4)
     for r in h5_1.runs:
@@ -471,19 +471,21 @@ def build_assignment3_tomtat_doc():
         r.font.size = Pt(12)
         r.font.bold = True
 
-    add_dash_item(doc, "Bước 1 (User Action / Trigger)", "Người dùng thực hiện thao tác trên giao diện React (đăng nhập, tìm phòng, chọn nhiều phòng để đặt, cập nhật hồ sơ, quản trị phòng/khách hàng/đơn đặt).")
-    add_dash_item(doc, "Bước 2 (API Call & Authorization Header)", "Axios Client đóng gói request JSON và tự động đính kèm header Authorization: Bearer <jwt_token>. Vite Reverse Proxy chuyển tiếp ngầm từ port 5183 sang backend port 8083.")
-    add_dash_item(doc, "Bước 3 (Security Filter Chain & JWT Verification)", "Request đi qua JwtAuthenticationFilter. Bộ lọc trích xuất token, JwtTokenProvider giải mã và kiểm tra chữ ký HMAC SHA-256. Nếu hợp lệ, Authentication object với GrantedAuthority (ROLE_STAFF hoặc ROLE_CUSTOMER) được nạp vào SecurityContextHolder.")
-    add_dash_item(doc, "Bước 4 (Controller Layer & Role Check)", "Controller tiếp nhận request. SecurityConfig và các endpoint kiểm tra phân quyền (ví dụ /api/admin/** chỉ cho phép ROLE_STAFF, /api/customer/** chỉ cho phép ROLE_CUSTOMER, /api/rooms/public cho phép tất cả). Controller nhận @Valid DTO và chuyển tiếp sang Service.")
-    add_dash_item(doc, "Bước 5 (Service Layer & Business Rules)", "Service xử lý toàn bộ logic nghiệp vụ: tính toán tổng tiền booking từ số ngày lưu trú và đơn giá phòng, kiểm tra ràng buộc xóa phòng (nếu tồn tại trong booking_detail thì chuyển roomStatus = 2 xóa mềm, ngược lại gọi xóa cứng trong SQL Server), kiểm tra chống trùng Email.")
-    add_dash_item(doc, "Bước 6 (Repository & Database Execution)", "Service gọi các Repository tương ứng (Spring Data JPA). Hibernate sinh câu lệnh SQL chuẩn thực thi trên cơ sở dữ liệu Microsoft SQL Server (tự động quản lý bảng booking_reservation và bảng quan hệ booking_detail).")
-    add_dash_item(doc, "Bước 7 (Exception Handling)", "Nếu có lỗi dữ liệu đầu vào hoặc vi phạm ràng buộc, ApiExceptionHandler (@RestControllerAdvice) bắt exception và trả về HTTP 400 Bad Request hoặc HTTP 404 Not Found kèm thông điệp rõ ràng.")
-    add_dash_item(doc, "Bước 8 (Response & UI Update)", "Controller trả về ResponseEntity HTTP 200/201 kèm dữ liệu JSON. React nhận response, cập nhật state (useState), đóng modal hoặc cập nhật bảng dữ liệu tức thì.")
+    add_dash_item(
+        doc,
+        "Điểm gắn kết ứng dụng (main.jsx)",
+        "Tại main.jsx dòng 8-12, ReactDOM.createRoot khởi tạo ứng dụng React và bao bọc bằng <BrowserRouter>, kết nối với DOM HTML root tại index.html."
+    )
+    add_dash_item(
+        doc,
+        "Khởi tạo phiên và định tuyến tổng thể (App.jsx)",
+        "Tại App.jsx dòng 28-56, bọc toàn bộ giao diện trong <AuthProvider> (AuthContext.jsx) để cấp phát token và trạng thái người dùng toàn cục. App.jsx đồng thời render thanh điều hướng <AppNavBar> và khai báo danh sách <Routes>: định tuyến '/' chuyển hướng sang '/rooms' (RoomCatalog.jsx), '/profile' (Profile.jsx), '/my-bookings' (CustomerBookings.jsx), '/admin/rooms' (AdminRooms.jsx), '/admin/customers' (AdminCustomers.jsx), '/admin/bookings' (AdminBookings.jsx). Hai Modal đăng nhập (<LoginModal>) và đăng ký (<RegisterModal>) luôn được gắn sẵn ở cuối App.jsx để bật lên ngay khi có sự kiện nhấn nút."
+    )
 
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
-    # 5.2. Các luồng chạy nghiệp vụ cụ thể và vị trí code tương ứng
-    h5_2 = doc.add_heading("5.2. Các luồng chạy nghiệp vụ cụ thể và vị trí code tương ứng", level=2)
+    # 5.2. Luồng chạy tổng quan từ sự kiện nhấn nút trên JSX đến Database
+    h5_2 = doc.add_heading("5.2. Luồng chạy tổng quan từ sự kiện nhấn nút trên JSX đến Database (End-to-End Button Trigger Flow)", level=2)
     h5_2.paragraph_format.space_before = Pt(6)
     h5_2.paragraph_format.space_after = Pt(4)
     for r in h5_2.runs:
@@ -491,35 +493,56 @@ def build_assignment3_tomtat_doc():
         r.font.size = Pt(12)
         r.font.bold = True
 
+    add_dash_item(doc, "Bước 1 (User Button Click trên JSX)", "Người dùng nhấp chuột vào một nút bấm cụ thể trên giao diện (ví dụ nút 'Login', nút 'Book This Room', nút 'Save Room', nút 'Delete' hoặc nút đổi trạng thái). Thao tác này kích hoạt trực tiếp sự kiện onClick hoặc onSubmit trên thẻ <Button> hoặc <Form> trong file JSX tương ứng.")
+    add_dash_item(doc, "Bước 2 (JSX Handler Function & State Package)", "Hàm xử lý (handler function như handleSubmit, handleConfirmBooking, handleDelete) trong component JSX thu thập dữ liệu từ các React state (useState), thực hiện validate sơ bộ và gọi thư viện Axios.")
+    add_dash_item(doc, "Bước 3 (Axios Interceptor & Bearer Token)", "Axios Client (axiosClient.js) tự động gắn JWT Bearer Token lấy từ localStorage vào header 'Authorization: Bearer <token>' của request. Vite Proxy chuyển tiếp request từ port 5183 sang Backend port 8083.")
+    add_dash_item(doc, "Bước 4 (Security Filter Chain - JwtAuthenticationFilter)", "Tại Backend, JwtAuthenticationFilter.java chặn bắt request, trích xuất chuỗi JWT từ header Authorization. JwtTokenProvider.java kiểm tra chữ ký HMAC SHA-256: nếu hợp lệ, tạo đối tượng UsernamePasswordAuthenticationToken kèm danh sách quyền (ROLE_STAFF hoặc ROLE_CUSTOMER) và nạp vào SecurityContextHolder. SecurityConfig.java kiểm tra quyền hạn trước khi cho phép đi tiếp.")
+    add_dash_item(doc, "Bước 5 (Controller Layer Mapping)", "Request đi vào đúng phương thức trong Controller được chú thích @PostMapping, @GetMapping, @PutMapping hoặc @DeleteMapping (AuthController, CustomerPortalController, PublicRoomController, AdminController). Controller nhận DTO đã được @Valid kiểm tra hợp lệ và chuyển tiếp xuống tầng Service.")
+    add_dash_item(doc, "Bước 6 (Service Layer - Business Rules Execution)", "Tầng Service (RoomService, CustomerService, BookingService, AuthService) thực thi nghiệp vụ: kiểm tra ràng buộc xóa phòng mềm/cứng, tính tổng tiền đơn đặt phòng từ số đêm lưu trú và giá gốc, kiểm tra trùng lặp email khách hàng.")
+    add_dash_item(doc, "Bước 7 (Repository & SQL Server Execution)", "Service gọi Repository interface (kế thừa JpaRepository). Hibernate sinh câu lệnh SQL chuẩn (SELECT, INSERT, UPDATE, DELETE) và thực thi trực tiếp trên cơ sở dữ liệu Microsoft SQL Server (database A3TranQuocThai_SE1910).")
+    add_dash_item(doc, "Bước 8 (Global Exception Handling - Nếu có lỗi)", "Nếu xảy ra lỗi vi phạm ràng buộc dữ liệu hoặc không tìm thấy bản ghi, ControllerAdvice (ApiExceptionHandler.java) bắt ngoại lệ và trả về phản hồi JSON chuẩn mã HTTP 400 hoặc 404 kèm thông điệp lỗi rõ ràng.")
+    add_dash_item(doc, "Bước 9 (Response & Re-render React UI)", "Backend trả về ResponseEntity HTTP 200/201 kèm dữ liệu JSON. Frontend JSX nhận kết quả qua Promise/await, cập nhật lại state (useState), đóng Modal popup, hiển thị Alert thông báo và tự động re-render bảng dữ liệu mới.")
+
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+
+    # 5.3. Chi tiết các luồng nghiệp vụ trọng tâm
+    h5_3 = doc.add_heading("5.3. Chi tiết các luồng nghiệp vụ trọng tâm (Truy vết từ dòng nhấn nút trên JSX đến mã nguồn Backend)", level=2)
+    h5_3.paragraph_format.space_before = Pt(6)
+    h5_3.paragraph_format.space_after = Pt(4)
+    for r in h5_3.runs:
+        r.font.color.rgb = SECONDARY_COLOR
+        r.font.size = Pt(12)
+        r.font.bold = True
+
     add_dash_item(
         doc,
-        "Luồng 1 - Đăng nhập và xác thực JWT (Login & JWT Authentication)",
-        "User nhập email/password trên LoginModal.jsx -> POST /api/auth/login -> AuthController.login() -> AuthService.login() kiểm tra Customer trong SQL Server hoặc tài khoản Staff cấu hình trong application.properties -> JwtTokenProvider.generateToken() tạo JWT -> Trả về AuthResponse kèm token và role -> AuthContext.jsx lưu token vào LocalStorage và cập nhật state user -> AppNavBar.jsx hiển thị menu tương ứng."
+        "Luồng 1 - Đăng nhập và cấp phát JWT (Login & JWT Authentication Flow)",
+        "Từ App.jsx -> AppNavBar.jsx người dùng nhấn nút 'Login (Staff / Customer)' tại dòng 58 (onClick={onOpenLogin}) làm state showLogin=true, kích hoạt mở LoginModal.jsx -> Người dùng nhập Email, Password và nhấn nút 'Login' tại dòng 84 của LoginModal.jsx kích hoạt onSubmit={handleSubmit} (dòng 20) -> Gọi hàm login(email, password) trong AuthContext.jsx -> Gửi POST /api/auth/login -> AuthController.java (phương thức login, dòng 28) nhận AuthLoginRequest -> Gọi AuthService.login() kiểm tra Staff từ StaffProperties hoặc tìm Customer trong SQL Server qua CustomerRepository -> Gọi JwtTokenProvider.generateToken() tạo JWT Bearer Token -> Trả về AuthResponse -> AuthContext.jsx lưu token vào localStorage và setUser() -> AppNavBar.jsx re-render mở rộng menu tương ứng vai trò."
     )
     add_dash_item(
         doc,
-        "Luồng 2 - Khách hàng đặt phòng trực tuyến đa phòng (Online Multi-room Booking)",
-        "Khách hàng bấm 'Book This Room' trên RoomCatalog.jsx -> Modal mở ra hiển thị phòng chính, cho phép tick chọn thêm các phòng khác -> Tính tổng tiền tự động -> POST /api/customer/bookings -> CustomerPortalController.createBooking() -> BookingService.createBooking() kiểm tra ngày hợp lệ, trích xuất giá phòng từ database, tính tổng tiền, lưu BookingReservation và danh sách BookingDetail với composite key (BookingDetailId) vào SQL Server -> Trả về đơn đặt thành công."
+        "Luồng 2 - Khách hàng đặt phòng trực tuyến đa phòng (Online Multi-room Booking Flow)",
+        "Tại RoomCatalog.jsx, khách hàng xem danh sách phòng và nhấn nút 'Book This Room' tại dòng 167 (onClick={() => handleOpenBooking(room)}) -> Modal đặt phòng mở ra -> Khách hàng chọn ngày nhận/trả phòng, tick chọn thêm phòng phụ tại dòng 219 (onChange={(e) => toggleExtraRoom(r.roomId, e.target.checked)}) -> Nhấn nút 'Confirm Reservation' tại dòng 274 kích hoạt onSubmit={handleConfirmBooking} (dòng 71) -> Gửi POST /api/customer/bookings kèm Bearer Token -> JwtAuthenticationFilter xác thực ROLE_CUSTOMER -> CustomerPortalController.java (phương thức createBooking, dòng 33) -> BookingService.java (createBooking) kiểm tra ngày hợp lệ, trích xuất giá phòng từ database, tính tổng tiền, tạo BookingReservation và danh sách BookingDetail với khóa phức hợp BookingDetailId -> BookingReservationRepository và BookingDetailRepository ghi dữ liệu vào SQL Server -> Trả về HTTP 201 -> RoomCatalog.jsx hiển thị Alert xanh và reset form."
     )
     add_dash_item(
         doc,
-        "Luồng 3 - Quy tắc xóa phòng thông minh (Room Delete: Hard Delete vs Soft Delete)",
-        "Staff bấm Delete tại AdminRooms.jsx -> DELETE /api/admin/rooms/{id} -> AdminController.deleteRoom() -> RoomService.deleteRoom() kiểm tra bookingDetailRepository.existsByRoomInformation(room) -> Nếu phòng CHƯA TỪNG có booking detail: gọi roomRepository.delete() xóa hoàn toàn khỏi SQL Server (Hard delete) -> Nếu phòng ĐÃ CÓ booking detail: gán roomStatus = 2 (Inactive) và lưu lại (Soft delete) -> Bảo toàn toàn vẹn dữ liệu và lịch sử hóa đơn."
+        "Luồng 3 - Quy tắc xóa phòng thông minh: Xóa cứng vs Xóa mềm (Room Delete Logic Flow)",
+        "Tại AdminRooms.jsx, Staff nhấn nút 'Delete' tại dòng 175 (onClick={() => handleDelete(r.roomId)}) -> Hàm handleDelete (dòng 108) bật hộp thoại window.confirm() xác nhận -> Nhấn OK gửi DELETE /api/admin/rooms/{id} kèm Bearer Token Staff -> JwtAuthenticationFilter xác thực ROLE_STAFF -> AdminController.java (deleteRoom, dòng 48) -> RoomService.java (phương thức deleteRoom, dòng 78) kiểm tra: if (bookingDetailRepository.existsByRoomInformation(room)) -> [Trường hợp 1]: Phòng chưa từng có booking detail -> Gọi roomRepository.delete(room) (Xóa cứng - Hard Delete khỏi SQL Server); [Trường hợp 2]: Phòng đã tồn tại trong booking detail -> Gán room.setRoomStatus((byte) 2) và gọi roomRepository.save(room) (Xóa mềm - Soft Delete chuyển trạng thái Inactive để bảo toàn hóa đơn) -> AdminRooms.jsx nhận phản hồi, hiển thị alert thành công và gọi fetchRooms() tải lại bảng."
     )
     add_dash_item(
         doc,
-        "Luồng 4 - Quản lý hồ sơ và tra cứu lịch sử đặt phòng của Khách hàng",
-        "Khách hàng vào Profile.jsx -> GET /api/customer/profile -> CustomerPortalController.getProfile() lấy thông tin từ CustomerRepository -> Khách hàng sửa thông tin và gửi PUT -> Cập nhật vào SQL Server. Khách hàng vào CustomerBookings.jsx -> GET /api/customer/bookings -> CustomerPortalController.getMyBookings() lấy danh sách đơn đặt từ BookingReservationRepository hiển thị đầy đủ chi tiết từng phòng, ngày lưu trú và tổng tiền."
+        "Luồng 4 - Quản lý hồ sơ cá nhân và tra cứu lịch sử đặt phòng của Khách hàng",
+        "Khách hàng nhấn menu 'My Profile' trên AppNavBar.jsx (dòng 29) -> Chuyển đến Profile.jsx -> Hook useEffect gọi GET /api/customer/profile -> CustomerPortalController.getProfile() nạp dữ liệu lên form -> Khách hàng sửa thông tin và nhấn nút 'Save Profile' tại dòng 108 (onSubmit={save}) -> Gửi PUT /api/customer/profile cập nhật thông tin và mật khẩu vào SQL Server. Khách hàng nhấn menu 'My Bookings' (dòng 30) -> Chuyển đến CustomerBookings.jsx -> useEffect gọi GET /api/customer/bookings -> CustomerPortalController.getMyBookings() -> bookingReservationRepository.findByCustomerOrderByBookingDateDesc() truy vấn toàn bộ lịch sử đơn đặt kèm chi tiết phòng hiển thị ra bảng."
     )
     add_dash_item(
         doc,
-        "Luồng 5 - Quản trị đơn đặt phòng và cập nhật trạng thái (Staff Reservation Management)",
-        "Staff vào AdminBookings.jsx -> GET /api/admin/bookings -> AdminController.getAllBookings() tải toàn bộ đơn đặt trong khách sạn -> Staff có thể tạo đơn đặt mới (Create Booking), chỉnh sửa phòng hoặc bấm các nút Confirm / Complete / Cancel để chuyển đổi trạng thái đơn đặt thông qua PUT /api/admin/bookings/{id}/status."
+        "Luồng 5 - Quản trị đơn đặt và cập nhật trạng thái đơn (Staff Bookings Management Flow)",
+        "Staff nhấn menu 'Manage Reservations' trên AppNavBar.jsx (dòng 40) -> Chuyển đến AdminBookings.jsx -> useEffect gọi GET /api/admin/bookings -> AdminController.getAllBookings() nạp bảng đơn đặt. Khi Staff nhấn nút 'Confirm' tại dòng 244 hoặc 'Complete' tại dòng 254 kích hoạt onClick={() => updateStatus(b.bookingReservationId, newStatus)} (dòng 92) -> Gửi PUT /api/admin/bookings/{id}/status?status={status} -> AdminController.updateBookingStatus() gọi bookingService.updateBookingStatus() cập nhật trường booking_status trong SQL Server -> Giao diện tự động đổi màu Badge trạng thái tức thì."
     )
     add_dash_item(
         doc,
-        "Luồng 6 - Xem thông tin phòng công khai (Public Room Browsing)",
-        "Khách vãng lai chưa đăng nhập truy cập /rooms -> GET /api/rooms/public -> PublicRoomController.getActiveRooms() -> RoomService.getActiveRooms() -> RoomInformationRepository.findByRoomStatus(1) -> SQL Server trả về danh sách phòng đang sẵn sàng đón khách kèm loại phòng, sức chứa tối đa và giá thuê theo ngày."
+        "Luồng 6 - Khách vãng lai xem và tìm kiếm danh mục phòng công khai (Public Room Browsing Flow)",
+        "Người dùng truy cập ứng dụng -> App.jsx định tuyến mặc định sang '/rooms' nạp RoomCatalog.jsx -> Hook useEffect tự động gọi hàm fetchRooms() (dòng 43) -> Gửi axios.get('/api/rooms/public') -> PublicRoomController.java (getActiveRooms, dòng 20) -> RoomService.getActiveRooms() -> RoomInformationRepository.findByRoomStatus((byte) 1) truy vấn các phòng Active từ SQL Server -> Frontend nhận mảng JSON, setRooms(res.data) và dùng hàm .map() render thành lưới các thẻ Card phòng trực quan."
     )
 
     doc.add_paragraph().paragraph_format.space_after = Pt(12)
@@ -527,7 +550,7 @@ def build_assignment3_tomtat_doc():
     # Lưu tài liệu ra assignment3-tomtat.docx trước
     out_file3 = os.path.abspath("assignment3-tomtat.docx")
     doc.save(out_file3)
-    print(f"Assignment 3 summary document created successfully at: {out_file3}")
+    print(f"Assignment 3 summary document updated successfully at: {out_file3}")
 
     # Copy / Lưu thêm bản vào noteTT/assignment3-tomtat.docx
     target_noteTT = os.path.abspath("noteTT/assignment3-tomtat.docx")

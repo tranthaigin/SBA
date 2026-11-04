@@ -171,12 +171,12 @@ def build_assignment2_tomtat_doc():
 
     add_dash_item(doc, "Phần Frontend (ReactJS + Vite)", "Tổ chức theo mô hình Component hóa hiện đại:")
     frontend_parts = [
+        ("main.jsx & App.jsx", "Khởi tạo BrowserRouter, nạp AuthProvider toàn cục và khai báo cấu trúc định tuyến Routes."),
         ("pages", "Chứa các file giao diện của từng màn hình chính (NewsList, CategoryList, AccountList, Profile, MyHistory)."),
         ("components", "Chứa các thành phần giao diện dùng chung hoặc tái sử dụng (AppNavBar, CategoryForm, LoginModal)."),
         ("context", "Quản lý trạng thái phiên đăng nhập toàn cục (AuthContext) và thông tin người dùng."),
         ("api", "Cấu hình Axios Client gọi REST API và bộ xử lý bắt lỗi phản hồi từ máy chủ (axiosClient, apiError)."),
         ("utils", "Chứa các hàm tiện ích hỗ trợ format và chuẩn hóa dữ liệu biểu mẫu."),
-        ("App.jsx & main.jsx", "Điểm khởi chạy ứng dụng, quản lý định tuyến trang (Routes) và bố cục tổng thể."),
     ]
     for folder, desc in frontend_parts:
         add_dash_item(doc, folder, desc, indent=0.4)
@@ -263,8 +263,8 @@ def build_assignment2_tomtat_doc():
         r.font.size = Pt(14)
         r.font.bold = True
 
-    # 5.1. Luồng chạy tổng quan xuyên suốt toàn hệ thống
-    h5_1 = doc.add_heading("5.1. Luồng chạy tổng quan xuyên suốt toàn hệ thống (End-to-End Flow)", level=2)
+    # 5.1. Khởi đầu kiến trúc ứng dụng từ main.jsx và App.jsx
+    h5_1 = doc.add_heading("5.1. Khởi đầu kiến trúc ứng dụng từ main.jsx và App.jsx (App Entry & Routing Setup)", level=2)
     h5_1.paragraph_format.space_before = Pt(6)
     h5_1.paragraph_format.space_after = Pt(4)
     for r in h5_1.runs:
@@ -272,19 +272,21 @@ def build_assignment2_tomtat_doc():
         r.font.size = Pt(12)
         r.font.bold = True
 
-    add_dash_item(doc, "Bước 1 (User Action / Trigger)", "Người dùng thực hiện thao tác trên giao diện React (bấm nút Submit form, click menu điều hướng, nhập từ khóa tìm kiếm hoặc bấm xác nhận xóa).")
-    add_dash_item(doc, "Bước 2 (API Call & Proxy)", "Component React gọi hàm API qua axiosClient (thiết lập withCredentials: true để gửi kèm Session Cookie). Vite Reverse Proxy chuyển tiếp ngầm request từ http://localhost:5182/api sang Backend http://localhost:8082/api để triệt tiêu lỗi CORS.")
-    add_dash_item(doc, "Bước 3 (Security Interceptor)", "Tại Backend, AccessConfig (HandlerInterceptor) chặn bắt mọi request /api/** để kiểm tra HttpSession: nếu chưa đăng nhập trả về HTTP 401; nếu người dùng truy cập trái quyền hạn (ví dụ Staff cố vào API quản lý Account của Admin) trả về HTTP 403 Forbidden.")
-    add_dash_item(doc, "Bước 4 (Controller Layer)", "Sau khi vượt qua Interceptor, request đi vào Controller tương ứng (CategoryController, NewsArticleController, SystemAccountController, AuthController). Controller nhận DTO từ @RequestBody, nhận tham số từ @PathVariable hoặc @RequestParam, trích xuất ID người dùng từ session và gọi xuống tầng Service.")
-    add_dash_item(doc, "Bước 5 (Service Layer - Business Logic)", "Service thực hiện toàn bộ nghiệp vụ và kiểm tra ràng buộc: ném BusinessRuleViolationException nếu vi phạm quy tắc (chặn xóa Category có bài viết, chặn xóa Account đã tạo tin, chặn trùng Email); tự động trích xuất tác giả từ Session và gán thời gian LocalDateTime.now().")
-    add_dash_item(doc, "Bước 6 (Repository & Database)", "Service gọi Repository (CategoryRepository, NewsArticleRepository, SystemAccountRepository, TagRepository). Spring Data JPA tự động dịch thành câu lệnh SQL tương ứng và thực thi trên cơ sở dữ liệu Microsoft SQL Server.")
-    add_dash_item(doc, "Bước 7 (Exception Handling - Nếu có lỗi)", "Nếu có lỗi xảy ra, @RestControllerAdvice (ApiExceptionHandler) bắt BusinessRuleViolationException hoặc ResourceNotFoundException và chuyển hóa thành phản hồi JSON chuẩn HTTP 400/404 kèm thông điệp lỗi rõ ràng.")
-    add_dash_item(doc, "Bước 8 (Response & UI Update)", "Controller trả về ResponseEntity HTTP 200/201 kèm dữ liệu JSON. Frontend nhận kết quả qua Promise/Axios, cập nhật state React (useState), đóng Modal và tự động re-render bảng dữ liệu mới.")
+    add_dash_item(
+        doc,
+        "Điểm gắn kết ứng dụng (main.jsx)",
+        "Tại main.jsx dòng 8-12, ReactDOM.createRoot khởi tạo ứng dụng React và bao bọc bằng <BrowserRouter>, kết nối với thẻ div id='root' trong file index.html."
+    )
+    add_dash_item(
+        doc,
+        "Khởi tạo phiên và định tuyến tổng thể (App.jsx)",
+        "Tại App.jsx dòng 23-38, toàn bộ ứng dụng được bọc trong <AuthProvider> (AuthContext.jsx) để duy trì thông tin tài khoản đăng nhập qua HttpSession. App.jsx đồng thời render thanh điều hướng <AppNavBar> và khai báo hệ thống <Routes>: '/' chuyển hướng sang '/news' (NewsList.jsx), '/categories' (CategoryList.jsx), '/profile' (Profile.jsx), '/accounts' (AccountList.jsx), '/my-history' (MyHistory.jsx). Popup đăng nhập <LoginModal> được gắn sẵn ở cuối App.jsx để mở lên ngay khi người dùng nhấn nút đăng nhập."
+    )
 
     doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
-    # 5.2. Các luồng chạy nghiệp vụ cụ thể và vị trí code tương ứng
-    h5_2 = doc.add_heading("5.2. Các luồng chạy nghiệp vụ cụ thể và vị trí code tương ứng", level=2)
+    # 5.2. Luồng chạy tổng quan từ sự kiện nhấn nút trên JSX đến Database
+    h5_2 = doc.add_heading("5.2. Luồng chạy tổng quan từ sự kiện nhấn nút trên JSX đến Database (End-to-End Button Trigger Flow)", level=2)
     h5_2.paragraph_format.space_before = Pt(6)
     h5_2.paragraph_format.space_after = Pt(4)
     for r in h5_2.runs:
@@ -292,35 +294,56 @@ def build_assignment2_tomtat_doc():
         r.font.size = Pt(12)
         r.font.bold = True
 
+    add_dash_item(doc, "Bước 1 (User Button Click trên JSX)", "Người dùng nhấp chuột vào một nút bấm cụ thể trên giao diện (ví dụ nút 'Login', nút '+ Create News Article', nút 'Save Category', nút 'Delete' hoặc nút đổi mật khẩu). Thao tác này kích hoạt trực tiếp sự kiện onClick hoặc onSubmit trên thẻ <Button> hoặc <Form> trong file JSX tương ứng.")
+    add_dash_item(doc, "Bước 2 (JSX Handler Function & State Package)", "Hàm xử lý (handler function như handleSubmit, handleSave, remove) trong component JSX thu thập dữ liệu từ các React state (useState), thực hiện kiểm tra sơ bộ và gọi hàm API trong thư mục api/.")
+    add_dash_item(doc, "Bước 3 (Axios Interceptor & Session Cookie)", "Axios Client (axiosClient.js) gửi request kèm thuộc tính withCredentials: true để trình duyệt tự động gửi Session Cookie (JSESSIONID) tới máy chủ. Vite Reverse Proxy chuyển tiếp request từ port 5182 sang Backend port 8082 để giải quyết triệt để vấn đề CORS.")
+    add_dash_item(doc, "Bước 4 (Security Interceptor - AccessConfig)", "Tại Backend, HandlerInterceptor (AccessConfig.java) chặn bắt request /api/**, kiểm tra HttpSession: nếu chưa đăng nhập trả về HTTP 401; nếu người dùng truy cập trái vai trò (ví dụ Staff cố vào API tài khoản của Admin) trả về HTTP 403 Forbidden.")
+    add_dash_item(doc, "Bước 5 (Controller Layer Mapping)", "Sau khi vượt qua Interceptor, request đi vào đúng Controller tương ứng (AuthController, CategoryController, NewsArticleController, SystemAccountController). Controller nhận DTO từ @RequestBody, nhận tham số từ @PathVariable hoặc @RequestParam, trích xuất ID người dùng từ session và gọi xuống tầng Service.")
+    add_dash_item(doc, "Bước 6 (Service Layer - Business Rules Execution)", "Tầng Service thực thi toàn bộ nghiệp vụ: ném BusinessRuleViolationException nếu vi phạm quy tắc (chặn xóa Category có bài viết, chặn xóa Account đã tạo tin, chặn trùng Email); tự động trích xuất tác giả từ Session và gán ngày tạo.")
+    add_dash_item(doc, "Bước 7 (Repository & SQL Server Execution)", "Service gọi Repository interface (kế thừa JpaRepository). Hibernate sinh câu lệnh SQL chuẩn (SELECT, INSERT, UPDATE, DELETE) và thực thi trực tiếp trên cơ sở dữ liệu Microsoft SQL Server (database A2TranQuocThai_SE1910).")
+    add_dash_item(doc, "Bước 8 (Global Exception Handling - Nếu có lỗi)", "Nếu có lỗi vi phạm ràng buộc dữ liệu hoặc không tìm thấy bản ghi, ControllerAdvice (ApiExceptionHandler.java) bắt ngoại lệ và trả về phản hồi JSON chuẩn HTTP 400 hoặc 404 kèm thông điệp lỗi rõ ràng.")
+    add_dash_item(doc, "Bước 9 (Response & Re-render React UI)", "Backend trả về ResponseEntity HTTP 200/201 kèm dữ liệu JSON. Frontend JSX nhận kết quả qua Promise/await, cập nhật lại state (useState), đóng Modal popup, hiển thị Alert thông báo và tự động re-render bảng dữ liệu mới.")
+
+    doc.add_paragraph().paragraph_format.space_after = Pt(4)
+
+    # 5.3. Chi tiết các luồng nghiệp vụ cụ thể và vị trí code tương ứng
+    h5_3 = doc.add_heading("5.3. Chi tiết các luồng nghiệp vụ trọng tâm (Truy vết từ dòng nhấn nút trên JSX đến mã nguồn Backend)", level=2)
+    h5_3.paragraph_format.space_before = Pt(6)
+    h5_3.paragraph_format.space_after = Pt(4)
+    for r in h5_3.runs:
+        r.font.color.rgb = SECONDARY_COLOR
+        r.font.size = Pt(12)
+        r.font.bold = True
+
     add_dash_item(
         doc,
-        "Luồng 1 - Đăng nhập và Phân quyền (Login & Authentication)",
-        "User nhập email/password trên LoginModal.jsx -> POST /api/auth/login -> AuthController.login() gọi AuthService.login() kiểm tra trong SQL Server -> Lưu USER_ID và ROLE vào HttpSession -> Trả về LoginResponse -> AuthContext.jsx lưu state user -> AppNavBar.jsx mở rộng các menu theo đúng vai trò (Staff mở Category/News/Profile/History; Admin mở Accounts)."
+        "Luồng 1 - Đăng nhập và Phân quyền (Login & Authentication Flow)",
+        "Từ App.jsx -> AppNavBar.jsx người dùng nhấn nút 'Login (Staff / Admin)' tại dòng 76 (onClick={onOpenLogin}) làm state showLogin=true, kích hoạt mở LoginModal.jsx -> Người dùng nhập Email, Password và nhấn nút 'Login' tại dòng 52 của LoginModal.jsx kích hoạt onSubmit={handleSubmit} (dòng 23) -> Gọi hàm login(email, password) trong AuthContext.jsx -> Gửi POST /api/auth/login -> AuthController.java (phương thức login, dòng 22) nhận LoginRequest -> Gọi AuthService.login() kiểm tra SystemAccountRepository.findByAccountEmail() trong SQL Server -> Lưu USER_ID và ROLE vào HttpSession -> Trả về LoginResponse -> AuthContext.jsx lưu state user -> AppNavBar.jsx re-render mở rộng menu tương ứng (Staff mở Categories/News/Profile/History; Admin mở Accounts Management)."
     )
     add_dash_item(
         doc,
-        "Luồng 2 - Thêm bài viết tin tức kèm gắn Thẻ Tags (Create News with Tags)",
-        "Staff mở modal tạo bài viết trên NewsList.jsx (nhập Title, Content, Category, chọn các Tags #Spring, #React) -> POST /api/news -> NewsArticleController.create() lấy USER_ID từ session -> NewsArticleService.createNews() tìm các Tag theo tagIds và gán vào Set<Tag> của bài viết (quan hệ Many-to-Many), gán createdDate -> NewsArticleRepository.save() ghi vào bảng NewsArticle và bảng trung gian NewsTag trong SQL Server -> Trả về bài viết mới hiển thị lên giao diện."
+        "Luồng 2 - Thêm bài viết tin tức kèm gắn Thẻ Tags (Create News with Tags Flow)",
+        "Tại NewsList.jsx, Staff nhấn nút '+ Create News Article' tại dòng 114 (onClick={handleOpenCreate}) -> Modal tạo bài viết mở ra -> Staff nhập Title, Content, chọn Category, tick chọn các Thẻ Tags (#Spring, #React) -> Nhấn nút 'Save News' tại dòng 230 kích hoạt onSubmit={handleSave} (dòng 72) -> Gửi POST /api/news -> HandlerInterceptor kiểm tra ROLE_STAFF -> NewsArticleController.java (create, dòng 32) lấy USER_ID từ session -> NewsArticleService.java (createNews) tìm các Tag theo tagIds và gán vào Set<Tag> của bài viết (quan hệ Many-to-Many), gán createdDate -> NewsArticleRepository.save() ghi vào bảng NewsArticle và bảng liên kết NewsTag trong SQL Server -> Trả về bài viết mới hiển thị lên bảng tin tức."
     )
     add_dash_item(
         doc,
-        "Luồng 3 - Ràng buộc chặn xóa Thể loại đang có bài viết (Category Delete Prevention)",
-        "Staff bấm Delete tại CategoryList.jsx -> DELETE /api/categories/{id} -> CategoryController.delete() gọi CategoryService.deleteCategory() -> Service kiểm tra newsArticleRepository.existsByCategory(cat) -> Phát hiện có bài viết liên kết -> Ném BusinessRuleViolationException('Cannot delete Category because it is associated with existing news articles') -> ApiExceptionHandler trả về HTTP 400 -> CategoryList.jsx bắt lỗi hiển thị Alert màu đỏ cảnh báo."
+        "Luồng 3 - Ràng buộc chặn xóa Thể loại đang có bài viết (Category Delete Prevention Flow)",
+        "Tại CategoryList.jsx, Staff nhấn nút 'Delete' tại dòng 102 (onClick={() => remove(c)}) -> Hàm remove(c) (dòng 52) bật hộp thoại window.confirm() xác nhận -> Nhấn OK gửi DELETE /api/categories/{id} -> CategoryController.java (delete, dòng 48) -> CategoryService.java (deleteCategory, dòng 60) kiểm tra: if (newsArticleRepository.existsByCategory(cat)) -> Phát hiện tồn tại bài viết liên kết -> Ném BusinessRuleViolationException('Cannot delete Category because it is associated with existing news articles') -> ApiExceptionHandler.java bắt exception trả về HTTP 400 Bad Request -> CategoryList.jsx bắt lỗi hiển thị Alert màu đỏ cảnh báo."
     )
     add_dash_item(
         doc,
-        "Luồng 4 - Ràng buộc chặn xóa Tài khoản đã từng tạo bài báo (Account Delete Prevention)",
-        "Admin bấm Delete tài khoản tác giả tại AccountList.jsx -> DELETE /api/accounts/{id} -> SystemAccountController.delete() gọi SystemAccountService.deleteAccount() -> Service kiểm tra newsArticleRepository.existsByCreatedById(id) -> Phát hiện tài khoản đã tạo bài báo -> Ném BusinessRuleViolationException('Cannot delete Account because it is the creator of existing news articles') -> ApiExceptionHandler trả về HTTP 400 -> AccountList.jsx hiển thị Alert màu đỏ chặn xóa."
+        "Luồng 4 - Ràng buộc chặn xóa Tài khoản đã từng tạo bài báo (Account Delete Prevention Flow)",
+        "Tại AccountList.jsx, Admin nhấn nút 'Delete' tại dòng 98 (onClick={() => remove(a)}) -> Hàm remove(a) (dòng 50) bật hộp thoại window.confirm() xác nhận -> Nhấn OK gửi DELETE /api/accounts/{id} -> SystemAccountController.java (delete, dòng 45) -> SystemAccountService.java (deleteAccount, dòng 80) kiểm tra: if (newsArticleRepository.existsByCreatedById(id)) -> Phát hiện tài khoản đã tạo bài viết -> Ném BusinessRuleViolationException('Cannot delete Account because it is the creator of existing news articles') -> ApiExceptionHandler.java trả về HTTP 400 -> AccountList.jsx bắt lỗi hiển thị Alert đỏ chặn xóa."
     )
     add_dash_item(
         doc,
-        "Luồng 5 - Xem Lịch sử bài viết cá nhân của Staff (My News History)",
-        "Staff bấm menu 'My News History' -> MyHistory.jsx gửi GET /api/news/created-by/{userId} -> NewsArticleController.getCreatedBy() gọi newsArticleRepository.findByCreatedByIdOrderByCreatedDateDesc(userId) -> SQL Server truy vấn và trả về danh sách bài viết do chính nhân viên đó tạo -> MyHistory.jsx render danh sách ra bảng kèm thông tin chi tiết."
+        "Luồng 5 - Xem Lịch sử bài viết cá nhân của Staff (My News History Flow)",
+        "Staff nhấn menu 'My News History' trên AppNavBar.jsx (dòng 42) -> Chuyển đến MyHistory.jsx -> Hook useEffect gọi GET /api/news/created-by/{userId} -> NewsArticleController.java (getCreatedBy, dòng 55) gọi newsArticleRepository.findByCreatedByIdOrderByCreatedDateDesc(userId) -> SQL Server truy vấn và trả về danh sách các bài viết do chính nhân viên đó tạo -> MyHistory.jsx render toàn bộ danh sách ra bảng giao diện."
     )
     add_dash_item(
         doc,
-        "Luồng 6 - Độc giả xem và tìm kiếm tin tức công khai (Public News Reading)",
-        "Độc giả chưa đăng nhập truy cập /news -> NewsList.jsx gửi GET /api/news/active -> NewsArticleController.getActive() gọi newsArticleRepository.findByNewsStatusTrueOrderByCreatedDateDesc() -> SQL Server trả về các bài viết kích hoạt -> Người dùng gõ từ khóa vào ô tìm kiếm, Frontend lọc tức thì theo tiêu đề và nội dung; bấm 'Read' mở Modal xem toàn văn bài báo."
+        "Luồng 6 - Độc giả xem và tìm kiếm tin tức công khai (Public News Reading Flow)",
+        "Người dùng truy cập ứng dụng -> App.jsx định tuyến mặc định sang '/news' nạp NewsList.jsx -> Hook useEffect tự động gọi hàm load() -> Gửi axios.get('/api/news/active') -> NewsArticleController.java (getActive, dòng 25) -> newsArticleRepository.findByNewsStatusTrueOrderByCreatedDateDesc() -> SQL Server trả về các bài viết kích hoạt -> Người dùng gõ từ khóa vào ô tìm kiếm, Frontend lọc tức thì theo tiêu đề và nội dung; nhấn nút 'Read Article' mở Modal xem toàn văn bài báo."
     )
 
     doc.add_paragraph().paragraph_format.space_after = Pt(12)
@@ -328,23 +351,17 @@ def build_assignment2_tomtat_doc():
     # Lưu tài liệu ra assignment2-tomtat.docx trước
     out_file2 = os.path.abspath("assignment2-tomtat.docx")
     doc.save(out_file2)
-    print(f"File 2 updated at: {out_file2}")
+    print(f"Assignment 2 summary document updated successfully at: {out_file2}")
 
-    # Cố gắng lưu đè vào noteTT/assignment2-tomtat.docx nếu không bị khóa bởi Word
-    out_file1 = os.path.abspath("noteTT/assignment2-tomtat.docx")
+    # Copy / Lưu thêm bản vào noteTT/assignment2-tomtat.docx
+    target_noteTT = os.path.abspath("noteTT/assignment2-tomtat.docx")
     try:
-        doc.save(out_file1)
-        print(f"File 1 updated at: {out_file1}")
-        if os.path.exists("noteTT/assignment2-tomtat_updated.docx"):
-            try:
-                os.remove("noteTT/assignment2-tomtat_updated.docx")
-            except:
-                pass
+        doc.save(target_noteTT)
+        print(f"Also saved successfully to: {target_noteTT}")
     except PermissionError:
-        print("noteTT/assignment2-tomtat.docx đang mở trong Word, lưu sang noteTT/assignment2-tomtat_updated.docx")
-        alt_path = os.path.abspath("noteTT/assignment2-tomtat_updated.docx")
-        doc.save(alt_path)
-        print(f"File backup updated at: {alt_path}")
+        fallback = os.path.abspath("noteTT/assignment2-tomtat_updated.docx")
+        doc.save(fallback)
+        print(f"noteTT/assignment2-tomtat.docx was locked. Saved fallback to: {fallback}")
 
 if __name__ == "__main__":
     build_assignment2_tomtat_doc()
