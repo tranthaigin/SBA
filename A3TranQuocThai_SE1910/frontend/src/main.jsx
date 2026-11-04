@@ -1,3 +1,8 @@
+/**
+ * @author Trần Quốc Thái
+ * Class: SE1910
+ * Student ID: CE190243
+ */
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";

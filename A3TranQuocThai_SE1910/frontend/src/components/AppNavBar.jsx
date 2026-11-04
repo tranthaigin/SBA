@@ -1,3 +1,8 @@
+/**
+ * @author Trần Quốc Thái
+ * Class: SE1910
+ * Student ID: CE190243
+ */
 import { Container, Nav, Navbar, Button, Badge } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
