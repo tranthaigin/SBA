@@ -98,7 +98,7 @@ public class NewsArticleService {
         article.setNewsSource(req.getNewsSource() != null ? req.getNewsSource().trim() : "");
         article.setCategory(cat);
         article.setNewsStatus(req.getNewsStatus() != null ? req.getNewsStatus() : true);
-        article.setCreatedBy(creator);
+        article.setCreatedById(creator.getAccountId());
         article.setCreatedDate(LocalDateTime.now());
         article.setModifiedDate(LocalDateTime.now());
 
@@ -130,7 +130,7 @@ public class NewsArticleService {
 
         if (updatedById != null) {
             SystemAccount updater = accountRepository.findById(updatedById).orElse(null);
-            article.setUpdatedBy(updater);
+            article.setUpdatedById(updatedById);
         }
 
         article.setModifiedDate(LocalDateTime.now());
